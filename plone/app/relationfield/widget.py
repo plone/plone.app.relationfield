@@ -38,13 +38,13 @@ class RelationDataManager(AttributeField):
             current = super(RelationDataManager, self).get()
         except AttributeError:
             pass
+        intids = getUtility(IIntIds)
+        to_id = intids.getId(value)
         if IRelationValue.providedBy(current):
             # If we already have a relation, just set the to_id
             current.to_id = to_id
         else:
             # otherwise create a relationship
-            intids = getUtility(IIntIds)
-            to_id = intids.getId(value)
             rel = RelationValue(to_id)
             super(RelationDataManager, self).set(rel)
 

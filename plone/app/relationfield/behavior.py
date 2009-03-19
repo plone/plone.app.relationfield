@@ -21,7 +21,6 @@ class IRelatedItems(form.Schema):
                       source=ObjPathSourceBinder()),
         required=False,
         )
-    form.widget(relatedItems = MultiContentTreeFieldWidget)
     form.fieldset('categorization', label=u"Categorization",
                   fields=['relatedItems'])
 

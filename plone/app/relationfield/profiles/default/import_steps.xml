@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<import-steps>
-  <import-step id="import-relations-utils" version="20090317-01"
-               handler="plone.app.relationfield.setuphandlers.installRelations"
-               title="Import Relations Utils">
-    <dependency step="toolset"/>
-    Import relation and intid utilities.
-  </import-step>
-</import-steps>

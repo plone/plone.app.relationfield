@@ -7,8 +7,6 @@
   <include package="z3c.relationfield" />
 
   <!-- setup GS profile -->
-  <five:registerPackage package="." initialize=".initialize" />
-
   <genericsetup:registerProfile
       name="default"
       title="Relation Field"
@@ -17,6 +15,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       for="Products.CMFPlone.interfaces.IPloneSiteRoot"
       />
+
+  <genericsetup:importStep
+      name="import-relations-utils"
+      title="Import Relations Utils"
+      description="Import relation and intid utilities."
+      handler=".setuphandlers.installRelations">
+     <depends name="toolset"/>
+  </genericsetup:importStep>
 
   <!-- Dexterity Content and Archetypes Content will support incoming
        and outgoing relations -->

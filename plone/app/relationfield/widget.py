@@ -42,7 +42,7 @@ class RelationDataManager(AttributeField):
         to_id = intids.getId(value)
         if IRelationValue.providedBy(current):
             # If we already have a relation, just set the to_id
-            current.to_id = value.to_id
+            current.to_id = to_id
         else:
             # otherwise create a relationship
             rel = RelationValue(to_id)

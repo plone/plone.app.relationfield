@@ -9,8 +9,8 @@ from z3c.relationfield.interfaces import (
 from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
 from z3c.form.datamanager import AttributeField
-from plone.supermodel.exportimport import BaseHandler
 
+from plone.supermodel.exportimport import BaseHandler
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set
@@ -42,7 +42,7 @@ class RelationDataManager(AttributeField):
         to_id = intids.getId(value)
         if IRelationValue.providedBy(current):
             # If we already have a relation, just set the to_id
-            current.to_id = to_id
+            current.to_id = value.to_id
         else:
             # otherwise create a relationship
             rel = RelationValue(to_id)
@@ -80,6 +80,8 @@ class RelationListDataManager(AttributeField):
             new_relationships.append(RelationValue(to_id))
         super(RelationListDataManager, self).set(new_relationships)
 
+
+# plone.supermodel schema import/export handlers
 
 RelationChoiceHandler = BaseHandler(RelationChoice)
 RelationListHandler = BaseHandler(RelationList)

@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-import sys, os
+import os
 
 version = '0.1'
 
@@ -25,9 +25,18 @@ setup(name='plone.app.relationfield',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          # -*- Extra requirements: -*-
+          'zope.interface',
+          'zope.component',
+          'zope.schema',
+          'zope.intid',
           'five.intid',
+          'z3c.form',
           'z3c.relationfield',
+          'z3c.formwidget.query',
+          'plone.formwidget.contenttree',
+          'plone.supermodel',
+          'plone.dexterity',
+          'Products.CMFCore',
       ],
       entry_points="""
       # -*- Entry points: -*-

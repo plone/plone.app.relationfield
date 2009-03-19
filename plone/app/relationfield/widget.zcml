@@ -23,7 +23,7 @@
                 z3c.form.interfaces.IFormLayer"
            />
 
-  <!-- Dexterity handlers -->
+  <!-- plone.supermodel export/import handlers -->
   <utility component=".widget.RelationChoiceHandler"
            name="plone.app.relationfield.Relation"
            />

@@ -1,7 +1,5 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
 
   <include package="z3c.relationfield" />
@@ -57,16 +55,5 @@
 
   <!-- widgets setup -->
   <include file="widget.zcml" />
-
-
-  <!-- dexterity behavior -->
-  <include package="plone.behavior" file="meta.zcml" />
-  <plone:behavior
-      title="Related items"
-      description="Adds the ability to assign related items"
-      interface=".behavior.IRelatedItems"
-      factory=".behavior.RelatedItemsFactory"
-      for="plone.dexterity.interfaces.IDexterityContent"
-      />
 
 </configure>

@@ -1,11 +1,11 @@
-from zope.interface import implements, classProvides
+from zope.interface import implements
 from zope.component import getUtility
-from zope.schema.vocabulary import SimpleVocabulary
-from zope.schema.interfaces import IContextSourceBinder
 from zope.intid.interfaces import IIntIds
-from Products.CMFCore.utils import getToolByName
-from z3c.formwidget.query.interfaces import IQuerySource
 
+from z3c.formwidget.query.interfaces import IQuerySource
+from zope.schema.vocabulary import SimpleVocabulary
+
+from Products.CMFCore.utils import getToolByName
 
 class CMFContentSearchSource(object):
     implements(IQuerySource)

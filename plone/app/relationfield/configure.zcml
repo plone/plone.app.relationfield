@@ -1,0 +1,66 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <include package="z3c.relationfield" />
+
+  <!-- setup GS profile -->
+  <five:registerPackage package="." initialize=".initialize" />
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Relation Field"
+      description="Adds support for content relationships defined using z3c.relationfield"
+      directory="profiles/default"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      />
+
+  <!-- Dexterity Content and Archetypes Content will support incoming
+       and outgoing relations -->
+  <class class="plone.dexterity.content.DexterityContent">
+    <implements interface="z3c.relationfield.interfaces.IHasRelations" />
+  </class>
+
+<!-- AT support requires a minor change to z3c.relationfield
+  <class class="Products.Archetypes.BaseObject.BaseObject">
+    <implements interface="z3c.relationfield.interfaces.IHasRelations" />
+  </class>
+-->
+
+  <!-- Only use intids for objects with relations -->
+  <includeOverrides package="five.intid" file="overrides.zcml" />
+  <include package="five.intid" file="base.zcml" />
+  <subscriber
+     handler="five.intid.intid.addIntIdSubscriber"
+     for="plone.dexterity.interfaces.IDexterityContent
+          zope.app.container.interfaces.IObjectAddedEvent"
+      />
+  <subscriber
+      handler="five.intid.intid.removeIntIdSubscriber"
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.app.container.interfaces.IObjectRemovedEvent"
+      />
+  <subscriber
+      handler="five.intid.intid.moveIntIdSubscriber"
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.app.container.interfaces.IObjectMovedEvent"
+      />
+
+  <!-- widgets setup -->
+  <include file="widget.zcml" />
+
+
+  <!-- dexterity behavior -->
+  <include package="plone.behavior" file="meta.zcml" />
+  <plone:behavior
+      title="Related items"
+      description="Adds the ability to assign related items"
+      interface=".behavior.IRelatedItems"
+      factory=".behavior.RelatedItemsFactory"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      />
+
+</configure>

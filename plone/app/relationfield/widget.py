@@ -56,11 +56,16 @@ class RelationListDataManager(AttributeField):
     def get(self):
         """Gets the target"""
         rel_list = []
+        
+        # Calling query() here will lead to infinite recursion!
         try:
             rel_list = super(RelationListDataManager, self).get()
         except AttributeError:
-            # Not yet set
-            pass
+            rel_list = None
+        
+        if not rel_list:
+            return []
+        
         resolved_list = []
         for rel in rel_list:
             if rel.isBroken():

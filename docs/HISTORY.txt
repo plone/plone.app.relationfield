@@ -4,6 +4,4 @@ Changelog for plone.app.relationfield
 
 plone.app.relationfield - 0.1 Unreleased
 
-    - Initial package structure.
-      [zopeskel]
-
+    - Create glue package for adding z3c.relationfield support to Plone/Dexterity

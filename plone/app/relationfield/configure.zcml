@@ -1,6 +1,7 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
 
 
   <!-- Only use intids for objects with relations -->
@@ -47,9 +48,11 @@
     <implements interface="z3c.relationfield.interfaces.IHasRelations" />
   </class>
   <!-- Archetypes Content will support incoming relations -->
-  <class class="Products.Archetypes.BaseObject.BaseObject">
+  <class zcml:condition="installed Products.Archetypes"
+         class="Products.Archetypes.BaseObject.BaseObject">
     <implements interface="z3c.relationfield.interfaces.IHasIncomingRelations" />
   </class>
+
 
 <!-- widgets setup -->
   <include file="widget.zcml" />

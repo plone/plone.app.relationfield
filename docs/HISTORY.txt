@@ -1,7 +1,10 @@
-Changelog for plone.app.relationfield
+Changelog
+=========
 
-    (name of developer listed in brackets)
+0.1 - Unreleased
+----------------
 
-plone.app.relationfield - 0.1 Unreleased
+- Made Archetypes support truly optional.
+  [hannosch]
 
-    - Create glue package for adding z3c.relationfield support to Plone/Dexterity
+- Create glue package for adding z3c.relationfield support to Plone/Dexterity.

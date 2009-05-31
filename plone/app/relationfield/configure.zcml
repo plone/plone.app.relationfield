@@ -44,17 +44,18 @@
   </genericsetup:importStep>
 
   <!-- Dexterity Content will support incoming and outgoing relations -->
-  <class class="plone.dexterity.content.DexterityContent">
+  <class zcml:condition="installed plone.dexterity"
+         class="plone.dexterity.content.DexterityContent">
     <implements interface="z3c.relationfield.interfaces.IHasRelations" />
   </class>
+  
   <!-- Archetypes Content will support incoming relations -->
   <class zcml:condition="installed Products.Archetypes"
          class="Products.Archetypes.BaseObject.BaseObject">
     <implements interface="z3c.relationfield.interfaces.IHasIncomingRelations" />
   </class>
 
-
-<!-- widgets setup -->
+  <!-- widgets setup -->
   <include file="widget.zcml" />
 
 </configure>

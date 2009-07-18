@@ -25,6 +25,8 @@
 
   <include package="z3c.relationfield" />
 
+  <utility factory=".path.Zope2ObjectPath" />
+  
   <!-- setup GS profile -->
   <genericsetup:registerProfile
       name="default"

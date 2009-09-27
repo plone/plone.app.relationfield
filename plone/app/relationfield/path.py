@@ -16,7 +16,7 @@ class Zope2ObjectPath(object):
         except AttributeError:
             raise ValueError(obj)
 
-    def resolve(path):
+    def resolve(self, path):
         site = getSite()
         if site is None:
             raise ValueError(path)

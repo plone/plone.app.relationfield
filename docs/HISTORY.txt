@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0b3 - 2009-09-27
+------------------
+
+- Fix IObjectPath utility's resolve() method signature. Thanks Hedley Roos.
+  [optilude]
+
 1.0b2 - 2009-07-18
 ------------------
 

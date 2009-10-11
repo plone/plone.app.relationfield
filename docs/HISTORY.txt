@@ -1,13 +1,19 @@
 Changelog
 =========
 
-1.0b3 - 2009-09-27
+1.0b4 (2009-10-11)
+------------------
+
+- Add plone.rfc822 field marshaler.
+  [optilude]
+
+1.0b3 (2009-09-27)
 ------------------
 
 - Fix IObjectPath utility's resolve() method signature. Thanks Hedley Roos.
   [optilude]
 
-1.0b2 - 2009-07-18
+1.0b2 (2009-07-18)
 ------------------
 
 - Add IObjectPath utility. This is required for broken relationships to work.
@@ -17,7 +23,7 @@ Changelog
   anywhere.
   [optilude]
 
-1.0b1 - 2009-05-31
+1.0b1 (2009-05-31)
 ------------------
 
 - Made Archetypes support truly optional.

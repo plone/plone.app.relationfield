@@ -1,0 +1,65 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml">
+
+  <!-- Only use intids for objects with relations -->
+  <includeOverrides package="five.intid" file="overrides.zcml" />
+  <include package="five.intid" file="base.zcml" />
+  <subscriber
+     handler="five.intid.intid.addIntIdSubscriber"
+     for="Products.CMFCore.interfaces.IDynamicType
+          zope.app.container.interfaces.IObjectAddedEvent"
+      />
+  <subscriber
+      handler="five.intid.intid.removeIntIdSubscriber"
+      for="Products.CMFCore.interfaces.IDynamicType
+           zope.app.container.interfaces.IObjectRemovedEvent"
+      />
+  <subscriber
+      handler="five.intid.intid.moveIntIdSubscriber"
+      for="Products.CMFCore.interfaces.IDynamicType
+           zope.app.container.interfaces.IObjectMovedEvent"
+      />
+
+  <include package="z3c.relationfield" />
+
+  <utility factory=".path.Zope2ObjectPath" />
+  
+  <!-- setup GS profile -->
+  <genericsetup:registerProfile
+      name="default"
+      title="Relation Field"
+      description="Adds support for content relationships defined using z3c.relationfield"
+      directory="profiles/default"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      />
+
+  <genericsetup:importStep
+      name="import-relations-utils"
+      title="Import Relations Utils"
+      description="Import relation and intid utilities."
+      handler=".setuphandlers.installRelations">
+     <depends name="toolset"/>
+  </genericsetup:importStep>
+
+  <!-- Dexterity Content will support incoming and outgoing relations -->
+  <class zcml:condition="installed plone.dexterity"
+         class="plone.dexterity.content.DexterityContent">
+    <implements interface="z3c.relationfield.interfaces.IHasRelations" />
+  </class>
+  
+  <!-- Archetypes Content will support incoming relations -->
+  <class zcml:condition="installed Products.Archetypes"
+         class="Products.Archetypes.BaseObject.BaseObject">
+    <implements interface="z3c.relationfield.interfaces.IHasIncomingRelations" />
+  </class>
+
+  <!-- widgets setup -->
+  <include file="widget.zcml" />
+  
+  <!-- marshaler setup -->
+  <include file="marshaler.zcml" />
+
+</configure>

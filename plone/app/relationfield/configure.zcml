@@ -3,7 +3,6 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:zcml="http://namespaces.zope.org/zcml">
 
-
   <!-- Only use intids for objects with relations -->
   <includeOverrides package="five.intid" file="overrides.zcml" />
   <include package="five.intid" file="base.zcml" />
@@ -59,5 +58,8 @@
 
   <!-- widgets setup -->
   <include file="widget.zcml" />
+  
+  <!-- marshaler setup -->
+  <include file="marshaler.zcml" />
 
 </configure>

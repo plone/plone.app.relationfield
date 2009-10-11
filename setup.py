@@ -36,6 +36,7 @@ setup(name='plone.app.relationfield',
           'plone.formwidget.contenttree',
           'plone.supermodel',
           'Products.CMFCore',
+          'plone.rfc822',
       ],
       entry_points="""
       # -*- Entry points: -*-

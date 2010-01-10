@@ -8,6 +8,12 @@ from five.intid.intid import IntIds
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.interfaces import IDynamicType
 
+try:
+    import Products.LinguaPlone
+    HAS_LINGUAPLONE = True
+except:
+    HAS_LINGUAPLONE = False
+
 def add_relations(context):
     addUtility(context, ICatalog, RelationCatalog, ofs_name='relations',
                findroot=False)
@@ -34,7 +40,10 @@ def register_all_content_for_intids(portal):
     registered = 0
     existing = 0
     if cat is not None:
-        content = cat(object_provides=IDynamicType.__identifier__)
+        query = {'object_provides': IDynamicType.__identifier__}
+        if HAS_LINGUAPLONE:
+            query['Language'] = 'all'
+        content = cat(query)
         for brain in content:
             if brain.getPath() in registered_paths:
                 existing += 1

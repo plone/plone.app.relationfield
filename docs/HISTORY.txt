@@ -4,6 +4,10 @@ Changelog
 1.0b5 (unreleased)
 ------------------
 
+- Depend on plone.app.intid for intid utility installation and content
+  registration.
+  [alecm]
+
 - Fix register_all_content_for_intids to register content in all
   Languages in LinguaPlone sites
   [csenger]
@@ -37,3 +41,4 @@ Changelog
   [hannosch]
 
 - Create glue package for adding z3c.relationfield support to Plone/Dexterity.
+  [alecm]

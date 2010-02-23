@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0b5 (unreleased)
+1.0b5 (2010-02-22)
 ------------------
 
 - Depend on plone.app.intid for intid utility installation and content

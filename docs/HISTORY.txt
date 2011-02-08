@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0b6 (unreleased)
+------------------
+
+- Create custom data manager for dictionaries.
+  [dukebody]
+
 1.0b5 (2010-02-22)
 ------------------
 

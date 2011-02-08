@@ -8,7 +8,7 @@ from z3c.relationfield.interfaces import (
     )
 from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
-from z3c.form.datamanager import AttributeField
+from z3c.form.datamanager import AttributeField, DictionaryField
 
 from plone.supermodel.exportimport import BaseHandler
 
@@ -47,6 +47,43 @@ class RelationDataManager(AttributeField):
             # otherwise create a relationship
             rel = RelationValue(to_id)
             super(RelationDataManager, self).set(rel)
+
+
+class RelationDictDataManager(DictionaryField):
+    """A data manager which uses the z3c.relationfield api to set
+    relationships using a schema field, for dict-like contexts."""
+    adapts(dict, IRelation)
+
+    def get(self):
+        """Gets the target"""
+        rel = None
+        try:
+            rel = super(RelationDictDataManager, self).get()
+        except AttributeError:
+            # Not set yet
+            pass
+        if rel is not None:
+            if rel.isBroken():
+                # XXX: should log or take action here
+                return
+            return rel.to_object
+
+    def set(self, value):
+        """Sets the relationship target"""
+        current = None
+        try:
+            current = super(RelationDictDataManager, self).get()
+        except AttributeError:
+            pass
+        intids = getUtility(IIntIds)
+        to_id = intids.getId(value)
+        if IRelationValue.providedBy(current):
+            # If we already have a relation, just set the to_id
+            current.to_id = to_id
+        else:
+            # otherwise create a relationship
+            rel = RelationValue(to_id)
+            super(RelationDictDataManager, self).set(rel)
 
 
 class RelationListDataManager(AttributeField):
@@ -90,3 +127,4 @@ class RelationListDataManager(AttributeField):
 
 RelationChoiceHandler = BaseHandler(RelationChoice)
 RelationListHandler = BaseHandler(RelationList)
+

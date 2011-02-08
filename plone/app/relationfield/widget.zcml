@@ -6,6 +6,7 @@
   <!-- Widget setup -->
   
   <adapter factory=".widget.RelationDataManager" />
+  <adapter factory=".widget.RelationDictDataManager" />
   <adapter factory=".widget.RelationListDataManager" />
 
   <utility component=".source.CMFContentSearchSource"

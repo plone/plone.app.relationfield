@@ -33,6 +33,9 @@ class RelationDataManager(AttributeField):
 
     def set(self, value):
         """Sets the relationship target"""
+        if value is None:
+            return super(RelationDataManager, self).set(None)
+
         current = None
         try:
             current = super(RelationDataManager, self).get()
@@ -70,6 +73,9 @@ class RelationDictDataManager(DictionaryField):
 
     def set(self, value):
         """Sets the relationship target"""
+        if value is None:
+            return super(RelationDictDataManager, self).set(None)
+        
         current = None
         try:
             current = super(RelationDictDataManager, self).get()

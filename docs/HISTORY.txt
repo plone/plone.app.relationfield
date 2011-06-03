@@ -1,9 +1,14 @@
 Changelog
 =========
 
-1.0.1 (unreleased)
-------------------
+1.1 (unreleased)
+----------------
 
+- Make sure the content tree widget profile is installed.
+  [davisagli]
+
+- Moved the 'related items' behavior here from plone.app.dexterity.
+  [davisagli]
 
 1.0 (2011-04-30)
 ----------------

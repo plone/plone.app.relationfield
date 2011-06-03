@@ -5,6 +5,8 @@
 
   <!-- Widget setup -->
   
+  <include package="plone.formwidget.contenttree" />
+  
   <adapter factory=".widget.RelationDataManager" />
   <adapter factory=".widget.RelationDictDataManager" />
   <adapter factory=".widget.RelationListDataManager" />

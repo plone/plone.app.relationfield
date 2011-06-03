@@ -1,7 +1,8 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:zcml="http://namespaces.zope.org/zcml">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:plone="http://namespaces.plone.org/plone">
 
   <!-- Only use intids for objects with relations -->
   <include package="plone.app.intid" />
@@ -28,15 +29,25 @@
   </genericsetup:importStep>
 
   <!-- Dexterity Content will support incoming and outgoing relations -->
-  <class zcml:condition="installed plone.dexterity"
-         class="plone.dexterity.content.DexterityContent">
-    <implements interface=".interfaces.IDexterityHasRelations" />
-  </class>
-  <subscriber zcml:condition="installed plone.dexterity"
-    for="plone.dexterity.interfaces.IDexterityContent
-         zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-    handler=".event.update_behavior_relations" 
-  />
+  <configure zcml:condition="installed plone.dexterity">
+    <class class="plone.dexterity.content.DexterityContent">
+      <implements interface=".interfaces.IDexterityHasRelations" />
+    </class>
+    <subscriber
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+      handler=".event.update_behavior_relations" 
+      />
+    <!-- Make 'related items' behavior available if plone.behavior is present. -->
+    <plone:behavior
+        zcml:condition="installed plone.behavior"
+        title="Related items"
+        description="Adds the ability to assign related items"
+        provides=".behavior.IRelatedItems"
+        for="plone.dexterity.interfaces.IDexterityContent"
+        />
+  </configure>
+
   <!-- Archetypes Content will support incoming relations -->
   <class zcml:condition="installed Products.Archetypes"
          class="Products.Archetypes.BaseObject.BaseObject">

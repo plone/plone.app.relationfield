@@ -1,6 +1,7 @@
 from zope.component import adapts, getUtility
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
+from zope.security.interfaces import ForbiddenAttribute
 from z3c.relationfield.interfaces import (
     IRelation,
     IRelationValue,
@@ -8,6 +9,7 @@ from z3c.relationfield.interfaces import (
     )
 from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
+from z3c.form.interfaces import NO_VALUE
 from z3c.form.datamanager import AttributeField, DictionaryField
 
 from plone.supermodel.exportimport import BaseHandler
@@ -70,6 +72,18 @@ class RelationDictDataManager(DictionaryField):
                 # XXX: should log or take action here
                 return
             return rel.to_object
+
+    def query(self, default=NO_VALUE):
+        """See z3c.form.interfaces.IDataManager"""
+        try:
+            return self.get()
+        except ForbiddenAttribute, e:
+            raise e
+        except AttributeError:
+            if default == NO_VALUE:
+                return super(RelationDictDataManager, self).query()
+            else:
+                return default
 
     def set(self, value):
         """Sets the relationship target"""

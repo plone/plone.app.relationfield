@@ -11,6 +11,10 @@ from z3c.relationfield.relation import RelationValue
 from z3c.form.datamanager import AttributeField, DictionaryField
 
 from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
+from plone.formwidget.contenttree import ObjPathSourceBinder
+
+obj_path_src_binder = ObjPathSourceBinder()
+
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set

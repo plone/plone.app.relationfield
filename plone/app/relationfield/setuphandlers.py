@@ -5,9 +5,10 @@ from zope.intid.interfaces import IIntIds
 from five.intid.site import addUtility
 from five.intid.intid import IntIds
 from zope.component import getUtility
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
 
 from plone.app.relationfield.relation import convert
-from z3c.relationfield.event import updateRelations
 
 def add_relations(context):
     addUtility(context, ICatalog, RelationCatalog, ofs_name='relations',
@@ -35,4 +36,4 @@ def upgradeRelations(setup_tool):
     for relation in relations:
         objects.add(convert(relation))
     for obj in objects:
-        updateRelations(obj, None)
+        notify(ObjectModifiedEvent(obj))

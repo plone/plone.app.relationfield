@@ -17,7 +17,7 @@ class RelationValue(ORelationValue):
 
     @property
     def from_object(self):
-        if self.from_id:
+        if self._from_id:
             return _object(self._from_id)
         else:
             return None
@@ -63,3 +63,22 @@ def convert(relation):
         setattr(source, relation.from_attribute,
                 inner_convert(relation) or relation)
     return source
+
+from z3c.relationfield.relation import RelationValue, _object
+
+def test(self):
+    if getattr(self, '_from_id', None):
+        return _object(self._from_id)
+    else:
+        intids = getUtility(IIntIds)
+        return intids.getObject(intids.getId(self.__dict__['from_object']))
+
+def test2(self, obj):
+    if not obj:
+        return
+    intids = getUtility(IIntIds)
+    if not intids.queryId(obj):
+        intids.register(obj)
+    self._from_id = intids.getId(obj)
+
+RelationValue.from_object = property(test, test2)

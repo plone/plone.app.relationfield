@@ -28,16 +28,12 @@ def installRelations(context):
     add_relations(portal)
     return "Added relations utility."
 
-def upgradeRelations(context):
-    if context.readDataFile('install_relations.txt') is None:
-        return
-    portal = context.getSite()
+def upgradeRelations(setup_tool):
     catalog = getUtility(ICatalog)
     relations = [relation for relation in catalog.findRelations()]
     objects = set()
     for relation in relations:
-        catalog.unindex(relation)
-        convert(relation)
+        objects.add(convert(relation))
     for obj in objects:
         updateRelations(obj, None)
         

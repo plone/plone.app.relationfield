@@ -8,7 +8,7 @@ from zc.relation.interfaces import ICatalog
 
 
 class RelationValue(ORelationValue):
-
+    plone_app_relation = True
     def __init__(self, to_id):
         self._from_id = None
         super(RelationValue, self).__init__(to_id)
@@ -38,10 +38,10 @@ class RelationValue(ORelationValue):
         return _path(self.from_object)
 
 def convert(relation):
-    if not isinstance(relation, ORelationValue):
+    if getattr(relation, 'plone_app_relation', False):
         return
     def inner_convert(relation):
-        if not isinstance(relation, ORelationValue):
+        if getattr(relation, 'plone_app_relation', False):
             return None
         new_relation = RelationValue(relation.to_id)
         new_relation.from_object = relation.from_object
@@ -57,3 +57,4 @@ def convert(relation):
     else:
         setattr(source, relation.from_attribute,
             inner_convert(relation) or relation)
+    return source

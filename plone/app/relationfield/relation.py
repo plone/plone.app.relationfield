@@ -1,14 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+
 from z3c.relationfield.relation import RelationValue as ORelationValue, \
     _object, _path
 from zope.app.intid.interfaces import IIntIds
 from zope.component import getUtility
-from zc.relation.interfaces import ICatalog
 
 
 class RelationValue(ORelationValue):
+
     plone_app_relation = True
+
     def __init__(self, to_id):
         self._from_id = None
         super(RelationValue, self).__init__(to_id)
@@ -37,9 +39,11 @@ class RelationValue(ORelationValue):
     def from_path(self):
         return _path(self.from_object)
 
+
 def convert(relation):
     if getattr(relation, 'plone_app_relation', False):
         return
+
     def inner_convert(relation):
         if getattr(relation, 'plone_app_relation', False):
             return None
@@ -48,13 +52,14 @@ def convert(relation):
         new_relation.__parent__ = relation.__parent__
         new_relation.from_attribute = relation.from_attribute
         return new_relation
+
     source = relation.from_object
     relations_from_source = getattr(source, relation.from_attribute)
     if isinstance(relations_from_source, list):
-        setattr(source, relation.from_attribute, 
-            [inner_convert(relation) or relation for relation in 
-            relations_from_source])
+        setattr(source, relation.from_attribute,
+                [inner_convert(relation) or relation for relation in
+                relations_from_source])
     else:
         setattr(source, relation.from_attribute,
-            inner_convert(relation) or relation)
+                inner_convert(relation) or relation)
     return source

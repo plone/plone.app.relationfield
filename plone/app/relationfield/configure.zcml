@@ -28,14 +28,15 @@
      <depends name="toolset"/>
   </genericsetup:importStep>
 
-  <genericsetup:importStep
-      name="upgrade-relations"
+  <genericsetup:upgradeStep
       title="Upgrade Relations"
       description="Upgrade Relations. Might be slow"
-      handler=".setuphandlers.upgradeRelations">
-     <depends name="import-relations-utils"/>
-  </genericsetup:importStep>
-
+      source="1"
+      destination="2"
+      handler=".setuphandlers.upgradeRelations"
+      sortkey="1"
+      profile="plone.app.relationfield:default">
+</genericsetup:upgradeStep>
   <!-- Dexterity Content will support incoming and outgoing relations -->
   <configure zcml:condition="installed plone.dexterity">
     <class class="plone.dexterity.content.DexterityContent">

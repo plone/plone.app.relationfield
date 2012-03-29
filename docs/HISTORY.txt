@@ -4,6 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- Use own implementation of RelationValue. z3c.relationfield RelationValue
+  is incompatible with Zope2/4 and can cause problems in some case.
+  [do3cc]
 
 1.1 (2011-07-02)
 ----------------

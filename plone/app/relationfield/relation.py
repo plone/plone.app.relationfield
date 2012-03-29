@@ -71,6 +71,10 @@ def test(self):
         return _object(self._from_id)
     else:
         intids = getUtility(IIntIds)
+        if not intids.queryId(self.__dict__['from_object']):
+            # XXX In this path, we could micro optimize by avoiding to query
+            # intids for the id again
+            intids.register(self.__dict__['from_object'])
         return intids.getObject(intids.getId(self.__dict__['from_object']))
 
 def test2(self, obj):

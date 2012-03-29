@@ -36,5 +36,3 @@ def upgradeRelations(setup_tool):
         objects.add(convert(relation))
     for obj in objects:
         updateRelations(obj, None)
-        
-        

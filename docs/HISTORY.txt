@@ -4,6 +4,9 @@ Changelog
 1.2 (unreleased)
 ----------------
 
+- changed handler for RelationChoiceHandler
+  to plone.supermodel.exportimport.ChoiceHandler
+  [gborelli]
 
 1.1 (2011-07-02)
 ----------------
@@ -55,7 +58,7 @@ Changelog
 
 - Add IObjectPath utility. This is required for broken relationships to work.
   Without it, deleting an object that has inbound relations will cause an
-  error. Arguably, this isn't the ideal package for this, somewhat more 
+  error. Arguably, this isn't the ideal package for this, somewhat more
   general utility, but it can always be moved later as it's not imported
   anywhere.
   [optilude]

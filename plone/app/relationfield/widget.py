@@ -10,7 +10,8 @@ from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
 from z3c.form.datamanager import AttributeField, DictionaryField
 
-from plone.supermodel.exportimport import BaseHandler
+from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
+
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set
@@ -75,7 +76,7 @@ class RelationDictDataManager(DictionaryField):
         """Sets the relationship target"""
         if value is None:
             return super(RelationDictDataManager, self).set(None)
-        
+
         current = None
         try:
             current = super(RelationDictDataManager, self).get()
@@ -99,16 +100,16 @@ class RelationListDataManager(AttributeField):
     def get(self):
         """Gets the target"""
         rel_list = []
-        
+
         # Calling query() here will lead to infinite recursion!
         try:
             rel_list = super(RelationListDataManager, self).get()
         except AttributeError:
             rel_list = None
-        
+
         if not rel_list:
             return []
-        
+
         resolved_list = []
         for rel in rel_list:
             if rel.isBroken():
@@ -131,6 +132,6 @@ class RelationListDataManager(AttributeField):
 
 # plone.supermodel schema import/export handlers
 
-RelationChoiceHandler = BaseHandler(RelationChoice)
+RelationChoiceHandler = ChoiceHandler(RelationChoice)
 RelationListHandler = BaseHandler(RelationList)
 

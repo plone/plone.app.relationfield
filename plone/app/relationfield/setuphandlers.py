@@ -4,6 +4,11 @@ from zope.app.intid.interfaces import IIntIds as app_IIntIds
 from zope.intid.interfaces import IIntIds
 from five.intid.site import addUtility
 from five.intid.intid import IntIds
+from zope.component import getUtility
+from zope.event import notify
+from zope.lifecycleevent import ObjectModifiedEvent
+
+from plone.app.relationfield.relation import convert
 
 def add_relations(context):
     addUtility(context, ICatalog, RelationCatalog, ofs_name='relations',
@@ -23,3 +28,12 @@ def installRelations(context):
     portal = context.getSite()
     add_relations(portal)
     return "Added relations utility."
+
+def upgradeRelations(setup_tool):
+    catalog = getUtility(ICatalog)
+    relations = [relation for relation in catalog.findRelations()]
+    objects = set()
+    for relation in relations:
+        objects.add(convert(relation))
+    for obj in objects:
+        notify(ObjectModifiedEvent(obj))

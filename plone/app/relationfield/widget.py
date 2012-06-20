@@ -7,11 +7,10 @@ from z3c.relationfield.interfaces import (
     IRelationList,
     )
 from z3c.relationfield.schema import RelationChoice, RelationList
-from z3c.relationfield.relation import RelationValue as ORelationValue
+from z3c.relationfield.relation import RelationValue
 from z3c.form.datamanager import AttributeField, DictionaryField
 
 from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
-from plone.app.relationfield.relation import RelationValue
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set

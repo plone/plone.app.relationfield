@@ -17,7 +17,7 @@ def get_from_object(self):
 
         # Heya, is there no from_object? Please have a look at #12802
 
-        self._from_id = intids.register(self.from_object)
+        self._from_id = intids.register(self.__dict__['from_object'])
         return _object(self._from_id)
 
 

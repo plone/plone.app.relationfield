@@ -7,7 +7,7 @@ Changelog
 - changed handler for RelationChoiceHandler
   to plone.supermodel.exportimport.ChoiceHandler
   [gborelli]
-- Monkey patch z3c.relationfield RelationValue, it is 
+- Monkey patch z3c.relationfield RelationValue, it is
   incompatible with Zope2/4 and can cause problems in some case.
   [do3cc]
 

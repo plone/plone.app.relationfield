@@ -1,8 +1,12 @@
 from zope.interface import implements
 from z3c.objpath.interfaces import IObjectPath
 
-from zope.app.component.hooks import getSite
+try:
+    from zope.component.hooks import getSite
+except ImportError:
+    from zope.app.component.hooks import getSite
 from zExceptions import NotFound
+
 
 class Zope2ObjectPath(object):
     """Path representation for Zope 2 objects.

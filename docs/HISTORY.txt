@@ -4,7 +4,8 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Update getSite import for compatibility with Plone 4.3.
+  [davisagli]
 
 
 1.2.0 (2012-09-21)
@@ -13,6 +14,7 @@ Changelog
 - changed handler for RelationChoiceHandler
   to plone.supermodel.exportimport.ChoiceHandler
   [gborelli]
+
 - Monkey patch z3c.relationfield RelationValue, it is
   incompatible with Zope2/4 and can cause problems in some case.
   [do3cc]

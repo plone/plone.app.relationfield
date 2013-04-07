@@ -10,6 +10,7 @@
   <adapter factory=".widget.RelationDataManager" />
   <adapter factory=".widget.RelationDictDataManager" />
   <adapter factory=".widget.RelationListDataManager" />
+  <adapter factory=".widget.RelationListDictDataManager" />
 
   <utility component=".source.CMFContentSearchSource"
            name="plone.formwidget.relations.cmfcontentsearch"

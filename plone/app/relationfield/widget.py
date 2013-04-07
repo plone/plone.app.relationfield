@@ -1,6 +1,7 @@
 from zope.component import adapts, getUtility
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
+from zope.security.interfaces import ForbiddenAttribute
 from z3c.relationfield.interfaces import (
     IRelation,
     IRelationValue,
@@ -8,6 +9,7 @@ from z3c.relationfield.interfaces import (
     )
 from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
+from z3c.form.interfaces import NO_VALUE
 from z3c.form.datamanager import AttributeField, DictionaryField
 
 from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
@@ -71,6 +73,18 @@ class RelationDictDataManager(DictionaryField):
                 return
             return rel.to_object
 
+    def query(self, default=NO_VALUE):
+        """See z3c.form.interfaces.IDataManager"""
+        try:
+            return self.get()
+        except ForbiddenAttribute, e:
+            raise e
+        except AttributeError:
+            if default == NO_VALUE:
+                return super(RelationDictDataManager, self).query()
+            else:
+                return default
+
     def set(self, value):
         """Sets the relationship target"""
         if value is None:
@@ -128,6 +142,52 @@ class RelationListDataManager(AttributeField):
             to_id = intids.getId(item)
             new_relationships.append(RelationValue(to_id))
         super(RelationListDataManager, self).set(new_relationships)
+
+
+class RelationListDictDataManager(DictionaryField):
+    """A data manager which sets a list of relations on dictionary"""
+    adapts(dict, IRelationList)
+
+    def get(self):
+        """Gets the target"""
+        rel_list = []
+
+        # Calling query() here will lead to infinite recursion!
+        try:
+            rel_list = super(RelationListDictDataManager, self).get()
+        except AttributeError:
+            rel_list = None
+
+        if not rel_list:
+            return []
+
+        resolved_list = []
+        for rel in rel_list:
+            if rel.isBroken():
+                # XXX: should log or take action here
+                continue
+            resolved_list.append(rel.to_object)
+        return resolved_list
+
+    def query(self, default=NO_VALUE):
+        """See z3c.form.interfaces.IDataManager"""
+        try:
+            return self.get()
+        except ForbiddenAttribute, e:
+            raise e
+        except AttributeError:
+            return default
+
+    def set(self, value):
+        """Sets the relationship target"""
+        value = value or []
+        new_relationships = []
+        intids = getUtility(IIntIds)
+        for item in value:
+            # otherwise create one
+            to_id = intids.getId(item)
+            new_relationships.append(RelationValue(to_id))
+        super(RelationListDictDataManager, self).set(new_relationships)
 
 
 # plone.supermodel schema import/export handlers

@@ -21,7 +21,7 @@
                 z3c.form.interfaces.IFormLayer"
            />
       
-  <adapter factory="plone.formwidget.contenttree.MultiContentTreeFieldWidget"
+  <adapter factory="plone.app.widgets.RelatedItemsFieldWidget"
            for="z3c.relationfield.interfaces.IRelationList
                 z3c.form.interfaces.IFormLayer"
            />

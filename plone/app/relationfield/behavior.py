@@ -22,7 +22,7 @@ class IRelatedItems(Interface):
         title=_(u'label_related_items', default=u'Related Items'),
         default=[],
         value_type=RelationChoice(title=u"Related",
-                      source=ObjPathSourceBinder()),
+                                  vocabulary="plone.app.vocabularies.Catalog"),
         required=False,
         )
 

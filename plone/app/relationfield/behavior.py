@@ -1,7 +1,6 @@
 from zope.interface import alsoProvides, Interface
 
 from z3c.relationfield.schema import RelationChoice, RelationList
-from plone.formwidget.contenttree import ObjPathSourceBinder
 
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plone.supermodel.model import Fieldset

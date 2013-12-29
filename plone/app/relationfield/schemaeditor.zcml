@@ -1,0 +1,15 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="plone.schemaeditor">
+
+<utility
+    component=".schemaeditor.RelationChoiceFactory"
+    name="plone.app.relationfield.RelationChoice"
+/>
+
+<utility
+    component=".schemaeditor.RelationListFactory"
+    name="plone.app.relationfield.RelationList"
+/>
+
+</configure>

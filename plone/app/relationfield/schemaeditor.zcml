@@ -4,12 +4,16 @@
 
 <utility
     component=".schemaeditor.RelationChoiceFactory"
-    name="plone.app.relationfield.RelationChoice"
+    name="z3c.relationfield.schema.RelationChoice"
 />
 
-<utility
+<adapter factory=".schemaeditor.getRelationChoiceFieldSchema" />
+<adapter factory=".schemaeditor.EditableRelationChoiceField" />
+
+<!-- utility
     component=".schemaeditor.RelationListFactory"
     name="plone.app.relationfield.RelationList"
-/>
+/ -->
+
 
 </configure>

@@ -5,11 +5,12 @@
 # ObjPathSourceBinder.
 
 from plone.app.relationfield import RelationChoice
-# from plone.app.relationfield import RelationList
+from plone.app.relationfield.schemaeditor import RelationObjPathSourceBinder
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.formwidget.contenttree import obj_path_src_binder
 from plone.supermodel.exportimport import BaseHandler
 from plone.supermodel.utils import valueToElement
+from zope.interface.interfaces import Interface
 from zope.schema.interfaces import IContextSourceBinder
 
 import zope.schema
@@ -41,6 +42,9 @@ class RelationChoiceHandlerClass(BaseHandler):
                 value_type=zope.schema.TextLine(),
                 )
 
+        self.fieldAttributes['source'] = \
+            zope.schema.Object(__name__='source', title=u"Source", schema=Interface)
+
     def _constructField(self, attributes):
         # In our override of read, we use the superclass' read before
         # looking for portal_types. It tries to construct the field,
@@ -50,7 +54,7 @@ class RelationChoiceHandlerClass(BaseHandler):
            'values' not in attributes and \
            'vocabulary' not in attributes and \
            'vocabularyName' not in attributes:
-            attributes['source'] = obj_path_src_binder
+            attributes['source'] = RelationObjPathSourceBinder()
         return self.klass(**attributes)
 
     def read(self, element):
@@ -64,7 +68,7 @@ class RelationChoiceHandlerClass(BaseHandler):
             if portal_types:
                 portal_types = [s for s in portal_types]
                 # setting vocabulary also sets source
-                field.vocabulary = ObjPathSourceBinder(portal_type=portal_types)
+                field.vocabulary = RelationObjPathSourceBinder(portal_types=portal_types)
             break
 
         return field

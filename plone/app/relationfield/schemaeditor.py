@@ -11,6 +11,7 @@
 # XXX: prevent edit if field is not the editable use case.
 
 from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.app.relationfield.interfaces import IRelationChoiceSourceBinder
 from plone.schemaeditor import SchemaEditorMessageFactory as _
 from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.fields import IFieldFactory
@@ -32,6 +33,18 @@ import zope.interface
 import zope.schema
 
 
+class RelationObjPathSourceBinder(ObjPathSourceBinder):
+    implements(IRelationChoiceSourceBinder)
+
+    def __init__(self, portal_types=None):
+        super(RelationObjPathSourceBinder, self).__init__(
+            portal_type=portal_types,
+            )
+
+    def portal_types(self):
+        return self.selectable_filter.criteria.get('portal_type')
+
+
 # In order to appear in schemaeditor's list of addable/
 # editable fields, we need to supply a FieldFactory
 # as a utility.
@@ -45,22 +58,14 @@ class RelationFieldFactory(FieldFactory):
     def available(self):
         return queryUtility(IIntIds) is not None
 
-
-# Our RelationFieldFactory will need to supply a
-# default 'source' attribute for the field it returns.
-# TODO: parameterize
-@provider(zope.schema.interfaces.IContextSourceBinder)
-def opsb(context):
-    # provide a callable with a __name__attribute
-    return plone.formwidget.contenttree.obj_path_src_binder(context)
-
-# directlyProvides(opsb, zope.schema.interfaces.IContextSourceBinder)
+    def editable(self, field):
+        return IRelationChoiceSourceBinder.providedBy(field.source)
 
 
 RelationChoiceFactory = RelationFieldFactory(
     RelationChoice,
     _(u'label_relationchoice_field', default=u'Relation Choice'),
-    source=opsb,
+    source=RelationObjPathSourceBinder(),
 )
 
 
@@ -106,14 +111,8 @@ class EditableRelationChoiceField(object):
         #     return "%s.%s" % (source.__module__, source.__name__)
         if name == 'portal_types':
             source = self.field.source
-            if IContextSourceBinder.providedBy(source):
-                filter = getattr(source, 'selectable_filter', None)
-                if filter is not None:
-                    criteria = filter.criteria
-                    portal_types = criteria.get('portal_type')
-                    if len(criteria.keys()) == 1 and \
-                       portal_types is not None:
-                        return portal_types
+            if IRelationChoiceSourceBinder.providedBy(source):
+                return source.portal_types()
             return []
         return getattr(self.field, name)
 
@@ -122,7 +121,7 @@ class EditableRelationChoiceField(object):
             return setattr(
                 self.field,
                 'vocabulary',
-                ObjPathSourceBinder(portal_type=value)
+                RelationObjPathSourceBinder(portal_type=value)
                 )
         return setattr(self.field, name, value)
 

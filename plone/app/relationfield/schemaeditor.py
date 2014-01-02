@@ -1,4 +1,3 @@
-
 # Support for editing RelationChoice and RelationList fields
 # via plone.schemaeditor.
 #
@@ -8,6 +7,8 @@
 # custom sources by editing XML.
 #
 # Support for supermodel ex/im in exportimport.py
+#
+# XXX: prevent edit if field is not the editable use case.
 
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.schemaeditor import SchemaEditorMessageFactory as _

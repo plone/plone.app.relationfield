@@ -1,8 +1,15 @@
-from plone.app.relationfield import RelationChoice, RelationList
+# plone.supermodel export/import handler for relation fields
+#
+# Adds the ability to set portal_types;
+# if no source/vocabulary is specified in XML, uses bare
+# ObjPathSourceBinder.
+
+from plone.app.relationfield import RelationChoice
+# from plone.app.relationfield import RelationList
 from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.formwidget.contenttree import obj_path_src_binder
 from plone.supermodel.exportimport import BaseHandler
-from plone.supermodel.utils import noNS, valueToElement, elementToValue
-from zope.interface import Interface
+from plone.supermodel.utils import valueToElement
 from zope.schema.interfaces import IContextSourceBinder
 
 import zope.schema
@@ -10,8 +17,7 @@ import zope.schema
 
 class RelationChoiceHandlerClass(BaseHandler):
     """Special handling for the RelationChoice field
-       to cover the source attribute.
-       We want to write it out as a dotted name.
+       to cover the portal_types tag.
     """
 
     filteredAttributes = BaseHandler.filteredAttributes.copy()
@@ -27,9 +33,6 @@ class RelationChoiceHandlerClass(BaseHandler):
 
     def __init__(self, klass):
         super(RelationChoiceHandlerClass, self).__init__(klass)
-
-        self.fieldAttributes['source'] = \
-            zope.schema.Object(__name__='source', title=u"Source", schema=Interface)
 
         self.fieldAttributes['portal_types'] = \
             zope.schema.Set(
@@ -47,7 +50,7 @@ class RelationChoiceHandlerClass(BaseHandler):
            'values' not in attributes and \
            'vocabulary' not in attributes and \
            'vocabularyName' not in attributes:
-            attributes['source'] = ObjPathSourceBinder()
+            attributes['source'] = obj_path_src_binder
         return self.klass(**attributes)
 
     def read(self, element):
@@ -67,32 +70,16 @@ class RelationChoiceHandlerClass(BaseHandler):
         return field
 
     def write(self, field, name, type, elementName='field'):
-
-        # if field.source is not None:
-        #     # The Choice field instantiates with both vocabulary and source
-        #     # set to the same value. We want to be able to use the Choice
-        #     # export handler, but avoid it writing out a vocabulary element.
-        #     source = field.source
-        #     field.vocabulary = None
-
-        element = super(RelationChoiceHandlerClass, self).write(field, name, type, elementName)
-
-        # write source
-        # if source is not None:
-        #     attributeField = self.fieldAttributes['source']
-        #     child = valueToElement(
-        #         attributeField,
-        #         "%s.%s" % (source.__module__, source.__name__),
-        #         name='source',
-        #         force=True
-        #         )
-        #     element.append(child)
+        element = super(
+            RelationChoiceHandlerClass,
+            self,
+            ).write(field, name, type, elementName)
 
         portal_types_field = self.fieldAttributes['portal_types']
         source = field.source
         if IContextSourceBinder.providedBy(source):
             filter = getattr(source, 'selectable_filter', None)
-            if filter is not None:
+            if source.navigation_tree_query is None and filter is not None:
                 criteria = filter.criteria
                 portal_types = criteria.get('portal_type')
                 if len(criteria.keys()) == 1 and \

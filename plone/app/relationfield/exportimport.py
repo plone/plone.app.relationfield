@@ -2,7 +2,10 @@
 #
 # Adds the ability to set portal_types;
 # if no source/vocabulary is specified in XML, uses bare
-# ObjPathSourceBinder.
+# RelationObjPathSourceBinder.
+#
+# Nearly all the work is for RelationChoice; RelationList is taken
+# care of due to the fact it's value_type is implemented.
 
 from plone.app.relationfield import RelationChoice
 from plone.app.relationfield import RelationList
@@ -97,13 +100,6 @@ class RelationChoiceHandlerClass(BaseHandler):
 
         return element
 
-
-class RelationListHandlerClass(BaseHandler):
-    """Special handling for the RelationList field
-       to cover the portal_types tag.
-    """
-
-    pass
 
 RelationChoiceHandler = RelationChoiceHandlerClass(RelationChoice)
 RelationListHandler = BaseHandler(RelationList)

@@ -127,6 +127,6 @@ class EditableRelationChoiceField(object):
             return setattr(
                 self.field,
                 'vocabulary',
-                RelationObjPathSourceBinder(portal_type=value)
+                RelationObjPathSourceBinder(portal_types=value)
                 )
         return setattr(self.field, name, value)

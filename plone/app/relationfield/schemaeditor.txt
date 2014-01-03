@@ -1,0 +1,50 @@
+Test setup::
+
+    >>> app = layer['app']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic admin:secret')
+    >>> portal = layer['portal']
+    >>> portal_url = portal.portal_url()
+    >>> dexterity_types = portal_url + '/dexterity-types'
+
+    >>> browser.open(dexterity_types + '/@@add-type')
+    >>> browser.getControl(name='form.widgets.title').value = 'test type'
+    >>> browser.getControl(name='form.widgets.id').value = 'test_type'
+    >>> browser.getControl(name='form.buttons.add').click()
+
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type/@@fields'
+
+    >>> type_url = 'http://nohost/plone/dexterity-types/test_type'
+    >>> browser.open(type_url + '/@@add-field')
+
+    >>> browser.contents
+    '...<option id="..." value="Relation Choice">Relation Choice</option>...'
+
+    >>> browser.getControl(name='form.widgets.title').value = 'My Relation Choice'
+    >>> browser.getControl(name='form.widgets.__name__').value = 'my_relation_choice'
+    >>> browser.getControl(name='form.widgets.factory:list').value = ['Relation Choice']
+    >>> browser.getControl(name='form.buttons.add').click()
+
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type/@@fields'
+
+    >>> browser.contents
+    '...<div class="fieldLabel">...My Relation Choice...'
+
+    >>> type_url + '/my_relation_choice' in browser.contents
+    True
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type/my_relation_choice'
+
+    >>> browser.getControl(name='form.widgets.portal_types:list').value = ['Event', 'Folder']
+    >>> browser.getControl(name='form.buttons.save').click()
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.getControl(name='form.widgets.portal_types:list').value
+    ['Event', 'Folder']
+

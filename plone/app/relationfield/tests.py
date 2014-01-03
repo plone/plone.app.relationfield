@@ -1,5 +1,6 @@
 from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.testing import layered
 
@@ -22,9 +23,17 @@ class PloneAppRelationFieldLayer(PloneSandboxLayer):
 
 
 PARF_FIXTURE = PloneAppRelationFieldLayer()
+
 PARF_INTEGRATION_TESTING = IntegrationTesting(
     bases=(PARF_FIXTURE,),
-    name="PloneAppRelationFieldLayer:Integration")
+    name="PloneAppRelationFieldLayer:Integration"
+    )
+
+PARF_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(PARF_FIXTURE,),
+    name="PloneAppRelationField:Functional"
+    )
+
 
 optionflags = (doctest.ELLIPSIS |
               doctest.NORMALIZE_WHITESPACE)
@@ -40,7 +49,10 @@ def test_suite():
         layered(doctest.DocFileSuite('marshaler.txt', optionflags=optionflags),
                 PARF_INTEGRATION_TESTING)
     ])
-
+    suite.addTests([
+        layered(doctest.DocFileSuite('schemaeditor.txt', optionflags=optionflags),
+                PARF_FUNCTIONAL_TESTING)
+    ])
     return suite
 
 

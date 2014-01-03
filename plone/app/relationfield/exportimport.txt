@@ -1,10 +1,20 @@
+===========================================
+Supermodel export/import of relation fields
+===========================================
+
+Basic setup
+
     >>> from plone.app.relationfield.interfaces import IRelationChoiceSourceBinder
     >>> from zope.component import getUtility
     >>> from plone.schemaeditor.interfaces import IFieldFactory
 
+Our factory utility should exist and show we're addable
+
     >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationChoice')
     >>> factory_utility.available()
     True
+
+Load a schema with several variations on a relation choice field
 
     >>> schema = """\
     ... <?xml version="1.0" encoding="UTF-8"?>
@@ -37,28 +47,37 @@
     ... </model>
     ... """
 
-We can parse this model using the loadString() function:
-
     >>> from plone.supermodel import loadString
     >>> model = loadString(schema)
-
-    >>> schema = model.schema # shortcut to model.schemata[u""]
+    >>> schema = model.schema
 
     >>> from zope.schema import getFieldNamesInOrder
     >>> getFieldNamesInOrder(schema)
     ['my_rc', 'my_rc1', 'my_rc2', 'my_rc3']
 
+The first field has explicit portal types. Make sure it's using our version
+of the ObjPathSourceBinder::
+
     >>> schema['my_rc'].source
     <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
+
+This should provide our interface::
 
     >>> IRelationChoiceSourceBinder.providedBy(schema['my_rc'].source)
     True
 
+The field factory for relation fields should tell us this is editable::
+
     >>> factory_utility.editable(schema['my_rc'])
     True
 
+And, we should have our specified portal_type spec::
+
     >>> schema['my_rc'].source.selectable_filter.criteria.get('portal_type')
     [u'Folder', u'File']
+
+The second test field has an empty portal_types stanza. It should look much
+like the first example, but with no types.
 
     >>> schema['my_rc1'].source
     <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
@@ -69,6 +88,8 @@ We can parse this model using the loadString() function:
     >>> schema['my_rc1'].source.selectable_filter.criteria.get('portal_type') is None
     True
 
+Same for the third, which has no portal_types stanza::
+
     >>> schema['my_rc2'].source
     <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
 
@@ -78,6 +99,9 @@ We can parse this model using the loadString() function:
     >>> schema['my_rc2'].source.selectable_filter.criteria.get('portal_type') is None
     True
 
+The final example uses a different, explicitly specified, source. We
+should know that we can't edit it.
+
     >>> schema['my_rc3'].source
     <plone.formwidget.contenttree.source.UUIDSourceBinder object at ...>
 
@@ -86,3 +110,7 @@ We can parse this model using the loadString() function:
 
     >>> IRelationChoiceSourceBinder.providedBy(schema['my_rc3'].source)
     False
+
+
+    >>> False
+    We need to test export as well as import

@@ -17,17 +17,16 @@ from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.fields import IFieldFactory
 from plone.schemaeditor.interfaces import IFieldEditFormSchema
 from z3c.relationfield.interfaces import IRelationChoice
+from z3c.relationfield.interfaces import IRelationList
 from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
 from zope.app.intid.interfaces import IIntIds
 from zope.component import adapter
 from zope.component import adapts
 from zope.component import queryUtility
 from zope.interface import implementer
 from zope.interface import implements
-from zope.interface import provider
-from zope.schema.interfaces import IContextSourceBinder
 
-import plone.formwidget.contenttree
 import zope.component
 import zope.interface
 import zope.schema
@@ -72,20 +71,27 @@ RelationChoiceFactory = RelationFieldFactory(
 )
 
 
+class RelationListFieldFactory(FieldFactory):
+    implements(IFieldFactory)
+
+    def available(self):
+        return queryUtility(IIntIds) is not None
+
+    def editable(self, field):
+        return IRelationChoiceSourceBinder.providedBy(field.value_type.source)
+
+
+RelationListFactory = RelationListFieldFactory(
+    RelationList,
+    _(u'label_relationlist_field', default=u'Relation List'),
+)
+
+
 # Specify an editing interface and an adapter that will return it.
 
 class IEditableRelationChoice(zope.schema.interfaces.IField):
-    """XXX
+    """ Add editing of portal types
     """
-
-    source = zope.schema.DottedName(
-        title=_("Source providing values"),
-        description=_("The IContextSourceBinder "
-                      "object that provides values for this field."),
-        required=True,
-        default=None,
-        readonly=True,
-        )
 
     portal_types = zope.schema.Set(
         title=_(u"Target types to allow for relations"),
@@ -109,9 +115,6 @@ class EditableRelationChoiceField(object):
         self.__dict__['field'] = field
 
     def __getattr__(self, name):
-        # if name == 'source':
-        #     source = getattr(self.field, name)
-        #     return "%s.%s" % (source.__module__, source.__name__)
         if name == 'portal_types':
             source = self.field.source
             if IRelationChoiceSourceBinder.providedBy(source):
@@ -127,17 +130,3 @@ class EditableRelationChoiceField(object):
                 RelationObjPathSourceBinder(portal_type=value)
                 )
         return setattr(self.field, name, value)
-
-    def __delattr__(self, name):
-        # import pdb; pdb.set_trace()
-        return delattr(self.field, name)
-
-
-
-
-
-# RelationListFactory = RelationFieldFactory(
-#     RelationList,
-#     _(u'label_relationlist_field', default=u'Relation List')
-# )
-

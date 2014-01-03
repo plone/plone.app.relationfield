@@ -5,9 +5,8 @@
 # ObjPathSourceBinder.
 
 from plone.app.relationfield import RelationChoice
+from plone.app.relationfield import RelationList
 from plone.app.relationfield.schemaeditor import RelationObjPathSourceBinder
-from plone.formwidget.contenttree import ObjPathSourceBinder
-from plone.formwidget.contenttree import obj_path_src_binder
 from plone.supermodel.exportimport import BaseHandler
 from plone.supermodel.utils import valueToElement
 from zope.interface.interfaces import Interface
@@ -99,5 +98,12 @@ class RelationChoiceHandlerClass(BaseHandler):
         return element
 
 
+class RelationListHandlerClass(BaseHandler):
+    """Special handling for the RelationList field
+       to cover the portal_types tag.
+    """
+
+    pass
+
 RelationChoiceHandler = RelationChoiceHandlerClass(RelationChoice)
-# RelationListHandler = BaseHandler(RelationList)
+RelationListHandler = BaseHandler(RelationList)

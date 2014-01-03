@@ -6,10 +6,9 @@
         name="z3c.relationfield.schema.RelationChoice"
     />
 
-    <!-- utility
+    <utility
         component=".exportimport.RelationListHandler"
-        name="z3c.relationfield.RelationList"
-    / -->
-
+        name="z3c.relationfield.schema.RelationList"
+    />
 
 </configure>

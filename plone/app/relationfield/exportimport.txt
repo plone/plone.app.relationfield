@@ -121,13 +121,13 @@ should know that we can't edit it.
 Export
 ------
 
-Test export by serializing out. Not that we lose the source detail on the
+Test export by serializing out. Note that we lose the source detail on the
 last field. That's because we are not supporting export of explicit sources.
 Serialization::
 
     >>> from plone.supermodel import serializeModel
     >>> print serializeModel(model)
-    <model xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema">
+    <model ...>
       <schema>
         <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
           <description>Test Field</description>
@@ -148,6 +148,73 @@ Serialization::
         <field name="my_rc3" type="z3c.relationfield.schema.RelationChoice">
           <description>Test Field</description>
           <title>My RC 3</title>
+        </field>
+      </schema>
+    </model>
+
+
+-------------------------
+RelationListField Tests
+-------------------------
+
+Check availability for adding::
+
+    >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationList')
+    >>> factory_utility.available()
+    True
+
+Import
+------
+
+Nearly all the testing is already done in testing RelationChoice.
+We just need to make sure it's handled in the value_type::
+
+    >>> schema = """\
+    ... <?xml version="1.0" encoding="UTF-8"?>
+    ... <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    ...     <schema>
+    ...         <field name="my_rl" type="z3c.relationfield.schema.RelationList">
+    ...           <title>My RL</title>
+    ...           <value_type type="z3c.relationfield.schema.RelationChoice">
+    ...               <portal_types>
+    ...                 <element>Folder</element>
+    ...                 <element>File</element>
+    ...               </portal_types>
+    ...           </value_type>
+    ...         </field>
+    ...     </schema>
+    ... </model>
+    ... """
+
+    >>> from plone.supermodel import loadString
+    >>> model = loadString(schema)
+    >>> schema = model.schema
+
+    >>> from zope.schema import getFieldNamesInOrder
+    >>> getFieldNamesInOrder(schema)
+    ['my_rl']
+
+    >>> schema['my_rl'].value_type.source.portal_types()
+    [u'Folder', u'File']
+
+    >>> factory_utility.editable(schema['my_rl'])
+    True
+
+Export
+------
+
+    >>> from plone.supermodel import serializeModel
+    >>> print serializeModel(model)
+    <model ...>
+      <schema>
+        <field name="my_rl" type="z3c.relationfield.schema.RelationList">
+          <title>My RL</title>
+          <value_type type="z3c.relationfield.schema.RelationChoice">
+            <portal_types>
+              <element>Folder</element>
+              <element>File</element>
+            </portal_types>
+          </value_type>
         </field>
       </schema>
     </model>

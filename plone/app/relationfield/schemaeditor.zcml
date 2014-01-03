@@ -10,10 +10,10 @@
 <adapter factory=".schemaeditor.getRelationChoiceFieldSchema" />
 <adapter factory=".schemaeditor.EditableRelationChoiceField" />
 
-<!-- utility
+<utility
     component=".schemaeditor.RelationListFactory"
-    name="plone.app.relationfield.RelationList"
-/ -->
+    name="z3c.relationfield.schema.RelationList"
+/>
 
 
 </configure>

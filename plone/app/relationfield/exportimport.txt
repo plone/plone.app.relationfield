@@ -1,0 +1,88 @@
+    >>> from plone.app.relationfield.interfaces import IRelationChoiceSourceBinder
+    >>> from zope.component import getUtility
+    >>> from plone.schemaeditor.interfaces import IFieldFactory
+
+    >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationChoice')
+    >>> factory_utility.available()
+    True
+
+    >>> schema = """\
+    ... <?xml version="1.0" encoding="UTF-8"?>
+    ... <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    ...     <schema>
+    ...       <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC</title>
+    ...         <portal_types>
+    ...           <element>Folder</element>
+    ...           <element>File</element>
+    ...         </portal_types>
+    ...       </field>
+    ...       <field name="my_rc1" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC 1</title>
+    ...       </field>
+    ...       <field name="my_rc2" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC 2</title>
+    ...         <portal_types>
+    ...         </portal_types>
+    ...       </field>
+    ...       <field name="my_rc3" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC 3</title>
+    ...         <source>plone.formwidget.contenttree.uuid_src_binder</source>
+    ...       </field>
+    ...     </schema>
+    ... </model>
+    ... """
+
+We can parse this model using the loadString() function:
+
+    >>> from plone.supermodel import loadString
+    >>> model = loadString(schema)
+
+    >>> schema = model.schema # shortcut to model.schemata[u""]
+
+    >>> from zope.schema import getFieldNamesInOrder
+    >>> getFieldNamesInOrder(schema)
+    ['my_rc', 'my_rc1', 'my_rc2', 'my_rc3']
+
+    >>> schema['my_rc'].source
+    <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
+
+    >>> IRelationChoiceSourceBinder.providedBy(schema['my_rc'].source)
+    True
+
+    >>> factory_utility.editable(schema['my_rc'])
+    True
+
+    >>> schema['my_rc'].source.selectable_filter.criteria.get('portal_type')
+    [u'Folder', u'File']
+
+    >>> schema['my_rc1'].source
+    <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
+
+    >>> factory_utility.editable(schema['my_rc1'])
+    True
+
+    >>> schema['my_rc1'].source.selectable_filter.criteria.get('portal_type') is None
+    True
+
+    >>> schema['my_rc2'].source
+    <plone.app.relationfield.schemaeditor.RelationObjPathSourceBinder object at ...>
+
+    >>> factory_utility.editable(schema['my_rc2'])
+    True
+
+    >>> schema['my_rc2'].source.selectable_filter.criteria.get('portal_type') is None
+    True
+
+    >>> schema['my_rc3'].source
+    <plone.formwidget.contenttree.source.UUIDSourceBinder object at ...>
+
+    >>> factory_utility.editable(schema['my_rc3'])
+    False
+
+    >>> IRelationChoiceSourceBinder.providedBy(schema['my_rc3'].source)
+    False

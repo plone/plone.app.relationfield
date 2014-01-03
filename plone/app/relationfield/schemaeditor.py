@@ -37,9 +37,12 @@ class RelationObjPathSourceBinder(ObjPathSourceBinder):
     implements(IRelationChoiceSourceBinder)
 
     def __init__(self, portal_types=None):
-        super(RelationObjPathSourceBinder, self).__init__(
-            portal_type=portal_types,
-            )
+        if portal_types:
+            super(RelationObjPathSourceBinder, self).__init__(
+                portal_type=portal_types,
+                )
+        else:
+            super(RelationObjPathSourceBinder, self).__init__()
 
     def portal_types(self):
         return self.selectable_filter.criteria.get('portal_type')

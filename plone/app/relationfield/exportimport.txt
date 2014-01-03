@@ -8,13 +8,20 @@ Basic setup
     >>> from zope.component import getUtility
     >>> from plone.schemaeditor.interfaces import IFieldFactory
 
-Our factory utility should exist and show we're addable
+-------------------------
+RelationChoiceField Tests
+-------------------------
+
+Our factory utility should exist and show we're addable::
 
     >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationChoice')
     >>> factory_utility.available()
     True
 
-Load a schema with several variations on a relation choice field
+Import
+------
+
+Load a schema with several variations on a relation choice field::
 
     >>> schema = """\
     ... <?xml version="1.0" encoding="UTF-8"?>
@@ -111,6 +118,36 @@ should know that we can't edit it.
     >>> IRelationChoiceSourceBinder.providedBy(schema['my_rc3'].source)
     False
 
+Export
+------
 
-    >>> False
-    We need to test export as well as import
+Test export by serializing out. Not that we lose the source detail on the
+last field. That's because we are not supporting export of explicit sources.
+Serialization::
+
+    >>> from plone.supermodel import serializeModel
+    >>> print serializeModel(model)
+    <model xmlns:security="http://namespaces.plone.org/supermodel/security" xmlns:marshal="http://namespaces.plone.org/supermodel/marshal" xmlns:form="http://namespaces.plone.org/supermodel/form" xmlns="http://namespaces.plone.org/supermodel/schema">
+      <schema>
+        <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC</title>
+          <portal_types>
+            <element>Folder</element>
+            <element>File</element>
+          </portal_types>
+        </field>
+        <field name="my_rc1" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC 1</title>
+        </field>
+        <field name="my_rc2" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC 2</title>
+        </field>
+        <field name="my_rc3" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC 3</title>
+        </field>
+      </schema>
+    </model>

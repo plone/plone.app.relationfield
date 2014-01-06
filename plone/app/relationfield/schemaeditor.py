@@ -7,8 +7,6 @@
 # custom sources by editing XML.
 #
 # Support for supermodel ex/im in exportimport.py
-#
-# XXX: prevent edit if field is not the editable use case.
 
 from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.app.relationfield.interfaces import IRelationChoiceSourceBinder
@@ -84,17 +82,19 @@ class RelationListFieldFactory(FieldFactory):
 RelationListFactory = RelationListFieldFactory(
     RelationList,
     _(u'label_relationlist_field', default=u'Relation List'),
+    value_type=RelationChoice(source=RelationObjPathSourceBinder()),
 )
 
 
 # Specify an editing interface and an adapter that will return it.
 
-class IEditableRelationChoice(zope.schema.interfaces.IField):
+class IEditableRelation(zope.schema.interfaces.IField):
     """ Add editing of portal types
     """
 
     portal_types = zope.schema.Set(
         title=_(u"Target types to allow for relations"),
+        description=_(u"Select none to allow all content types."),
         value_type=zope.schema.Choice(
             vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes",
             ),
@@ -104,11 +104,11 @@ class IEditableRelationChoice(zope.schema.interfaces.IField):
 @implementer(IFieldEditFormSchema)
 @adapter(IRelationChoice)
 def getRelationChoiceFieldSchema(field):
-    return IEditableRelationChoice
+    return IEditableRelation
 
 
 class EditableRelationChoiceField(object):
-    implements(IEditableRelationChoice)
+    implements(IEditableRelation)
     adapts(RelationChoice)
 
     def __init__(self, field):
@@ -126,6 +126,37 @@ class EditableRelationChoiceField(object):
         if name == 'portal_types':
             return setattr(
                 self.field,
+                'vocabulary',
+                RelationObjPathSourceBinder(portal_types=value)
+                )
+        return setattr(self.field, name, value)
+
+
+@implementer(IFieldEditFormSchema)
+@adapter(IRelationList)
+def getRelationListFieldSchema(field):
+    return IEditableRelation
+
+
+class EditableRelationListField(object):
+    implements(IEditableRelation)
+    adapts(RelationList)
+
+    def __init__(self, field):
+        self.__dict__['field'] = field
+
+    def __getattr__(self, name):
+        if name == 'portal_types':
+            source = self.field.value_type.source
+            if IRelationChoiceSourceBinder.providedBy(source):
+                return source.portal_types()
+            return []
+        return getattr(self.field, name)
+
+    def __setattr__(self, name, value):
+        if name == 'portal_types':
+            return setattr(
+                self.field.value_type,
                 'vocabulary',
                 RelationObjPathSourceBinder(portal_types=value)
                 )

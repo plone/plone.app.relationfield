@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope">
+
+    <utility
+        component=".exportimport.RelationChoiceHandler"
+        name="z3c.relationfield.schema.RelationChoice"
+    />
+
+    <utility
+        component=".exportimport.RelationListHandler"
+        name="z3c.relationfield.schema.RelationList"
+    />
+
+</configure>

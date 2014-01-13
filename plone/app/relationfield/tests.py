@@ -1,16 +1,60 @@
-import unittest
-from zope.testing import doctest
-import zope.component.testing
+from plone.app.testing import PloneSandboxLayer
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import FunctionalTesting
+from plone.app.testing import IntegrationTesting
+from plone.testing import layered
 
-class UnitTestLayer:
-    
-    @classmethod
-    def testTearDown(cls):
-        zope.component.testing.tearDown()
+import doctest
+import unittest
+
+
+class PloneAppRelationFieldLayer(PloneSandboxLayer):
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import plone.app.dexterity
+        self.loadZCML(name='meta.zcml', package=plone.app.dexterity)
+        self.loadZCML(package=plone.app.dexterity)
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'plone.app.dexterity:testing')
+        self.applyProfile(portal, 'plone.app.relationfield:default')
+
+
+PARF_FIXTURE = PloneAppRelationFieldLayer()
+
+PARF_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(PARF_FIXTURE,),
+    name="PloneAppRelationFieldLayer:Integration"
+    )
+
+PARF_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(PARF_FIXTURE,),
+    name="PloneAppRelationField:Functional"
+    )
+
+
+optionflags = (doctest.ELLIPSIS |
+              doctest.NORMALIZE_WHITESPACE)
+
 
 def test_suite():
-    
-    marshaler = doctest.DocFileSuite('marshaler.txt', optionflags=doctest.ELLIPSIS)
-    marshaler.layer = UnitTestLayer
-    
-    return unittest.TestSuite((marshaler,))
+    suite = unittest.TestSuite()
+    suite.addTests([
+        layered(doctest.DocFileSuite('exportimport.txt', optionflags=optionflags),
+                PARF_INTEGRATION_TESTING)
+    ])
+    suite.addTests([
+        layered(doctest.DocFileSuite('marshaler.txt', optionflags=optionflags),
+                PARF_INTEGRATION_TESTING)
+    ])
+    suite.addTests([
+        layered(doctest.DocFileSuite('schemaeditor.txt', optionflags=optionflags),
+                PARF_FUNCTIONAL_TESTING)
+    ])
+    return suite
+
+
+if __name__ == '__main__':
+    unittest.main(default='test_suite')

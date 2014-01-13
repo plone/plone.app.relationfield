@@ -1,0 +1,19 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="plone.schemaeditor">
+
+    <utility
+        component=".schemaeditor.RelationChoiceFactory"
+        name="z3c.relationfield.schema.RelationChoice"
+    />
+    <adapter factory=".schemaeditor.getRelationChoiceFieldSchema" />
+    <adapter factory=".schemaeditor.EditableRelationChoiceField" />
+    
+    <utility
+        component=".schemaeditor.RelationListFactory"
+        name="z3c.relationfield.schema.RelationList"
+    />
+    <adapter factory=".schemaeditor.getRelationListFieldSchema" />
+    <adapter factory=".schemaeditor.EditableRelationListField" />
+
+</configure>

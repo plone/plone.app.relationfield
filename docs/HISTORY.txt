@@ -4,7 +4,11 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add Dexterity schemaeditor support for adding and editing RelationChoice and
+  RelationList fields. Edit interface will allow selection of portal_type targets
+  for relations. Other sources may still be specified in XML, but if they are the
+  field is no longer editable via GUI.
+  [smcmahon]
 
 
 1.2.1 (2013-01-25)

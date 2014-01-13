@@ -6,11 +6,9 @@ from z3c.relationfield.interfaces import (
     IRelationValue,
     IRelationList,
     )
-from z3c.relationfield.schema import RelationChoice, RelationList
 from z3c.relationfield.relation import RelationValue
 from z3c.form.datamanager import AttributeField, DictionaryField
 
-from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set
@@ -128,10 +126,4 @@ class RelationListDataManager(AttributeField):
             to_id = intids.getId(item)
             new_relationships.append(RelationValue(to_id))
         super(RelationListDataManager, self).set(new_relationships)
-
-
-# plone.supermodel schema import/export handlers
-
-RelationChoiceHandler = ChoiceHandler(RelationChoice)
-RelationListHandler = BaseHandler(RelationList)
 

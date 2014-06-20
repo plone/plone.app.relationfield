@@ -1,10 +1,29 @@
 Changelog
 =========
 
-1.2.2 (unreleased)
+1.2.3 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+1.2.2 (2014-04-15)
+------------------
+
+- plone.rfc822 1.0.2 marshalls collections as ascii.
+  [esteele]
+
+- Remove the adaptation from this package and move it to plone.app.widgets.
+  [frapell]
+
+- Do not include demo by default.
+  [frapell]
+
+- Remove plone.formwidget.contenttree dependency.
+  [frapell]
+
+- Use the widget provided by plone.app.widgets.
+  [frapell]
 
 
 1.2.1 (2013-01-25)

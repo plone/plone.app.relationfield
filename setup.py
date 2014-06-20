@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.2.2.dev0'
+version = '1.2.3.dev0'
 
 setup(name='plone.app.relationfield',
       version=version,
@@ -35,7 +35,6 @@ setup(name='plone.app.relationfield',
           'z3c.relationfield>=0.4.2',
           'z3c.formwidget.query',
           'plone.autoform',
-          'plone.formwidget.contenttree',
           'plone.supermodel',
           'Products.CMFCore',
           'plone.rfc822',

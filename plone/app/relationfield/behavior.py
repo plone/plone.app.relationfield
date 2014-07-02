@@ -10,7 +10,9 @@ from plone.autoform.interfaces import IFormFieldProvider
 try:
     from plone.app.dexterity import MessageFactory as _
 except ImportError:
-    _ = unicode
+    def MessageFactory(messageid, default=None):
+        return unicode(default)
+    _ = MessageFactory
 
 
 class IRelatedItems(Interface):

@@ -39,6 +39,7 @@ setup(name='plone.app.relationfield',
           'Products.CMFCore',
           'plone.rfc822',
       ],
+      extras_require={'test': ['plone.app.testing', ]},
       entry_points="""
       # -*- Entry points: -*-
       """,

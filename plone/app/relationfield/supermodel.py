@@ -29,7 +29,9 @@ class RelationChoiceBaseHandler(BaseHandler):
                         value_type=schema.Text(title=u'Type'))
 
     def _constructField(self, attributes):
-        portal_type = attributes.get('portal_type') or []
+        portal_type = attributes.get('portal_type') \
+            or attributes.get('portal_types') \
+            or []
         if 'portal_type' in attributes:
             del attributes['portal_type']
 

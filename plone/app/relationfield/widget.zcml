@@ -30,12 +30,4 @@
              />
   </configure>
 
-  <!-- plone.supermodel export/import handlers -->
-  <utility component=".widget.RelationChoiceHandler"
-           name="plone.app.relationfield.Relation"
-           />
-  <utility component=".widget.RelationListHandler"
-           name="plone.app.relationfield.RelationList"
-           />
-
 </configure>

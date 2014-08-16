@@ -61,4 +61,10 @@
   <!-- marshaler setup -->
   <include file="marshaler.zcml" />
 
+  <!-- supermodel setup -->
+  <include file="supermodel.zcml" />
+
+  <!-- editor setup -->
+  <include file="editor.zcml" />
+
 </configure>

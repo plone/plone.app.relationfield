@@ -1,5 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="plone.app.relationfield">
 
@@ -14,6 +15,20 @@
            name="plone.formwidget.relations.cmfcontentsearch"
            provides="zope.schema.interfaces.IVocabularyFactory"
            />
+
+  <configure zcml:condition="installed plone.formwidget.contenttree">
+    <adapter factory="plone.formwidget.contenttree.ContentTreeFieldWidget"
+             for="z3c.relationfield.interfaces.IRelationChoice
+                  z3c.form.interfaces.IFormLayer"
+             zcml:condition="not-installed plone.app.widgets"
+             />
+
+    <adapter factory="plone.formwidget.contenttree.MultiContentTreeFieldWidget"
+             for="z3c.relationfield.interfaces.IRelationList
+                  z3c.form.interfaces.IFormLayer"
+             zcml:condition="not-installed plone.app.widgets"
+             />
+  </configure>
 
   <!-- plone.supermodel export/import handlers -->
   <utility component=".widget.RelationChoiceHandler"

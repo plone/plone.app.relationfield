@@ -7,35 +7,35 @@
   <adapter
       provides="plone.schemaeditor.interfaces.IFieldEditFormSchema"
       for="z3c.relationfield.interfaces.IRelationChoice"
-      factory=".editor.getRelationChoiceEditFormSchema"
+      factory=".schemaeditor.getRelationChoiceEditFormSchema"
       />
 
   <adapter
-      provides=".editor.IRelationFieldSettings"
+      provides=".schemaeditor.IRelationFieldSettings"
       for="z3c.relationfield.interfaces.IRelationChoice"
-      factory=".editor.RelationChoiceEditFormAdapter"
+      factory=".schemaeditor.RelationChoiceEditFormAdapter"
       />
 
   <utility
       name="z3c.relationfield.schema.RelationChoice"
-      component=".editor.RelationChoiceFactory"
+      component=".schemaeditor.RelationChoiceFactory"
       />
 
   <adapter
       provides="plone.schemaeditor.interfaces.IFieldEditFormSchema"
       for="z3c.relationfield.interfaces.IRelationList"
-      factory=".editor.getRelationListEditFormSchema"
+      factory=".schemaeditor.getRelationListEditFormSchema"
       />
 
   <adapter
-      provides=".editor.IRelationFieldSettings"
+      provides=".schemaeditor.IRelationFieldSettings"
       for="z3c.relationfield.interfaces.IRelationList"
-      factory=".editor.RelationListEditFormAdapter"
+      factory=".schemaeditor.RelationListEditFormAdapter"
       />
 
   <utility
       name="z3c.relationfield.schema.RelationList"
-      component=".editor.RelationListFactory"
+      component=".schemaeditor.RelationListFactory"
       />
 
 </configure>

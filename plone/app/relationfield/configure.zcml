@@ -30,6 +30,7 @@
 
   <!-- Dexterity Content will support incoming and outgoing relations -->
   <configure zcml:condition="installed plone.dexterity">
+    <include package="plone.behavior" file="meta.zcml" />
     <class class="plone.dexterity.content.DexterityContent">
       <implements interface=".interfaces.IDexterityHasRelations" />
     </class>
@@ -62,9 +63,15 @@
   <include file="marshaler.zcml" />
 
   <!-- supermodel setup -->
-  <include file="supermodel.zcml" />
+  <include
+      file="supermodel.zcml"
+      zcml:condition="installed plone.supermodel"
+      />
 
-  <!-- editor setup -->
-  <include file="editor.zcml" />
+  <!-- schemaeditor setup -->
+  <include
+      file="schemaeditor.zcml"
+      zcml:condition="installed plone.schemaeditor"
+      />
 
 </configure>

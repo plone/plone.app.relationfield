@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
-import os
-import doctest
-import unittest
-
-from plone.testing import layered
-
+from plone.app.relationfield import HAS_CONTENTTREE
 from plone.app.relationfield.testing import FUNCTIONAL_DEXTERITY_TESTING
+from plone.testing import layered
+import doctest
+import os
+import unittest
 
 optionflags = (doctest.ELLIPSIS |
                doctest.NORMALIZE_WHITESPACE)
@@ -13,12 +12,13 @@ optionflags = (doctest.ELLIPSIS |
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTests([
-        layered(doctest.DocFileSuite(
-                os.path.join(os.path.pardir, 'schemaeditor.txt'),
-                optionflags=optionflags),
-                FUNCTIONAL_DEXTERITY_TESTING)
-    ])
+    if HAS_CONTENTTREE:
+        suite.addTests([
+            layered(doctest.DocFileSuite(
+                    os.path.join(os.path.pardir, 'schemaeditor.txt'),
+                    optionflags=optionflags),
+                    FUNCTIONAL_DEXTERITY_TESTING)
+        ])
     return suite
 
 

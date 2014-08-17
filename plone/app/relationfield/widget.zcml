@@ -16,17 +16,30 @@
            provides="zope.schema.interfaces.IVocabularyFactory"
            />
 
-  <configure zcml:condition="installed plone.formwidget.contenttree">
+  <configure zcml:condition="not-installed plone.app.widgets">
     <adapter factory="plone.formwidget.contenttree.ContentTreeFieldWidget"
              for="z3c.relationfield.interfaces.IRelationChoice
                   z3c.form.interfaces.IFormLayer"
-             zcml:condition="not-installed plone.app.widgets"
+             zcml:condition="installed plone.formwidget.contenttree"
              />
 
     <adapter factory="plone.formwidget.contenttree.MultiContentTreeFieldWidget"
              for="z3c.relationfield.interfaces.IRelationList
                   z3c.form.interfaces.IFormLayer"
-             zcml:condition="not-installed plone.app.widgets"
+             zcml:condition="installed plone.formwidget.contenttree"
+             />
+  </configure>
+
+  <configure zcml:condition="installed plone.app.widgets">
+    <adapter factory="plone.app.widgets.dx.RelatedItemsFieldWidget"
+             for="z3c.relationfield.interfaces.IRelationChoice
+                 z3c.form.interfaces.IFormLayer"
+             zcml:condtion="not-have plone-5"
+             />
+    <adapter factory="plone.app.widgets.dx.RelatedItemsFieldWidget"
+             for="z3c.relationfield.interfaces.IRelationList
+                  z3c.form.interfaces.IFormLayer"
+             zcml:condtion="not-have plone-5"
              />
   </configure>
 

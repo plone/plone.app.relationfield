@@ -56,10 +56,11 @@ Load a schema with several variations on a relation choice field::
     >>> getFieldNamesInOrder(schema)
     ['my_rc', 'my_rc1', 'my_rc2']
 
-The first field has explicit portal types. Make sure it's using CatalogSource::
+The first field has explicit portal types. Make sure it's using
+ObjPathSourceBinder::
 
     >>> schema['my_rc'].source
-    <plone.app.vocabularies.catalog.CatalogSource object at ...>
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
 
 The field factory for relation fields should tell us this is editable::
 
@@ -68,30 +69,30 @@ The field factory for relation fields should tell us this is editable::
 
 And, we should have our specified portal_type spec::
 
-    >>> schema['my_rc'].source.query.get('portal_type')
+    >>> schema['my_rc'].source.selectable_filter.criteria.get('portal_type')
     [u'Folder', u'File']
 
 The second test field has an empty portal_type stanza. It should look much
 like the first example, but with no types.
 
     >>> schema['my_rc1'].source
-    <plone.app.vocabularies.catalog.CatalogSource object at ...>
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
 
     >>> factory_utility.editable(schema['my_rc1'])
     True
 
-    >>> schema['my_rc1'].source.query.get('portal_type') is None
+    >>> schema['my_rc1'].source.selectable_filter.criteria.get('portal_type') is None
     True
 
 Same for the third, which has no portal_type stanza::
 
     >>> schema['my_rc2'].source
-    <plone.app.vocabularies.catalog.CatalogSource object at ...>
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
 
     >>> factory_utility.editable(schema['my_rc2'])
     True
 
-    >>> schema['my_rc2'].source.query.get('portal_type') is None
+    >>> schema['my_rc2'].source.selectable_filter.criteria.get('portal_type') is None
     True
 
 
@@ -167,7 +168,7 @@ We just need to make sure it's handled in the value_type::
     >>> getFieldNamesInOrder(schema)
     ['my_rl']
 
-    >>> schema['my_rl'].value_type.source.query.get('portal_type')
+    >>> schema['my_rl'].value_type.source.selectable_filter.criteria.get('portal_type')
     [u'Folder', u'File']
 
     >>> factory_utility.editable(schema['my_rl'])

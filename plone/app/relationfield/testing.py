@@ -60,7 +60,7 @@ FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(FIXTURE,), name="plone.app.relationfield:Functional")
 
 
-class PloneAppRelationfieldDexterityFixture(PloneSandboxLayer):
+class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE,)
 
@@ -68,23 +68,47 @@ class PloneAppRelationfieldDexterityFixture(PloneSandboxLayer):
         import plone.app.dexterity
         self.loadZCML(package=plone.app.dexterity)
 
-        if HAS_CONTENTTREE:
-            import plone.formwidget.contenttree
-            self.loadZCML(package=plone.formwidget.contenttree)
+        import plone.formwidget.contenttree
+        self.loadZCML(package=plone.formwidget.contenttree)
 
         import plone.app.relationfield
         self.loadZCML(package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.dexterity:default')
-
-        if HAS_CONTENTTREE:
-            self.applyProfile(portal, 'plone.formwidget.contenttree:default')
-
+        self.applyProfile(portal, 'plone.formwidget.contenttree:default')
         self.applyProfile(portal, 'plone.app.relationfield:default')
 
 
-DEXTERITY_FIXTURE = PloneAppRelationfieldDexterityFixture()
+CONTENTTREE_FIXTURE = PloneAppRelationfieldContentTreeFixture()
 
-FUNCTIONAL_DEXTERITY_TESTING = FunctionalTesting(
-    bases=(DEXTERITY_FIXTURE,), name="plone.app.relationfield.dx:Functional")
+FUNCTIONAL_CONTENTTREE_TESTING = FunctionalTesting(
+    bases=(CONTENTTREE_FIXTURE,),
+    name="plone.app.relationfield.contenttree:Functional")
+
+
+class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import plone.app.dexterity
+        self.loadZCML(package=plone.app.dexterity)
+
+        import plone.app.widgets
+        self.loadZCML(package=plone.app.widgets)
+
+        import plone.app.relationfield
+        self.loadZCML(package=plone.app.relationfield)
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'plone.app.dexterity:default')
+        self.applyProfile(portal, 'plone.app.widgets:default')
+        self.applyProfile(portal, 'plone.app.relationfield:default')
+
+
+WIDGETS_FIXTURE = PloneAppRelationfieldWidgetsFixture()
+
+FUNCTIONAL_WIDGETS_TESTING = FunctionalTesting(
+    bases=(WIDGETS_FIXTURE,),
+    name="plone.app.relationfield.contenttree:Functional")

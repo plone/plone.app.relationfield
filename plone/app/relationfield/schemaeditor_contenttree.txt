@@ -90,11 +90,11 @@ Now, let's demonstrate that the new type has a relation choice field::
 And that that field has the expected source::
 
     >>> my_field.source
-    <plone.app.vocabularies.catalog.CatalogSource object at ...>
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
 
 And portal types::
 
-    >>> sorted(my_field.source.query.get('portal_type'))
+    >>> sorted(my_field.source.selectable_filter.criteria.get('portal_type'))
     ['Event', 'Folder']
 
 -------------
@@ -169,10 +169,10 @@ Now, let's demonstrate that the new type has a relation list field::
 And that that field has the expected value_type source::
 
     >>> my_field.value_type.source
-    <plone.app.vocabularies.catalog.CatalogSource object at ...>
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
 
 And portal types::
 
-    >>> sorted(my_field.value_type.source.query.get('portal_type'))
+    >>> sorted(my_field.value_type.source.selectable_filter.criteria.get('portal_type'))
     ['Event', 'Folder']
 

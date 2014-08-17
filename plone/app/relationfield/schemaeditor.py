@@ -2,18 +2,29 @@
 from plone.app.relationfield import HAS_CONTENTTREE
 from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.interfaces import IFieldEditFormSchema
+from plone.schemaeditor.interfaces import IFieldFactory
 from z3c.relationfield import interfaces
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import adapter
+from zope.component import queryUtility
 from zope.i18n import MessageFactory
 from zope.interface import implementer
+from zope.interface import implements
+from zope.intid.interfaces import IIntIds
 
 _ = MessageFactory('plone')
 
 if HAS_CONTENTTREE:
     from plone.formwidget.contenttree import ObjPathSourceBinder
+
+
+class RelationFieldFactory(FieldFactory):
+    implements(IFieldFactory)
+
+    def available(self):
+        return queryUtility(IIntIds) is not None
 
 
 class IRelationFieldSettings(schema.interfaces.IField):
@@ -65,7 +76,7 @@ class RelationChoiceEditFormAdapter(object):
 
 
 if HAS_CONTENTTREE:
-    RelationChoiceFactory = FieldFactory(
+    RelationChoiceFactory = RelationFieldFactory(
         RelationChoice, _('Relation Choice'),
         source=ObjPathSourceBinder()
     )
@@ -106,7 +117,7 @@ class RelationListEditFormAdapter(object):
 
 
 if HAS_CONTENTTREE:
-    RelationListFactory = FieldFactory(
+    RelationListFactory = RelationFieldFactory(
         RelationList, _('Relation List'),
         value_type=RelationChoice(title=_(u'Relation Choice'),
                                   source=ObjPathSourceBinder())

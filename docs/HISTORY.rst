@@ -5,7 +5,7 @@ Changelog
 ------------------
 
 - Add schemaeditor support
-  [datakurre]
+  [smcmahon, datakurre]
 
 - Added RelationListDictDataManager
   [jaroel, datakurre]

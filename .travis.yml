@@ -3,20 +3,27 @@ python:
   - 2.6
   - 2.7
 env:
+  - PLONE=4.0.x
+  - PLONE=4.0.x-contenttree
   - PLONE=4.1.x
   - PLONE=4.1.x-contenttree
   - PLONE=4.2.x
+  - PLONE=4.2.x-contenttree
   - PLONE=4.3.x
+  - PLONE=4.3.x-contenttree
 matrix:
   exclude:
     - python: 2.7
       env: PLONE=4.0.x
     - python: 2.7
       env: PLONE=4.1.x
+      env: PLONE=4.1.x-contenttree
     - python: 2.6
       env: PLONE=4.2.x
+      env: PLONE=4.2.x-contenttree
     - python: 2.6
       env: PLONE=4.3.x
+      env: PLONE=4.3.x-contenttree
 install:
   - mkdir -p buildout-cache/downloads
   - python bootstrap.py -c travis-$PLONE.cfg

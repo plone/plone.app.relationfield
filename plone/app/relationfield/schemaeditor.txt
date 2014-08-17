@@ -25,7 +25,7 @@ Add a test type::
     >>> browser.getControl(name='form.buttons.add').click()
 
     >>> browser.url
-    'http://nohost/plone/dexterity-types/test_type/@@fields'
+    'http://nohost/plone/dexterity-types...'
 
 Add a relation choice::
 
@@ -41,7 +41,7 @@ Add a relation choice::
     >>> browser.getControl(name='form.buttons.add').click()
 
     >>> browser.url
-    'http://nohost/plone/dexterity-types/test_type/@@fields'
+    'http://nohost/plone/dexterity-types/test_type...'
 
     >>> browser.contents
     '...<div class="fieldLabel">...My Relation Choice...'
@@ -120,7 +120,7 @@ Add a relation list::
     >>> browser.getControl(name='form.buttons.add').click()
 
     >>> browser.url
-    'http://nohost/plone/dexterity-types/test_type1/@@fields'
+    'http://nohost/plone/dexterity-types/test_type1...'
 
     >>> browser.contents
     '...<div class="fieldLabel">...My Relation List...'

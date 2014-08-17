@@ -15,6 +15,7 @@ matrix:
   exclude:
     - python: 2.7
       env: PLONE=4.0.x
+      env: PLONE=4.0.x-contenttree
     - python: 2.7
       env: PLONE=4.1.x
       env: PLONE=4.1.x-contenttree

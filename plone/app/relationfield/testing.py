@@ -76,7 +76,7 @@ class PloneAppRelationfieldDexterityFixture(PloneSandboxLayer):
         self.loadZCML(package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'plone.app.dexterity:testing')
+        self.applyProfile(portal, 'plone.app.dexterity:default')
 
         if HAS_CONTENTTREE:
             self.applyProfile(portal, 'plone.formwidget.contenttree:default')

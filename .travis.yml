@@ -3,8 +3,6 @@ python:
   - 2.6
   - 2.7
 env:
-  - PLONE=4.0.x
-  - PLONE=4.0.x-contenttree
   - PLONE=4.1.x
   - PLONE=4.1.x-contenttree
   - PLONE=4.2.x
@@ -14,10 +12,6 @@ env:
   - PLONE=4.3.x-widgets
 matrix:
   exclude:
-    - python: 2.7
-      env: PLONE=4.0.x
-    - python: 2.7
-      env: PLONE=4.0.x-contenttree
     - python: 2.7
       env: PLONE=4.1.x
     - python: 2.7

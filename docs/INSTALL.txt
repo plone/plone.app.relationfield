@@ -1,7 +1,7 @@
 plone.app.relationfield Installation
 =======================
 
- * When you're reading this you have probably already run 
+ * When you're reading this you have probably already run
    ``easy_install plone.app.relationfield``. Find out how to install setuptools
    (and EasyInstall) here:
    http://peak.telecommunity.com/DevCenter/EasyInstall

@@ -12,7 +12,7 @@ class UnitTestLayer:
 
 def test_suite():
 
-    marshaler = doctest.DocFileSuite('../marshaler.txt', optionflags=doctest.ELLIPSIS)
+    marshaler = doctest.DocFileSuite('../marshaler.rst', optionflags=doctest.ELLIPSIS)
     marshaler.layer = UnitTestLayer
 
     return unittest.TestSuite((marshaler, ))

@@ -1,11 +1,16 @@
-from zope.interface import alsoProvides, Interface
-
-from z3c.relationfield.schema import RelationChoice, RelationList
-
+# -*- coding: utf-8 -*-
+from plone.app.relationfield import HAS_CONTENTTREE
+from plone.app.relationfield import HAS_WIDGETS
+from plone.autoform.interfaces import IFormFieldProvider
 from plone.supermodel.interfaces import FIELDSETS_KEY
 from plone.supermodel.model import Fieldset
+from z3c.relationfield.schema import RelationChoice
+from z3c.relationfield.schema import RelationList
+from zope.interface import Interface
+from zope.interface import alsoProvides
 
-from plone.autoform.interfaces import IFormFieldProvider
+if HAS_CONTENTTREE and not HAS_WIDGETS:
+    from plone.formwidget.contenttree import ObjPathSourceBinder
 
 try:
     from plone.app.dexterity import MessageFactory as _
@@ -19,15 +24,32 @@ class IRelatedItems(Interface):
     """Behavior interface to make a Dexterity type support related items.
     """
 
-    relatedItems = RelationList(
-        title=_(u'label_related_items', default=u'Related Items'),
-        default=[],
-        value_type=RelationChoice(title=u"Related",
-                                  vocabulary="plone.app.vocabularies.Catalog"),
-        required=False,
+    if HAS_CONTENTTREE and not HAS_WIDGETS:
+
+        relatedItems = RelationList(
+            title=_(u'label_related_items', default=u'Related Items'),
+            default=[],
+            value_type=RelationChoice(
+                title=u"Related",
+                source=ObjPathSourceBinder()
+            ),
+            required=False
         )
 
-fieldset = Fieldset('categorization', label=_(u'Categorization'), fields=['relatedItems'])
+    else:
+
+        relatedItems = RelationList(
+            title=_(u'label_related_items', default=u'Related Items'),
+            default=[],
+            value_type=RelationChoice(
+                title=u"Related",
+                vocabulary="plone.app.vocabularies.Catalog"
+            ),
+            required=False
+        )
+
+fieldset = Fieldset('categorization',
+                    label=_(u'Categorization'), fields=['relatedItems'])
 IRelatedItems.setTaggedValue(FIELDSETS_KEY, [fieldset])
 
 alsoProvides(IRelatedItems, IFormFieldProvider)

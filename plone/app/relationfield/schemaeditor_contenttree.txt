@@ -1,0 +1,178 @@
+============================================
+plone.app.relationfield schemaeditor support
+============================================
+
+Test setup::
+
+    >>> app = layer['app']
+    >>> from plone.testing.z2 import Browser
+    >>> browser = Browser(app)
+    >>> browser.handleErrors = False
+    >>> browser.addHeader('Authorization', 'Basic admin:secret')
+    >>> portal = layer['portal']
+    >>> portal_url = portal.portal_url()
+    >>> dexterity_types = portal_url + '/dexterity-types'
+
+---------------
+Relation Choice
+---------------
+
+Add a test type::
+
+    >>> browser.open(dexterity_types + '/@@add-type')
+    >>> browser.getControl(name='form.widgets.title').value = 'test type'
+    >>> browser.getControl(name='form.widgets.id').value = 'test_type'
+    >>> browser.getControl(name='form.buttons.add').click()
+
+    >>> browser.url
+    'http://nohost/plone/dexterity-types...'
+
+Add a relation choice::
+
+    >>> type_url = 'http://nohost/plone/dexterity-types/test_type'
+    >>> browser.open(type_url + '/@@add-field')
+
+    >>> browser.contents
+    '...<option id="..." value="Relation Choice">Relation Choice</option>...'
+
+    >>> browser.getControl(name='form.widgets.title').value = 'My Relation Choice'
+    >>> browser.getControl(name='form.widgets.__name__').value = 'my_relation_choice'
+    >>> browser.getControl(name='form.widgets.factory:list').value = ['Relation Choice']
+    >>> browser.getControl(name='form.buttons.add').click()
+
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type...'
+
+    >>> browser.contents
+    '...<div class="fieldLabel">...My Relation Choice...'
+
+    >>> type_url + '/my_relation_choice' in browser.contents
+    True
+
+Make sure it's editable via the 'settings' link::
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type/my_relation_choice'
+
+Specify a couple of portal types to target::
+
+    >>> browser.getControl(name='form.widgets.portal_type:list').value = ['Event', 'Folder']
+    >>> browser.getControl(name='form.buttons.save').click()
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.getControl(name='form.widgets.portal_type:list').value
+    ['Event', 'Folder']
+
+Check to make sure test type is addable::
+
+    >>> browser.open(portal_url + '/++add++test_type')
+    >>> browser.contents
+    '...My Relation Choice...'
+
+Now, let's demonstrate that the new type has a relation choice field::
+
+    >>> from zope.component import queryUtility
+    >>> from plone.dexterity.interfaces import IDexterityFTI
+
+    >>> fti = queryUtility(IDexterityFTI, name='test_type')
+    >>> fti
+    <DexterityFTI at /plone/test_type>
+
+    >>> schema = fti.lookupSchema()
+    >>> schema
+    <InterfaceClass plone.dexterity.schema.generated.plone_..._test_type>
+
+    >>> my_field = schema['my_relation_choice']
+    >>> my_field
+    <z3c.relationfield.schema.RelationChoice object at ...>
+
+And that that field has the expected source::
+
+    >>> my_field.source
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
+
+And portal types::
+
+    >>> sorted(my_field.source.selectable_filter.criteria.get('portal_type'))
+    ['Event', 'Folder']
+
+-------------
+Relation List
+-------------
+
+Add a test type::
+
+Add a test type::
+
+    >>> browser.open(dexterity_types + '/@@add-type')
+    >>> browser.getControl(name='form.widgets.title').value = 'test type1'
+    >>> browser.getControl(name='form.widgets.id').value = 'test_type1'
+    >>> browser.getControl(name='form.buttons.add').click()
+
+Add a relation list::
+
+    >>> type_url = 'http://nohost/plone/dexterity-types/test_type1'
+    >>> browser.open(type_url + '/@@add-field')
+    >>> browser.getControl(name='form.widgets.title').value = 'My Relation List'
+    >>> browser.getControl(name='form.widgets.__name__').value = 'my_relation_list'
+    >>> browser.getControl(name='form.widgets.factory:list').value = ['Relation List']
+    >>> browser.getControl(name='form.buttons.add').click()
+
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type1...'
+
+    >>> browser.contents
+    '...<div class="fieldLabel">...My Relation List...'
+
+    >>> type_url + '/my_relation_list' in browser.contents
+    True
+
+Make sure it's editable via the 'settings' link::
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.url
+    'http://nohost/plone/dexterity-types/test_type1/my_relation_list'
+
+Specify a couple of portal types to target::
+
+    >>> browser.getControl(name='form.widgets.portal_type:list').value = ['Event', 'Folder']
+    >>> browser.getControl(name='form.buttons.save').click()
+
+    >>> browser.getLink('Settings…').click()
+    >>> browser.getControl(name='form.widgets.portal_type:list').value
+    ['Event', 'Folder']
+
+Check to make sure test type is addable::
+
+    >>> browser.open(portal_url + '/++add++test_type1')
+    >>> browser.contents
+    '...My Relation List...'
+
+Now, let's demonstrate that the new type has a relation list field::
+
+    >>> from zope.component import queryUtility
+    >>> from plone.dexterity.interfaces import IDexterityFTI
+
+    >>> fti = queryUtility(IDexterityFTI, name='test_type1')
+    >>> fti
+    <DexterityFTI at /plone/test_type1>
+
+    >>> schema = fti.lookupSchema()
+    >>> schema
+    <InterfaceClass plone.dexterity.schema.generated.plone_..._test_type1>
+
+    >>> my_field = schema['my_relation_list']
+    >>> my_field
+    <z3c.relationfield.schema.RelationList object at ...>
+
+And that that field has the expected value_type source::
+
+    >>> my_field.value_type.source
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
+
+And portal types::
+
+    >>> sorted(my_field.value_type.source.selectable_filter.criteria.get('portal_type'))
+    ['Event', 'Folder']
+

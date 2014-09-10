@@ -4,6 +4,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
+- Add schemaeditor support
+  [smcmahon, datakurre]
+
 - Added RelationListDictDataManager
   [jaroel, datakurre]
 

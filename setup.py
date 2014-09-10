@@ -36,10 +36,12 @@ setup(name='plone.app.relationfield',
           'z3c.formwidget.query',
           'plone.autoform',
           'plone.supermodel',
+          'plone.app.vocabularies',
+          'plone.schemaeditor>=1.3.5.dev0',
           'Products.CMFCore',
           'plone.rfc822',
       ],
-      extras_require={'test': ['plone.app.testing', ]},
+      extras_require={'test': ['plone.app.testing', 'plone.app.dexterity']},
       entry_points="""
       # -*- Entry points: -*-
       """,

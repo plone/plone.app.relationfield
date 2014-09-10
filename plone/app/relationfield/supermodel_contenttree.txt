@@ -1,0 +1,194 @@
+===========================================
+Supermodel export/import of relation fields
+===========================================
+
+Basic setup
+
+    >>> from zope.component import getUtility
+    >>> from plone.schemaeditor.interfaces import IFieldFactory
+
+-------------------------
+RelationChoiceField Tests
+-------------------------
+
+Our factory utility should exist and show we're addable::
+
+    >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationChoice')
+    >>> factory_utility.available()
+    True
+
+Import
+------
+
+Load a schema with several variations on a relation choice field::
+
+    >>> schema = """\
+    ... <?xml version="1.0" encoding="UTF-8"?>
+    ... <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    ...     <schema>
+    ...       <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC</title>
+    ...         <portal_type>
+    ...           <element>Folder</element>
+    ...           <element>File</element>
+    ...         </portal_type>
+    ...       </field>
+    ...       <field name="my_rc1" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC 1</title>
+    ...       </field>
+    ...       <field name="my_rc2" type="z3c.relationfield.schema.RelationChoice">
+    ...         <description>Test Field</description>
+    ...         <title>My RC 2</title>
+    ...         <portal_type>
+    ...         </portal_type>
+    ...       </field>
+    ...     </schema>
+    ... </model>
+    ... """
+
+    >>> from plone.supermodel import loadString
+    >>> model = loadString(schema)
+    >>> schema = model.schema
+
+    >>> from zope.schema import getFieldNamesInOrder
+    >>> getFieldNamesInOrder(schema)
+    ['my_rc', 'my_rc1', 'my_rc2']
+
+The first field has explicit portal types. Make sure it's using
+ObjPathSourceBinder::
+
+    >>> schema['my_rc'].source
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
+
+The field factory for relation fields should tell us this is editable::
+
+    >>> factory_utility.editable(schema['my_rc'])
+    True
+
+And, we should have our specified portal_type spec::
+
+    >>> schema['my_rc'].source.selectable_filter.criteria.get('portal_type')
+    [u'Folder', u'File']
+
+The second test field has an empty portal_type stanza. It should look much
+like the first example, but with no types.
+
+    >>> schema['my_rc1'].source
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
+
+    >>> factory_utility.editable(schema['my_rc1'])
+    True
+
+    >>> schema['my_rc1'].source.selectable_filter.criteria.get('portal_type') is None
+    True
+
+Same for the third, which has no portal_type stanza::
+
+    >>> schema['my_rc2'].source
+    <plone.formwidget.contenttree.source.ObjPathSourceBinder object at ...>
+
+    >>> factory_utility.editable(schema['my_rc2'])
+    True
+
+    >>> schema['my_rc2'].source.selectable_filter.criteria.get('portal_type') is None
+    True
+
+
+Export
+------
+
+Test export by serializing out. Note that we lose the source detail on the
+last field. That's because we are not supporting export of explicit sources.
+Serialization::
+
+    >>> from plone.supermodel import serializeModel
+    >>> print serializeModel(model)
+    <model ...>
+      <schema>
+        <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC</title>
+          <portal_type>
+            <element>Folder</element>
+            <element>File</element>
+          </portal_type>
+        </field>
+        <field name="my_rc1" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC 1</title>
+        </field>
+        <field name="my_rc2" type="z3c.relationfield.schema.RelationChoice">
+          <description>Test Field</description>
+          <title>My RC 2</title>
+        </field>
+      </schema>
+    </model>
+
+
+-------------------------
+RelationListField Tests
+-------------------------
+
+Check availability for adding::
+
+    >>> factory_utility = getUtility(IFieldFactory, name='z3c.relationfield.schema.RelationList')
+    >>> factory_utility.available()
+    True
+
+Import
+------
+
+Nearly all the testing is already done in testing RelationChoice.
+We just need to make sure it's handled in the value_type::
+
+    >>> schema = """\
+    ... <?xml version="1.0" encoding="UTF-8"?>
+    ... <model xmlns="http://namespaces.plone.org/supermodel/schema">
+    ...     <schema>
+    ...         <field name="my_rl" type="z3c.relationfield.schema.RelationList">
+    ...           <title>My RL</title>
+    ...           <value_type type="z3c.relationfield.schema.RelationChoice">
+    ...               <portal_type>
+    ...                 <element>Folder</element>
+    ...                 <element>File</element>
+    ...               </portal_type>
+    ...           </value_type>
+    ...         </field>
+    ...     </schema>
+    ... </model>
+    ... """
+
+    >>> from plone.supermodel import loadString
+    >>> model = loadString(schema)
+    >>> schema = model.schema
+
+    >>> from zope.schema import getFieldNamesInOrder
+    >>> getFieldNamesInOrder(schema)
+    ['my_rl']
+
+    >>> schema['my_rl'].value_type.source.selectable_filter.criteria.get('portal_type')
+    [u'Folder', u'File']
+
+    >>> factory_utility.editable(schema['my_rl'])
+    True
+
+Export
+------
+
+    >>> from plone.supermodel import serializeModel
+    >>> print serializeModel(model)
+    <model ...>
+      <schema>
+        <field name="my_rl" type="z3c.relationfield.schema.RelationList">
+          <title>My RL</title>
+          <value_type type="z3c.relationfield.schema.RelationChoice">
+            <portal_type>
+              <element>Folder</element>
+              <element>File</element>
+            </portal_type>
+          </value_type>
+        </field>
+      </schema>
+    </model>

@@ -5,14 +5,12 @@ from zope.security.interfaces import ForbiddenAttribute
 from z3c.relationfield.interfaces import (
     IRelation,
     IRelationValue,
-    IRelationList,
-    )
-from z3c.relationfield.schema import RelationChoice, RelationList
+    IRelationList
+)
 from z3c.relationfield.relation import RelationValue
 from z3c.form.interfaces import NO_VALUE
 from z3c.form.datamanager import AttributeField, DictionaryField
 
-from plone.supermodel.exportimport import BaseHandler, ChoiceHandler
 
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set
@@ -188,10 +186,3 @@ class RelationListDictDataManager(DictionaryField):
             to_id = intids.getId(item)
             new_relationships.append(RelationValue(to_id))
         super(RelationListDictDataManager, self).set(new_relationships)
-
-
-# plone.supermodel schema import/export handlers
-
-RelationChoiceHandler = ChoiceHandler(RelationChoice)
-RelationListHandler = BaseHandler(RelationList)
-

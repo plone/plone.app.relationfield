@@ -1,13 +1,13 @@
-from plone.app.testing import PloneSandboxLayer
-from plone.app.testing import PLONE_FIXTURE
+# -*- coding: utf-8 -*-
+from persistent import Persistent
+from plone.app.relationfield import HAS_CONTENTTREE
 from plone.app.testing import FunctionalTesting
-
-import zope.interface
-import zope.schema
-
+from plone.app.testing import PLONE_FIXTURE
+from plone.app.testing import PloneSandboxLayer
 from z3c.relationfield import RelationList
 from z3c.relationfield.interfaces import IHasRelations
-from persistent import Persistent
+import zope.interface
+import zope.schema
 
 
 class IAddress(zope.interface.Interface):
@@ -56,4 +56,59 @@ class PloneAppRelationfieldFixture(PloneSandboxLayer):
 
 
 FIXTURE = PloneAppRelationfieldFixture()
-FUNCTIONAL_TESTING = FunctionalTesting(bases=(FIXTURE,), name="plone.app.relationfield:Functional")
+FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(FIXTURE,), name="plone.app.relationfield:Functional")
+
+
+class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import plone.app.dexterity
+        self.loadZCML(package=plone.app.dexterity)
+
+        import plone.formwidget.contenttree
+        self.loadZCML(package=plone.formwidget.contenttree)
+
+        import plone.app.relationfield
+        self.loadZCML(package=plone.app.relationfield)
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'plone.app.dexterity:default')
+        self.applyProfile(portal, 'plone.formwidget.contenttree:default')
+        self.applyProfile(portal, 'plone.app.relationfield:default')
+
+
+CONTENTTREE_FIXTURE = PloneAppRelationfieldContentTreeFixture()
+
+FUNCTIONAL_CONTENTTREE_TESTING = FunctionalTesting(
+    bases=(CONTENTTREE_FIXTURE,),
+    name="plone.app.relationfield.contenttree:Functional")
+
+
+class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
+
+    defaultBases = (PLONE_FIXTURE,)
+
+    def setUpZope(self, app, configurationContext):
+        import plone.app.dexterity
+        self.loadZCML(package=plone.app.dexterity)
+
+        import plone.app.widgets
+        self.loadZCML(package=plone.app.widgets)
+
+        import plone.app.relationfield
+        self.loadZCML(package=plone.app.relationfield)
+
+    def setUpPloneSite(self, portal):
+        self.applyProfile(portal, 'plone.app.dexterity:default')
+        self.applyProfile(portal, 'plone.app.widgets:default')
+        self.applyProfile(portal, 'plone.app.relationfield:default')
+
+
+WIDGETS_FIXTURE = PloneAppRelationfieldWidgetsFixture()
+
+FUNCTIONAL_WIDGETS_TESTING = FunctionalTesting(
+    bases=(WIDGETS_FIXTURE,),
+    name="plone.app.relationfield.contenttree:Functional")

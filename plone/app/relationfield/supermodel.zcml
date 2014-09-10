@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="plone.app.relationfield">
+
+  <include package="plone.supermodel" />
+
+  <utility component=".supermodel.RelationChoiceHandler"
+           name="z3c.relationfield.schema.RelationChoice"
+           />
+  <utility component=".supermodel.RelationListHandler"
+           name="z3c.relationfield.schema.RelationList"
+           />
+
+</configure>

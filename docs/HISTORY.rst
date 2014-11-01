@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.3 (unreleased)
+1.3.0 (2014-11-01)
 ------------------
 
 - Add schemaeditor support

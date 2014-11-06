@@ -1,10 +1,6 @@
 from zope.interface import implements
 from z3c.objpath.interfaces import IObjectPath
-
-try:
-    from zope.component.hooks import getSite
-except ImportError:
-    from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 from zExceptions import NotFound
 
 

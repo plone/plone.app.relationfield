@@ -4,7 +4,8 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Remove dependency on zope.app.intid.
+  [davisagli]
 
 
 1.3.0 (2014-11-01)

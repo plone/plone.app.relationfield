@@ -6,7 +6,7 @@ from plone.app.relationfield.testing import Address
 from z3c.form.interfaces import IDataManager
 from plone.app.relationfield.widget import RelationListDictDataManager
 from zope.component import getUtility, getMultiAdapter
-from zope.app.intid.interfaces import IIntIds
+from zope.intid.interfaces import IIntIds
 from z3c.relationfield.interfaces import IRelationValue
 
 

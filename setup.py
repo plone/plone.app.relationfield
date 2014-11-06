@@ -7,7 +7,7 @@ setup(name='plone.app.relationfield',
       version=version,
       description="Plone support for z3c.relationfield",
       long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.rst")).read(),
+                       open("CHANGES.rst").read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",

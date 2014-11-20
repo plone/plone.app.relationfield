@@ -1,6 +1,6 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="plone.app.textfield">
+    i18n_domain="plone.app.relationfield">
 
   <include package="plone.schemaeditor" />
 

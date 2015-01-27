@@ -40,7 +40,7 @@ setup(name='plone.app.relationfield',
           'plone.schemaeditor>=1.3.5.dev0',
           'Products.CMFCore',
           'plone.rfc822',
-          'plone.app.z3cform>=1.1.0'
+          'plone.app.z3cform>=1.1.0.dev0'
       ],
       extras_require={'test': ['plone.app.testing', 'plone.app.dexterity']},
       entry_points="""

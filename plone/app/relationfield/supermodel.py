@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
-from plone.app.relationfield import HAS_CONTENTTREE
-from plone.app.relationfield import HAS_WIDGETS
 from plone.supermodel.exportimport import BaseHandler
 from plone.supermodel.utils import valueToElement
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
 
-if HAS_CONTENTTREE and not HAS_WIDGETS:
-    from plone.formwidget.contenttree import ObjPathSourceBinder
-else:
-    from plone.app.vocabularies.catalog import CatalogSource
+from plone.app.vocabularies.catalog import CatalogSource
 
 
 class RelationChoiceBaseHandler(BaseHandler):
@@ -38,11 +33,7 @@ class RelationChoiceBaseHandler(BaseHandler):
         if 'portal_type' in attributes:
             del attributes['portal_type']
 
-        if HAS_CONTENTTREE and not HAS_WIDGETS and not portal_type:
-            attributes['source'] = ObjPathSourceBinder()
-        elif HAS_CONTENTTREE and not HAS_WIDGETS:
-            attributes['source'] = ObjPathSourceBinder(portal_type=portal_type)
-        elif not portal_type:
+        if not portal_type:
             attributes['source'] = CatalogSource()
         else:
             attributes['source'] = CatalogSource(portal_type=portal_type)
@@ -55,13 +46,8 @@ class RelationChoiceBaseHandler(BaseHandler):
                         self).write(field, name, type, elementName)
         portal_type = []
 
-        if HAS_CONTENTTREE and not HAS_WIDGETS:
-            filter_ = getattr(field.source, 'selectable_filter', None) or {}
-            portal_type.extend(
-                filter_.criteria.get('portal_type') or [])
-        else:
-            portal_type.extend(
-                field.source.query.get('portal_type') or [])
+        portal_type.extend(
+            field.source.query.get('portal_type') or [])
 
         if portal_type:
             attributeField = self.fieldAttributes['portal_type']

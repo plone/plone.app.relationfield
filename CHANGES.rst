@@ -4,6 +4,9 @@ Changelog
 1.3.1 (unreleased)
 ------------------
 
+- Integrate plone.app.widgets.
+  [vangheem]
+  
 - Remove dependency on zope.app.intid.
   [davisagli]
 

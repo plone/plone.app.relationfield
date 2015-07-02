@@ -40,9 +40,7 @@ Add a relation choice::
     >>> browser.getControl(name='form.widgets.factory:list').value = ['Relation Choice']
     >>> browser.getControl(name='form.buttons.add').click()
 
-    >>> browser.url
-    'http://nohost/plone/dexterity-types/test_type...'
-
+    >>> browser.open(type_url + '/@@fields')
     >>> browser.contents
     '...<div class="fieldLabel">...My Relation Choice...'
 
@@ -60,6 +58,7 @@ Specify a couple of portal types to target::
     >>> browser.getControl(name='form.widgets.portal_type:list').value = ['Event', 'Folder']
     >>> browser.getControl(name='form.buttons.save').click()
 
+    >>> browser.open(type_url + '/@@fields')
     >>> browser.getLink('Settings…').click()
     >>> browser.getControl(name='form.widgets.portal_type:list').value
     ['Event', 'Folder']
@@ -122,6 +121,7 @@ Add a relation list::
     >>> browser.url
     'http://nohost/plone/dexterity-types/test_type1...'
 
+    >>> browser.open(type_url + '/@@fields')
     >>> browser.contents
     '...<div class="fieldLabel">...My Relation List...'
 
@@ -139,6 +139,7 @@ Specify a couple of portal types to target::
     >>> browser.getControl(name='form.widgets.portal_type:list').value = ['Event', 'Folder']
     >>> browser.getControl(name='form.buttons.save').click()
 
+    >>> browser.open(type_url + '/@@fields')
     >>> browser.getLink('Settings…').click()
     >>> browser.getControl(name='form.widgets.portal_type:list').value
     ['Event', 'Folder']

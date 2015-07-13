@@ -45,7 +45,6 @@
         title="Related items"
         description="Adds the ability to assign related items"
         provides=".behavior.IRelatedItems"
-        for="plone.dexterity.interfaces.IDexterityContent"
         />
   </configure>
 

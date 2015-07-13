@@ -1,2 +1,7 @@
 *.egg-info
 *.pyc
+bin/
+lib/
+include/
+.installed.cfg
+develop-eggs/

@@ -42,7 +42,13 @@ setup(name='plone.app.relationfield',
           'plone.rfc822',
           'plone.app.z3cform>=1.1.0.dev0'
       ],
-      extras_require={'test': ['plone.app.testing', 'plone.app.dexterity']},
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'plone.app.dexterity',
+              'plone.app.robotframework',
+          ]
+      },
       entry_points="""
       # -*- Entry points: -*-
       """,

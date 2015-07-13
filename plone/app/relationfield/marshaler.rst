@@ -3,26 +3,6 @@ plone.rfc822 marshaler
 
 This package includes a field marshaler for ``plone.rfc822``
 
-To test this, we must first load some configuration:
-
-    >>> configuration = """\
-    ... <configure
-    ...      xmlns="http://namespaces.zope.org/zope"
-    ...      i18n_domain="plone.app.relationfield.tests">
-    ...
-    ...     <include package="zope.component" file="meta.zcml" />
-    ...
-    ...     <include package="plone.rfc822" />
-    ...
-    ...     <include package="plone.app.relationfield" file="marshaler.zcml" />
-    ...
-    ... </configure>
-    ... """
-
-    >>> from StringIO import StringIO
-    >>> from zope.configuration import xmlconfig
-    >>> xmlconfig.xmlconfig(StringIO(configuration))
-
 Next, we will create a simple schema with which to test the marshaler
 
     >>> from zope.interface import Interface

@@ -1,0 +1,7 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    i18n_domain="plone.app.relationfield.tests">
+     <include package="zope.component" file="meta.zcml" />
+     <include package="plone.rfc822" />
+     <include package="plone.app.relationfield" file="marshaler.zcml" />
+</configure>

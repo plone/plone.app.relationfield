@@ -1,6 +1,13 @@
 Changelog
 =========
 
+1.3.2 (unreleased)
+------------------
+
+- Fix test isolation problem.
+  [gotcha, timo]
+
+
 1.3.1 (2015-03-13)
 ------------------
 

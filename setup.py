@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.3.1'
+version = '1.3.2.dev0'
 
 setup(name='plone.app.relationfield',
       version=version,
@@ -42,7 +42,13 @@ setup(name='plone.app.relationfield',
           'plone.rfc822',
           'plone.app.z3cform>=1.1.0.dev0'
       ],
-      extras_require={'test': ['plone.app.testing', 'plone.app.dexterity']},
+      extras_require={
+          'test': [
+              'plone.app.testing',
+              'plone.app.dexterity',
+              'plone.app.robotframework',
+          ]
+      },
       entry_points="""
       # -*- Entry points: -*-
       """,

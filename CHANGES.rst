@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.3.2 (unreleased)
+1.3.2 (2015-07-18)
 ------------------
 
 - Fix test isolation problem.

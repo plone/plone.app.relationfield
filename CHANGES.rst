@@ -4,7 +4,13 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+New:
+
+- *add item here*
+
+Fixes:
+
+- *add item here*
 
 
 1.3.2 (2015-07-18)
@@ -19,7 +25,7 @@ Changelog
 
 - Integrate plone.app.widgets.
   [vangheem]
-  
+
 - Remove dependency on zope.app.intid.
   [davisagli]
 

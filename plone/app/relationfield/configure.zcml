@@ -56,7 +56,6 @@
 
   <!-- widgets setup -->
   <include file="widget.zcml" />
-  <include file="demo.zcml" />
   
   <!-- marshaler setup -->
   <include file="marshaler.zcml" />

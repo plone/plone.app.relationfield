@@ -4,7 +4,9 @@
     i18n_domain="plone.app.relationfield">
 
   <!-- Widget setup -->
-
+  
+  <include package="plone.formwidget.contenttree" />
+  
   <adapter factory=".widget.RelationDataManager" />
   <adapter factory=".widget.RelationDictDataManager" />
   <adapter factory=".widget.RelationListDataManager" />
@@ -14,12 +16,12 @@
            provides="zope.schema.interfaces.IVocabularyFactory"
            />
 
-  <adapter factory="plone.app.widgets.RelatedItemsFieldWidget"
+  <adapter factory="plone.formwidget.contenttree.ContentTreeFieldWidget"
            for="z3c.relationfield.interfaces.IRelationChoice
                 z3c.form.interfaces.IFormLayer"
            />
       
-  <adapter factory="plone.app.widgets.MultiRelatedItemsFieldWidget"
+  <adapter factory="plone.app.widgets.RelatedItemsFieldWidget"
            for="z3c.relationfield.interfaces.IRelationList
                 z3c.form.interfaces.IFormLayer"
            />

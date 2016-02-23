@@ -14,6 +14,16 @@
            provides="zope.schema.interfaces.IVocabularyFactory"
            />
 
+  <adapter factory="plone.app.widgets.RelatedItemsFieldWidget"
+           for="z3c.relationfield.interfaces.IRelationChoice
+                z3c.form.interfaces.IFormLayer"
+           />
+      
+  <adapter factory="plone.app.widgets.MultiRelatedItemsFieldWidget"
+           for="z3c.relationfield.interfaces.IRelationList
+                z3c.form.interfaces.IFormLayer"
+           />
+
   <!-- plone.supermodel export/import handlers -->
   <utility component=".widget.RelationChoiceHandler"
            name="plone.app.relationfield.Relation"

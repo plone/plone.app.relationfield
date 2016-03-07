@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
+from plone.app.vocabularies.catalog import CatalogSource
 from plone.supermodel.exportimport import BaseHandler
 from plone.supermodel.utils import valueToElement
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope import schema
-
-from plone.app.vocabularies.catalog import CatalogSource
 
 
 class RelationChoiceBaseHandler(BaseHandler):

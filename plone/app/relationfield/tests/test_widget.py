@@ -1,13 +1,16 @@
-import unittest2 as unittest
-from plone.app.relationfield.testing import FUNCTIONAL_TESTING
-from plone.app.relationfield.testing import IPerson, Person
+# -*- coding: utf-8 -*-
 from plone.app.relationfield.testing import Address
-
-from z3c.form.interfaces import IDataManager
+from plone.app.relationfield.testing import FUNCTIONAL_TESTING
+from plone.app.relationfield.testing import IPerson
+from plone.app.relationfield.testing import Person
 from plone.app.relationfield.widget import RelationListDictDataManager
-from zope.component import getUtility, getMultiAdapter
-from zope.intid.interfaces import IIntIds
+from z3c.form.interfaces import IDataManager
 from z3c.relationfield.interfaces import IRelationValue
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
+
+import unittest2 as unittest
 
 
 class RelationListDictDataManagerTest(unittest.TestCase):

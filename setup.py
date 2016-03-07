@@ -1,21 +1,24 @@
-from setuptools import setup, find_packages
+# -*- coding: utf-8 -*-
+from setuptools import find_packages
+from setuptools import setup
+
 
 version = '1.3.3.dev0'
 
 setup(
     name='plone.app.relationfield',
     version=version,
-    description="Plone support for z3c.relationfield",
-    long_description=(open("README.rst").read() + "\n" +
-                      open("CHANGES.rst").read()),
+    description='Plone support for z3c.relationfield',
+    long_description=(open('README.rst').read() + '\n' +
+                      open('CHANGES.rst').read()),
     # Get more strings from
     # https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[
-        "Framework :: Plone",
-        "Framework :: Plone :: 5.0",
-        "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Topic :: Software Development :: Libraries :: Python Modules",
+        'Framework :: Plone',
+        'Framework :: Plone :: 5.0',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Software Development :: Libraries :: Python Modules',
     ],
     keywords='dexterity relations plone zc.relation',
     author='Alec Mitchell',

@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-import doctest
-from unittest import TestSuite
-
 from plone.testing import layered
 from plone.testing.zca import ZCMLSandbox
+from unittest import TestSuite
 
+import doctest
 import plone.app.relationfield.tests
+
 
 ZCML_SANDBOX = ZCMLSandbox(
     filename='test_marshall.zcml',
@@ -20,7 +20,7 @@ def test_suite():
         doctest.DocFileSuite(
             '../marshaler.rst',
             optionflags=OPTIONFLAGS,
-            package="plone.app.relationfield.tests",
+            package='plone.app.relationfield.tests',
         ),
         layer=ZCML_SANDBOX)
     )

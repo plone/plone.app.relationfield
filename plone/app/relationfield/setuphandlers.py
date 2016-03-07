@@ -1,8 +1,9 @@
-from zc.relation.interfaces import ICatalog
-from z3c.relationfield.index import RelationCatalog
-from zope.intid.interfaces import IIntIds
-from five.intid.site import addUtility
+# -*- coding: utf-8 -*-
 from five.intid.intid import IntIds
+from five.intid.site import addUtility
+from z3c.relationfield.index import RelationCatalog
+from zc.relation.interfaces import ICatalog
+from zope.intid.interfaces import IIntIds
 
 
 def add_relations(context):
@@ -20,4 +21,4 @@ def installRelations(context):
         return
     portal = context.getSite()
     add_relations(portal)
-    return "Added relations utility."
+    return 'Added relations utility.'

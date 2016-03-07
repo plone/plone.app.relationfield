@@ -1,14 +1,14 @@
-from zope.interface import implements
-from zope.component import getUtility
-from zope.intid.interfaces import IIntIds
-
+# -*- coding: utf-8 -*-
+from Products.CMFCore.utils import getToolByName
 from z3c.formwidget.query.interfaces import IQuerySource
+from zope.component import getUtility
+from zope.interface import implementer
+from zope.intid.interfaces import IIntIds
 from zope.schema.vocabulary import SimpleVocabulary
 
-from Products.CMFCore.utils import getToolByName
 
+@implementer(IQuerySource)
 class CMFContentSearchSource(object):
-    implements(IQuerySource)
 
     def __init__(self, context):
         self.context = context
@@ -24,15 +24,21 @@ class CMFContentSearchSource(object):
         return 0
 
     def getTerm(self, obj):
-        return SimpleVocabulary.createTerm(obj, self.intid_utility.getId(obj),
-                                           obj.Title())
+        return SimpleVocabulary.createTerm(
+            obj,
+            self.intid_utility.getId(obj),
+            obj.Title()
+        )
 
     def getTermByToken(self, value):
         return self.getTerm(self.intid_utility.getObject(int(value)))
 
     def search(self, query_string):
         catalog = getToolByName(self.context, 'portal_catalog')
-        result = catalog(SearchableText='%s*' % query_string, sort_limit=20)
+        result = catalog(
+            SearchableText='{0:s}*'.format(query_string),
+            sort_limit=20
+        )
         terms = []
         for brain in result:
             try:

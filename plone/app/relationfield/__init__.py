@@ -1,8 +1,11 @@
+# -*- coding: utf-8 -*-
 from plone.app.relationfield.monkey import PATCHES
+
+import pkg_resources
+
 
 PATCHES
 
-import pkg_resources
 
 try:
     pkg_resources.get_distribution('plone.app.contenttypes')

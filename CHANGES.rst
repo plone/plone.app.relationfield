@@ -10,7 +10,8 @@ New:
 
 Fixes:
 
-- *add item here*
+- cleanup: pep8, utf8 header, sorted imports, zca decorators, ...
+  [jensens]
 
 
 1.3.2 (2015-07-18)

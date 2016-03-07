@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
 from plone.rfc822.defaultfields import BaseFieldMarshaler
 from z3c.relationfield import RelationValue
+
 
 class RelationFieldMarshaler(BaseFieldMarshaler):
     """Field marshaler for z3c.relationfield IRelation and IRelationChoice
@@ -13,7 +15,14 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
             return None
         return str(value.to_id)
 
-    def decode(self, value, message=None, charset='utf-8', contentType=None, primary=False):
+    def decode(
+        self,
+        value,
+        message=None,
+        charset='utf-8',
+        contentType=None,
+        primary=False,
+    ):
         try:
             toId = int(value.decode(charset))
         except TypeError, e:

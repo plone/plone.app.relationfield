@@ -1,21 +1,22 @@
-from zope.component import adapts, getUtility
+# -*- coding: utf-8 -*-
+from z3c.form.datamanager import AttributeField
+from z3c.form.datamanager import DictionaryField
+from z3c.form.interfaces import NO_VALUE
+from z3c.relationfield.interfaces import IRelation
+from z3c.relationfield.interfaces import IRelationList
+from z3c.relationfield.interfaces import IRelationValue
+from z3c.relationfield.relation import RelationValue
+from zope.component import adapter
+from zope.component import getUtility
 from zope.interface import Interface
 from zope.intid.interfaces import IIntIds
 from zope.security.interfaces import ForbiddenAttribute
-from z3c.relationfield.interfaces import (
-    IRelation,
-    IRelationValue,
-    IRelationList
-)
-from z3c.relationfield.relation import RelationValue
-from z3c.form.interfaces import NO_VALUE
-from z3c.form.datamanager import AttributeField, DictionaryField
 
 
+@adapter(Interface, IRelation)
 class RelationDataManager(AttributeField):
     """A data manager which uses the z3c.relationfield api to set
     relationships using a schema field."""
-    adapts(Interface, IRelation)
 
     def get(self):
         """Gets the target"""
@@ -52,10 +53,10 @@ class RelationDataManager(AttributeField):
             super(RelationDataManager, self).set(rel)
 
 
+@adapter(dict, IRelation)
 class RelationDictDataManager(DictionaryField):
     """A data manager which uses the z3c.relationfield api to set
     relationships using a schema field, for dict-like contexts."""
-    adapts(dict, IRelation)
 
     def get(self):
         """Gets the target"""
@@ -104,9 +105,9 @@ class RelationDictDataManager(DictionaryField):
             super(RelationDictDataManager, self).set(rel)
 
 
+@adapter(Interface, IRelationList)
 class RelationListDataManager(AttributeField):
     """A data manager which sets a list of relations"""
-    adapts(Interface, IRelationList)
 
     def get(self):
         """Gets the target"""
@@ -142,9 +143,9 @@ class RelationListDataManager(AttributeField):
         super(RelationListDataManager, self).set(new_relationships)
 
 
+@adapter(dict, IRelationList)
 class RelationListDictDataManager(DictionaryField):
     """A data manager which sets a list of relations on dictionary"""
-    adapts(dict, IRelationList)
 
     def get(self):
         """Gets the target"""

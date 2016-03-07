@@ -6,20 +6,23 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from z3c.relationfield import RelationList
 from z3c.relationfield.interfaces import IHasRelations
-import zope.interface
+from zope.interface import implementer
+from zope.interface import Interface
+
 import zope.schema
+
 
 if HAS_CONTENTTYPES:
     from plone.app.contenttypes.testing import \
         PLONE_APP_CONTENTTYPES_FIXTURE
 
 
-class IAddress(zope.interface.Interface):
+class IAddress(Interface):
     streetname = zope.schema.TextLine(title=u'Street name')
     city = zope.schema.TextLine(title=u'City')
 
 
-@zope.interface.implementer(IAddress, IHasRelations)
+@implementer(IAddress, IHasRelations)
 class Address(Persistent):
     __name__ = u''
     streetname = u''
@@ -40,7 +43,7 @@ class IPerson(zope.interface.Interface):
     addresses = RelationList(title=u'Addresses')
 
 
-@zope.interface.implementer(IPerson, IHasRelations)
+@implementer(IPerson, IHasRelations)
 class Person(Persistent):
     name = u''
 
@@ -64,7 +67,9 @@ class PloneAppRelationfieldFixture(PloneSandboxLayer):
 
 FIXTURE = PloneAppRelationfieldFixture()
 FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(FIXTURE,), name="plone.app.relationfield:Functional")
+    bases=(FIXTURE,),
+    name='plone.app.relationfield:Functional'
+)
 
 
 class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
@@ -94,7 +99,8 @@ CONTENTTREE_FIXTURE = PloneAppRelationfieldContentTreeFixture()
 
 FUNCTIONAL_CONTENTTREE_TESTING = FunctionalTesting(
     bases=(CONTENTTREE_FIXTURE,),
-    name="plone.app.relationfield.contenttree:Functional")
+    name='plone.app.relationfield.contenttree:Functional'
+)
 
 
 class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
@@ -124,4 +130,5 @@ WIDGETS_FIXTURE = PloneAppRelationfieldWidgetsFixture()
 
 FUNCTIONAL_WIDGETS_TESTING = FunctionalTesting(
     bases=(WIDGETS_FIXTURE,),
-    name="plone.app.relationfield.contenttree:Functional")
+    name='plone.app.relationfield.contenttree:Functional'
+)

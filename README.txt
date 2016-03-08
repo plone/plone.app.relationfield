@@ -1,6 +1,8 @@
 Overview
 ========
 
+WARNING: please use the 1.2.x branch instead when you want to work on Plone 4.
+
 Plone support for z3c.relationfield. If this package is installed, you
 should be able to use z3c.relationfield as per its documentation for
 Dexterity and Archetypes content.
@@ -14,4 +16,3 @@ Dexterity content.
 
 Other types of content can be supported by appropriate use of these marker
 interfaces. See z3c.relationfield for more details.
-

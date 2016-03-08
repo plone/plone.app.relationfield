@@ -1,6 +1,8 @@
 Changelog
 =========
 
+WARNING: please use the 1.2.x branch instead when you want to work on Plone 4.
+
 1.2.2 (unreleased)
 ------------------
 

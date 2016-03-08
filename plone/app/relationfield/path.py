@@ -11,9 +11,9 @@ from zExceptions import NotFound
 class Zope2ObjectPath(object):
     """Path representation for Zope 2 objects.
     """
-    
+
     implements(IObjectPath)
-    
+
     def path(self, obj):
         try:
             return '/'.join(obj.getPhysicalPath())
@@ -24,12 +24,12 @@ class Zope2ObjectPath(object):
         site = getSite()
         if site is None:
             raise ValueError(path)
-        
+
         try:
             root = site.getPhysicalRoot()
         except AttributeError:
             raise ValueError(path)
-        
+
         try:
             return root.unrestrictedTraverse(path)
         except (AttributeError, NotFound, KeyError):

@@ -9,7 +9,7 @@
   <include package="z3c.relationfield" />
 
   <utility factory=".path.Zope2ObjectPath" />
-  
+
   <!-- setup GS profile -->
   <genericsetup:registerProfile
       name="default"
@@ -36,7 +36,7 @@
     <subscriber
       for="plone.dexterity.interfaces.IDexterityContent
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-      handler=".event.update_behavior_relations" 
+      handler=".event.update_behavior_relations"
       />
     <!-- Make 'related items' behavior available if plone.behavior is present. -->
     <plone:behavior
@@ -56,7 +56,7 @@
 
   <!-- widgets setup -->
   <include file="widget.zcml" />
-  
+
   <!-- marshaler setup -->
   <include file="marshaler.zcml" />
 

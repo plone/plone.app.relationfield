@@ -4,8 +4,11 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Revert plone.app.widgets and plone.formwidget.contenttree related changes made in 1.2.2 (1.2.x versions must remain compatible with Plone 4).
-  [cedricmessiant]
+Fixes:
+
+- Revert plone.app.widgets and plone.formwidget.contenttree related
+  changes made in 1.2.2 (1.2.x versions must remain compatible with
+  Plone 4). [cedricmessiant]
 
 
 1.2.2 (2014-04-15)

@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import os
 
 version = '1.2.2'
 
@@ -8,7 +7,7 @@ setup(
     version=version,
     description="Plone support for z3c.relationfield",
     long_description=(open("README.rst").read() + "\n" +
-                      open(os.path.join("docs", "HISTORY.txt")).read()),
+                      open("CHANGES.rst").read()),
     # Get more strings from
     # https://pypi.python.org/pypi?%3Aaction=list_classifiers
     classifiers=[

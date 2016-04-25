@@ -4,10 +4,6 @@ Changelog
 1.3.3 (unreleased)
 ------------------
 
-New:
-
-- *add item here*
-
 Fixes:
 
 - cleanup: pep8, utf8 header, sorted imports, zca decorators, ...

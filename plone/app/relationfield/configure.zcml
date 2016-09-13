@@ -54,6 +54,9 @@
     <implements interface="z3c.relationfield.interfaces.IHasIncomingRelations" />
   </class>
 
+  <!-- p.a.vocabularies needs UUID support from RelatedValues -->
+  <adapter factory=".adapter.rvUUID" />
+
   <!-- widgets setup -->
   <include file="widget.zcml" />
   <!--<include file="demo.zcml" />-->

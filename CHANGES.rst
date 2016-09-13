@@ -10,7 +10,8 @@ Breaking changes:
 
 New features:
 
-- *add item here*
+- Support RelatedValues UUID lookup to validate with p.a.vocabularies
+  [calvinhp]
 
 Bug fixes:
 

@@ -4,18 +4,10 @@ Changelog
 1.3.4 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
 New features:
 
 - Support RelatedValues UUID lookup to validate with p.a.vocabularies
   [calvinhp]
-
-Bug fixes:
-
-- *add item here*
 
 
 1.3.3 (2016-04-25)

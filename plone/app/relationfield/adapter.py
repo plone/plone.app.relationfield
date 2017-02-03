@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from Acquisition import aq_base
-from zope.interface import implementer
-from zope.component import adapter
-from plone.uuid.interfaces import IUUID
 from plone.uuid.interfaces import ATTRIBUTE_NAME
+from plone.uuid.interfaces import IUUID
 from z3c.relationfield.interfaces import IRelationValue
+from zope.component import adapter
+from zope.interface import implementer
 
 
 @implementer(IUUID)

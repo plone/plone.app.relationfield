@@ -45,6 +45,9 @@ Fixes:
 1.3.1 (2015-03-13)
 ------------------
 
+- Make sure behavior relations are also "updated" (initialized) upon adding objects.
+  [phgross]
+
 - Integrate plone.app.widgets.
   [vangheem]
 

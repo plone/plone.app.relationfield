@@ -1,0 +1,16 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:db="http://namespaces.zope.org/db"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:plone="http://namespaces.plone.org/plone">
+
+  <plone:behavior
+      title="Relation test behavior."
+      description=""
+      provides=".tests.sample_behavior.ISampleItem"
+      factory="plone.behavior.AnnotationStorage"
+      for="plone.dexterity.interfaces.IDexterityContent"
+      marker=".tests.sample_behavior.ISampleItemMarker"
+      />
+
+</configure>

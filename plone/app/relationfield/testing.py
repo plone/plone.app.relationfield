@@ -60,6 +60,7 @@ class PloneAppRelationfieldFixture(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         import plone.app.relationfield
         self.loadZCML(package=plone.app.relationfield)
+        self.loadZCML('tests.zcml', package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.relationfield:default')

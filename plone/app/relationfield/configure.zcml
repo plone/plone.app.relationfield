@@ -39,6 +39,11 @@
            zope.lifecycleevent.interfaces.IObjectModifiedEvent"
       handler=".event.update_behavior_relations"
       />
+    <subscriber
+      for="plone.dexterity.interfaces.IDexterityContent
+           zope.lifecycleevent.interfaces.IObjectAddedEvent"
+      handler=".event.update_behavior_relations"
+      />
     <!-- Make 'related items' behavior available if plone.behavior is present. -->
     <plone:behavior
         zcml:condition="installed plone.behavior"

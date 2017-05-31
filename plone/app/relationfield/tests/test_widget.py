@@ -10,7 +10,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.intid.interfaces import IIntIds
 
-import unittest2 as unittest
+import unittest
 
 
 class RelationListDictDataManagerTest(unittest.TestCase):

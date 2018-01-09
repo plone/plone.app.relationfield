@@ -10,7 +10,9 @@ Breaking changes:
 
 New features:
 
-- *add item here*
+- Related items behavior: show a recently used dropdown in the related items widget.
+  Needs mockup 2.6.3 for that to work.
+  [thet]
 
 Bug fixes:
 

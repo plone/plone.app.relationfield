@@ -8,6 +8,13 @@ from plone.supermodel.directives import fieldset
 from z3c.relationfield.schema import RelationChoice
 from z3c.relationfield.schema import RelationList
 from zope.interface import provider
+from Products.CMFCore.utils import getToolByName
+
+
+def relateditems_recentlyused_key(context):
+    tool = getToolByName(context, 'portal_membership')
+    user = tool.getAuthenticatedMember()
+    return u'relateditems_recentlyused_relateditems_' + user.id
 
 
 @provider(IFormFieldProvider)
@@ -27,7 +34,11 @@ class IRelatedItems(model.Schema):
     form.widget(
         'relatedItems',
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog'
+        vocabulary='plone.app.vocabularies.Catalog',
+        pattern_options={
+            'recentlyUsed': True,
+            'recentlyUsedKey': relateditems_recentlyused_key
+        }
     )
 
     fieldset(

@@ -27,7 +27,10 @@ class IRelatedItems(model.Schema):
     form.widget(
         'relatedItems',
         RelatedItemsFieldWidget,
-        vocabulary='plone.app.vocabularies.Catalog'
+        vocabulary='plone.app.vocabularies.Catalog',
+        pattern_options={
+            'recentlyUsed': True,  # Just turn on. Config in plone.app.widgets.
+        }
     )
 
     fieldset(

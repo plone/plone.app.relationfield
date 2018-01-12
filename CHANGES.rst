@@ -10,7 +10,9 @@ Breaking changes:
 
 New features:
 
-- *add item here*
+- Related items behavior: show a "recently used" dropdown in the related items widget.
+  The "recently used" dropdown is only available for Mockup 2.6.3+.
+  [thet]
 
 Bug fixes:
 

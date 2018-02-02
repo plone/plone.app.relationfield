@@ -4,10 +4,6 @@ Changelog
 1.4.0 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
 New features:
 
 - Related items behavior: show a "recently used" dropdown in the related items widget.

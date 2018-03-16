@@ -76,7 +76,7 @@ class RelationDictDataManager(DictionaryField):
         """See z3c.form.interfaces.IDataManager"""
         try:
             return self.get()
-        except ForbiddenAttribute, e:
+        except ForbiddenAttribute as e:
             raise e
         except AttributeError:
             if default == NO_VALUE:
@@ -172,7 +172,7 @@ class RelationListDictDataManager(DictionaryField):
         """See z3c.form.interfaces.IDataManager"""
         try:
             return self.get()
-        except ForbiddenAttribute, e:
+        except ForbiddenAttribute as e:
             raise e
         except AttributeError:
             return default

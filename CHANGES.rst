@@ -14,7 +14,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Python 3 compatibility.
+  [pbauer]
 
 
 1.4.0 (2018-02-02)

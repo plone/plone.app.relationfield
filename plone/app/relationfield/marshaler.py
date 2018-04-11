@@ -25,6 +25,6 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
     ):
         try:
             toId = int(value.decode(charset))
-        except TypeError, e:
+        except TypeError as e:
             raise ValueError(e)
         return RelationValue(toId)

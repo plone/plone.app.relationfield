@@ -11,6 +11,7 @@ class RelationChoiceBaseHandler(BaseHandler):
 
     filteredAttributes = BaseHandler.filteredAttributes.copy()
     filteredAttributes.update({
+        'pattern_options': 'w',
         'portal_type': 'w',
         'source': 'rw',
         'vocabulary': 'rw',

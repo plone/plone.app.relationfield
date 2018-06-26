@@ -2,6 +2,8 @@
 from plone.rfc822.defaultfields import BaseFieldMarshaler
 from z3c.relationfield import RelationValue
 
+import six
+
 
 class RelationFieldMarshaler(BaseFieldMarshaler):
     """Field marshaler for z3c.relationfield IRelation and IRelationChoice
@@ -23,8 +25,10 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
         contentType=None,
         primary=False,
     ):
+        if isinstance(value, six.binary_type):
+            value = value.decode(charset)
         try:
-            toId = int(value.decode(charset))
+            toId = int(value)
         except TypeError as e:
             raise ValueError(e)
         return RelationValue(toId)

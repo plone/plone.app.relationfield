@@ -69,7 +69,7 @@ The field factory for relation fields should tell us this is editable::
 And, we should have our specified portal_type spec::
 
     >>> schema['my_rc'].source.query.get('portal_type')
-    [u'Folder', u'File']
+    ['Folder', 'File']
 
 The second test field has an empty portal_type stanza. It should look much
 like the first example, but with no types.
@@ -103,7 +103,7 @@ last field. That's because we are not supporting export of explicit sources.
 Serialization::
 
     >>> from plone.supermodel import serializeModel
-    >>> print serializeModel(model)
+    >>> print(serializeModel(model))
     <model ...>
       <schema>
         <field name="my_rc" type="z3c.relationfield.schema.RelationChoice">
@@ -168,7 +168,7 @@ We just need to make sure it's handled in the value_type::
     ['my_rl']
 
     >>> schema['my_rl'].value_type.source.query.get('portal_type')
-    [u'Folder', u'File']
+    ['Folder', 'File']
 
     >>> factory_utility.editable(schema['my_rl'])
     True
@@ -177,7 +177,7 @@ Export
 ------
 
     >>> from plone.supermodel import serializeModel
-    >>> print serializeModel(model)
+    >>> print(serializeModel(model))
     <model ...>
       <schema>
         <field name="my_rl" type="z3c.relationfield.schema.RelationList">

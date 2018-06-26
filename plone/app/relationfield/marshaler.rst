@@ -18,9 +18,9 @@ this test, we don't bother creating actual relations in the relationship
 catalog. All we care about is the 'to_id' variable.
 
     >>> from z3c.relationfield import RelationValue
-    >>> from zope.interface import implements
-    >>> class TestContent(object):
-    ...     implements(ITestContent)
+    >>> from zope.interface import implementer
+    >>> @implementer(ITestContent)
+    ... class TestContent(object):
     ...     _relation = RelationValue(123)
     ...     _relationChoice = RelationValue(234)
     ...     _relationList = [RelationValue(345), RelationValue(456)]

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from plone.app.dexterity import MessageFactory as _
+from plone.app.dexterity import _
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider

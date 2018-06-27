@@ -14,7 +14,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Change import of message factory from dx to non-deprecated way.
+  [jensens]
 
 
 1.4.1 (2018-06-19)

@@ -4,14 +4,6 @@ Changelog
 1.4.2 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Change import of message factory from dx to non-deprecated way.

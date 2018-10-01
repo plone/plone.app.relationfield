@@ -12,7 +12,7 @@ setup(
     long_description=(open('README.rst').read() + '\n' +
                       open('CHANGES.rst').read()),
     # Get more strings from
-    # https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    # https://pypi.org/classifiers/
     classifiers=[
         'Framework :: Plone',
         'Framework :: Plone :: 5.0',
@@ -28,7 +28,7 @@ setup(
     keywords='dexterity relations plone zc.relation',
     author='Alec Mitchell',
     author_email='apm13@columbia.edu',
-    url='https://pypi.python.org/pypi/plone.app.relationfield',
+    url='https://pypi.org/project/plone.app.relationfield',
     license='GPL',
     packages=find_packages(exclude=['ez_setup']),
     namespace_packages=['plone', 'plone.app'],

@@ -30,7 +30,7 @@ setup(
     author_email='apm13@columbia.edu',
     url='https://pypi.org/project/plone.app.relationfield',
     license='GPL',
-    packages=find_packages(exclude=['ez_setup']),
+    packages=find_packages(),
     namespace_packages=['plone', 'plone.app'],
     include_package_data=True,
     zip_safe=False,

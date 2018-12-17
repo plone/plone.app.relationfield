@@ -122,7 +122,6 @@ class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         self.applyProfile(portal, 'plone.app.dexterity:default')
-        self.applyProfile(portal, 'plone.app.widgets:default')
         self.applyProfile(portal, 'plone.app.relationfield:default')
 
 

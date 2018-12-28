@@ -4,14 +4,6 @@ Changelog
 1.4.3 (unreleased)
 ------------------
 
-Breaking changes:
-
-- *add item here*
-
-New features:
-
-- *add item here*
-
 Bug fixes:
 
 - Remove installation of plone.app.widgets default profile in tests.

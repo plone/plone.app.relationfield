@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '1.4.4.dev0'
+version = '2.0.0.dev0'
 
 setup(
     name='plone.app.relationfield',
@@ -15,8 +15,6 @@ setup(
     # https://pypi.org/classifiers/
     classifiers=[
         'Framework :: Plone',
-        'Framework :: Plone :: 5.0',
-        'Framework :: Plone :: 5.1',
         'Framework :: Plone :: 5.2',
         "License :: OSI Approved :: GNU General Public License (GPL)",
         'Programming Language :: Python',
@@ -43,7 +41,7 @@ setup(
         'five.intid',
         'plone.app.intid',
         'z3c.form',
-        'z3c.relationfield>=0.4.2',
+        'z3c.relationfield>0.7.999',
         'z3c.formwidget.query',
         'plone.autoform',
         'plone.supermodel',

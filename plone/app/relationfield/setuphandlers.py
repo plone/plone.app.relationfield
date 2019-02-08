@@ -5,10 +5,37 @@ from z3c.relationfield.index import RelationCatalog
 from zc.relation.interfaces import ICatalog
 from zope.intid.interfaces import IIntIds
 
+import BTrees
+
+
+PLONE_RELATION_INDEXES = [
+    {
+        'name': 'from_id',
+    },
+    {
+        'name': 'to_id',
+    },
+    {
+        'name': 'from_attribute',
+        'kwargs': {
+            'btree': BTrees.family32.OI,
+        },
+    },
+]
+
+
+def relation_catalog_factory():
+    return RelationCatalog(indexes=PLONE_RELATION_INDEXES)
+
 
 def add_relations(context):
-    addUtility(context, ICatalog, RelationCatalog, ofs_name='relations',
-               findroot=False)
+    addUtility(
+        context,
+        ICatalog,
+        relation_catalog_factory,
+        ofs_name='relations',
+        findroot=False
+    )
 
 
 def add_intids(context):

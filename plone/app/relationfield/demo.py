@@ -12,14 +12,13 @@ class ITestForm(IFormLayer):
         title=u'Multiple (Relations field)',
         required=False,
         value_type=RelationChoice(
-            title=u'Multiple',
-            vocabulary='plone.app.vocabularies.Catalog'
-        )
+            title=u'Multiple', vocabulary='plone.app.vocabularies.Catalog'
+        ),
     )
     single = RelationChoice(
         title=u'Single',
         required=False,
-        vocabulary='plone.app.vocabularies.Catalog'
+        vocabulary='plone.app.vocabularies.Catalog',
     )
 
 

@@ -9,8 +9,7 @@ import six
 import unittest
 
 
-optionflags = (doctest.ELLIPSIS |
-               doctest.NORMALIZE_WHITESPACE)
+optionflags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
 
 
 class Py23DocChecker(doctest.OutputChecker):
@@ -22,15 +21,18 @@ class Py23DocChecker(doctest.OutputChecker):
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTests([
-        layered(
-            doctest.DocFileSuite(
-                os.path.join(os.path.pardir, 'supermodel.txt'),
-                optionflags=optionflags,
-                checker=Py23DocChecker(),
+    suite.addTests(
+        [
+            layered(
+                doctest.DocFileSuite(
+                    os.path.join(os.path.pardir, 'supermodel.txt'),
+                    optionflags=optionflags,
+                    checker=Py23DocChecker(),
                 ),
-            layer=FUNCTIONAL_WIDGETS_TESTING)
-    ])
+                layer=FUNCTIONAL_WIDGETS_TESTING,
+            )
+        ]
+    )
     return suite
 
 

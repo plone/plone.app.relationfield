@@ -2,6 +2,7 @@
 from five.intid.intid import IntIds
 from five.intid.site import addUtility
 from z3c.relationfield.index import RelationCatalog
+from z3c.relationfield.interfaces import IRelationValue
 from zc.relation.interfaces import ICatalog
 from zope.intid.interfaces import IIntIds
 
@@ -9,17 +10,11 @@ import BTrees
 
 
 PLONE_RELATION_INDEXES = [
+    {'element': IRelationValue['from_id']},
+    {'element': IRelationValue['to_id']},
     {
-        'name': 'from_id',
-    },
-    {
-        'name': 'to_id',
-    },
-    {
-        'name': 'from_attribute',
-        'kwargs': {
-            'btree': BTrees.family32.OI,
-        },
+        'element': IRelationValue['from_attribute'],
+        'kwargs': {'btree': BTrees.family32.OI},
     },
 ]
 
@@ -34,13 +29,12 @@ def add_relations(context):
         ICatalog,
         relation_catalog_factory,
         ofs_name='relations',
-        findroot=False
+        findroot=False,
     )
 
 
 def add_intids(context):
-    addUtility(context, IIntIds, IntIds, ofs_name='intids',
-               findroot=False)
+    addUtility(context, IIntIds, IntIds, ofs_name='intids', findroot=False)
 
 
 def installRelations(context):

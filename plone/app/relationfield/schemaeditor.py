@@ -19,7 +19,6 @@ _ = MessageFactory('plone')
 
 @implementer(IFieldFactory)
 class RelationFieldFactory(FieldFactory):
-
     def available(self):
         return queryUtility(IIntIds) is not None
 
@@ -33,7 +32,7 @@ class IRelationFieldSettings(schema.interfaces.IField):
             title=_(u'Type'),
             vocabulary='plone.app.vocabularies.ReallyUserFriendlyTypes',
         ),
-        required=False
+        required=False,
     )
 
 
@@ -44,7 +43,6 @@ def getRelationChoiceEditFormSchema(field):
 
 
 class RelationChoiceEditFormAdapter(object):
-
     def __init__(self, field):
         self.field = field
 
@@ -65,8 +63,7 @@ class RelationChoiceEditFormAdapter(object):
 
 
 RelationChoiceFactory = RelationFieldFactory(
-    RelationChoice, _('Relation Choice'),
-    source=CatalogSource(),
+    RelationChoice, _('Relation Choice'), source=CatalogSource()
 )
 
 
@@ -77,7 +74,6 @@ def getRelationListEditFormSchema(field):
 
 
 class RelationListEditFormAdapter(object):
-
     def __init__(self, field):
         self.field = field
 
@@ -98,9 +94,9 @@ class RelationListEditFormAdapter(object):
 
 
 RelationListFactory = RelationFieldFactory(
-    RelationList, _('Relation List'),
+    RelationList,
+    _('Relation List'),
     value_type=RelationChoice(
-        title=_(u'Relation Choice'),
-        source=CatalogSource(),
-    )
+        title=_(u'Relation Choice'), source=CatalogSource()
+    ),
 )

@@ -7,18 +7,22 @@ import os
 import unittest
 
 
-optionflags = (doctest.ELLIPSIS |
-               doctest.NORMALIZE_WHITESPACE)
+optionflags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
 
 
 def test_suite():
     suite = unittest.TestSuite()
-    suite.addTests([
-        layered(doctest.DocFileSuite(
-                os.path.join(os.path.pardir, 'schemaeditor.txt'),
-                optionflags=optionflags),
-                FUNCTIONAL_WIDGETS_TESTING)
-    ])
+    suite.addTests(
+        [
+            layered(
+                doctest.DocFileSuite(
+                    os.path.join(os.path.pardir, 'schemaeditor.txt'),
+                    optionflags=optionflags,
+                ),
+                FUNCTIONAL_WIDGETS_TESTING,
+            )
+        ]
+    )
     return suite
 
 

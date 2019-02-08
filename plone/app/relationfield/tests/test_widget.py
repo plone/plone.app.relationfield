@@ -35,7 +35,7 @@ class RelationListDictDataManagerTest(unittest.TestCase):
             intids.register(address)
 
     def test_get_datamanger(self):
-        dm = getMultiAdapter(({}, IPerson['addresses'], ), IDataManager)
+        dm = getMultiAdapter(({}, IPerson['addresses']), IDataManager)
         self.assertTrue(isinstance(dm, RelationListDictDataManager))
 
     def test_datamanager_get_empty(self):

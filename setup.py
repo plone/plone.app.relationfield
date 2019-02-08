@@ -9,8 +9,9 @@ setup(
     name='plone.app.relationfield',
     version=version,
     description='Plone support for z3c.relationfield',
-    long_description=(open('README.rst').read() + '\n' +
-                      open('CHANGES.rst').read()),
+    long_description=(
+        open('README.rst').read() + '\n' + open('CHANGES.rst').read()
+    ),
     # Get more strings from
     # https://pypi.org/classifiers/
     classifiers=[
@@ -49,7 +50,7 @@ setup(
         'plone.schemaeditor>=1.3.5.dev0',
         'Products.CMFCore',
         'plone.rfc822',
-        'plone.app.z3cform>=1.1.0.dev0'
+        'plone.app.z3cform>=1.1.0.dev0',
     ],
     extras_require={
         'test': [
@@ -61,4 +62,4 @@ setup(
     entry_points="""
     # -*- Entry points: -*-
     """,
-    )
+)

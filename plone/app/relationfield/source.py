@@ -9,7 +9,6 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 @implementer(IQuerySource)
 class CMFContentSearchSource(object):
-
     def __init__(self, context):
         self.context = context
         self.intid_utility = getUtility(IIntIds)
@@ -25,9 +24,7 @@ class CMFContentSearchSource(object):
 
     def getTerm(self, obj):
         return SimpleVocabulary.createTerm(
-            obj,
-            self.intid_utility.getId(obj),
-            obj.Title()
+            obj, self.intid_utility.getId(obj), obj.Title()
         )
 
     def getTermByToken(self, value):
@@ -36,8 +33,7 @@ class CMFContentSearchSource(object):
     def search(self, query_string):
         catalog = getToolByName(self.context, 'portal_catalog')
         result = catalog(
-            SearchableText='{0:s}*'.format(query_string),
-            sort_limit=20
+            SearchableText='{0:s}*'.format(query_string), sort_limit=20
         )
         terms = []
         for brain in result:

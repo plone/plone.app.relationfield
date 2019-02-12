@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.0.0 (2019-02-13)
+------------------
+
+Breaking changes:
+
+
+- Remove availability of interface indexes on relation catalog. Those broke if
+  interfaces were removed. Plone itself never used those indexes. [jensens]
+  (#26)
+
+
 1.4.3 (2018-12-28)
 ------------------
 

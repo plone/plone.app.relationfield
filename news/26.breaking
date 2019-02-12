@@ -1,4 +1,0 @@
-Remove availability of interface indexes on relation catalog.
-Those broke if interfaces were removed.
-Plone itself never used those indexes.
-[jensens]

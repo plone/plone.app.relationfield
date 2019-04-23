@@ -43,6 +43,7 @@
     <plone:behavior
         zcml:condition="installed plone.behavior"
         title="Related items"
+        name="plone.relateditems"
         description="Adds the ability to assign related items"
         provides=".behavior.IRelatedItems"
         />

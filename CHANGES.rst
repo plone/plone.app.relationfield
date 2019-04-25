@@ -8,6 +8,15 @@ Changelog
 
 .. towncrier release notes start
 
+2.0.1 (2019-04-26)
+------------------
+
+Bug fixes:
+
+
+- Added name "plone.relateditems" to behavior for further use of named behaviors. [iham] (#27)
+
+
 2.0.0 (2019-02-13)
 ------------------
 

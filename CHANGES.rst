@@ -8,6 +8,17 @@ Changelog
 
 .. towncrier release notes start
 
+2.0.3 (2020-10-12)
+------------------
+
+Bug fixes:
+
+
+- Update tests to fix updated schema cache.
+  See https://github.com/plone/plone.dexterity/pull/137
+  [@avoinea] (#30)
+
+
 2.0.2 (2020-04-20)
 ------------------
 

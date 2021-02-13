@@ -5,7 +5,7 @@ plone.app.relationfield schemaeditor support
 Test setup::
 
     >>> app = layer['app']
-    >>> from plone.testing.z2 import Browser
+    >>> from plone.testing.zope import Browser
     >>> browser = Browser(app)
     >>> browser.handleErrors = False
     >>> browser.addHeader('Authorization', 'Basic admin:secret')
@@ -49,7 +49,7 @@ Add a relation choice::
 
 Make sure it's editable via the 'settings' link::
 
-    >>> browser.getLink('Settings').click()
+    >>> browser.getLink(url='/dexterity-types/test_type/my_relation_choice').click()
     >>> browser.url
     'http://nohost/plone/dexterity-types/test_type/my_relation_choice'
 
@@ -59,7 +59,7 @@ Specify a couple of portal types to target::
     >>> browser.getControl(name='form.buttons.save').click()
 
     >>> browser.open(type_url + '/@@fields')
-    >>> browser.getLink('Settings').click()
+    >>> browser.getLink(url='/dexterity-types/test_type/my_relation_choice').click()
     >>> browser.getControl(name='form.widgets.portal_type:list').value
     ['Event', 'Folder']
 
@@ -130,7 +130,7 @@ Add a relation list::
 
 Make sure it's editable via the 'settings' link::
 
-    >>> browser.getLink('Settings').click()
+    >>> browser.getLink(url='/dexterity-types/test_type1/my_relation_list').click()
     >>> browser.url
     'http://nohost/plone/dexterity-types/test_type1/my_relation_list'
 
@@ -140,7 +140,7 @@ Specify a couple of portal types to target::
     >>> browser.getControl(name='form.buttons.save').click()
 
     >>> browser.open(type_url + '/@@fields')
-    >>> browser.getLink('Settings').click()
+    >>> browser.getLink(url='/dexterity-types/test_type1/my_relation_list').click()
     >>> browser.getControl(name='form.widgets.portal_type:list').value
     ['Event', 'Folder']
 

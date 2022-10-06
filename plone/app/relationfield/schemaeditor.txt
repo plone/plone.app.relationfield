@@ -6,10 +6,10 @@ Test setup::
 
     >>> app = layer['app']
     >>> from plone.testing.zope import Browser
-    >>> from plone.app.testing import TEST_USER_PASSWORD
+    >>> from plone.app.testing import SITE_OWNER_PASSWORD
     >>> browser = Browser(app)
     >>> browser.handleErrors = False
-    >>> browser.addHeader('Authorization', f'Basic admin:{TEST_USER_PASSWORD}')
+    >>> browser.addHeader('Authorization', f'Basic admin:{SITE_OWNER_PASSWORD}')
     >>> portal = layer['portal']
     >>> portal_url = portal.portal_url()
     >>> dexterity_types = portal_url + '/dexterity-types'

@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '3.0.0b2'
+version = '3.0.0b3.dev0'
 
 setup(
     name='plone.app.relationfield',

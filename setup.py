@@ -50,10 +50,10 @@ setup(
         'plone.autoform',
         'plone.supermodel',
         'plone.app.vocabularies',
-        'plone.schemaeditor>=1.3.5.dev0',
+        'plone.schemaeditor>=1.3.5',
         'Products.CMFCore',
         'plone.rfc822',
-        'plone.app.z3cform>=1.1.0.dev0',
+        'plone.app.z3cform>=1.1.0',
     ],
     extras_require={
         'test': [

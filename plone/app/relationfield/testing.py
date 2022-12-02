@@ -114,10 +114,6 @@ class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
 
         self.loadZCML(package=plone.app.dexterity)
 
-        import plone.app.widgets
-
-        self.loadZCML(package=plone.app.widgets)
-
         import plone.app.relationfield
 
         self.loadZCML(package=plone.app.relationfield)

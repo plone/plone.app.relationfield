@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.1 (2022-12-05)
+------------------
+
+Bug fixes:
+
+
+- Remove deprecated ``plone.app.widgets`` code.
+  [petschki] (#36)
+
+
 3.0.0 (2022-11-30)
 ------------------
 

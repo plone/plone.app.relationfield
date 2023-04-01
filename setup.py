@@ -52,12 +52,23 @@ setup(
         "Products.CMFCore",
         "plone.rfc822",
         "plone.app.z3cform>=1.1.0",
+        "BTrees",
+        "Products.GenericSetup",
+        "plone.app.dexterity",
+        "plone.behavior",
+        "plone.dexterity",
+        "plone.uuid",
+        "plone.z3cform",
+        "z3c.objpath",
+        "zc.relation",
     ],
     extras_require={
         "test": [
+            "persistent",
+            "plone.app.contenttypes[test]",
             "plone.app.testing",
             "plone.app.dexterity",
-            "plone.app.robotframework",
+            "plone.testing",
         ]
     },
     entry_points="""

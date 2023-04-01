@@ -3,8 +3,8 @@ from plone.testing import layered
 
 import doctest
 import os
-import six
 import re
+import six
 import unittest
 
 

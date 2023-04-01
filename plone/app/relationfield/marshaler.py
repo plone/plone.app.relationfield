@@ -1,8 +1,6 @@
 from plone.rfc822.defaultfields import BaseFieldMarshaler
 from z3c.relationfield import RelationValue
 
-import six
-
 
 class RelationFieldMarshaler(BaseFieldMarshaler):
     """Field marshaler for z3c.relationfield IRelation and IRelationChoice

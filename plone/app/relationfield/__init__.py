@@ -7,7 +7,7 @@ PATCHES
 
 
 try:
-    pkg_resources.get_distribution('plone.app.contenttypes')
+    pkg_resources.get_distribution("plone.app.contenttypes")
 except pkg_resources.DistributionNotFound:
     HAS_CONTENTTYPES = False
 else:

@@ -7,7 +7,7 @@ import plone.app.relationfield.tests
 
 
 ZCML_SANDBOX = ZCMLSandbox(
-    filename='test_marshall.zcml', package=plone.app.relationfield.tests
+    filename="test_marshall.zcml", package=plone.app.relationfield.tests
 )
 
 
@@ -17,9 +17,9 @@ def test_suite():
     suite.addTest(
         layered(
             doctest.DocFileSuite(
-                '../marshaler.rst',
+                "../marshaler.rst",
                 optionflags=OPTIONFLAGS,
-                package='plone.app.relationfield.tests',
+                package="plone.app.relationfield.tests",
             ),
             layer=ZCML_SANDBOX,
         )

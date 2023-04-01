@@ -24,7 +24,7 @@ def test_suite():
         [
             layered(
                 doctest.DocFileSuite(
-                    os.path.join(os.path.pardir, 'schemaeditor.txt'),
+                    os.path.join(os.path.pardir, "schemaeditor.txt"),
                     optionflags=optionflags,
                     checker=Py23DocChecker(),
                 ),
@@ -35,5 +35,5 @@ def test_suite():
     return suite
 
 
-if __name__ == '__main__':
-    unittest.main(default='test_suite')
+if __name__ == "__main__":
+    unittest.main(default="test_suite")

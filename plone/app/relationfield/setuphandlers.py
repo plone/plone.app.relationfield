@@ -9,11 +9,11 @@ import BTrees
 
 
 PLONE_RELATION_INDEXES = [
-    {'element': IRelationValue['from_id']},
-    {'element': IRelationValue['to_id']},
+    {"element": IRelationValue["from_id"]},
+    {"element": IRelationValue["to_id"]},
     {
-        'element': IRelationValue['from_attribute'],
-        'kwargs': {'btree': BTrees.family32.OI},
+        "element": IRelationValue["from_attribute"],
+        "kwargs": {"btree": BTrees.family32.OI},
     },
 ]
 
@@ -27,18 +27,18 @@ def add_relations(context):
         context,
         ICatalog,
         relation_catalog_factory,
-        ofs_name='relations',
+        ofs_name="relations",
         findroot=False,
     )
 
 
 def add_intids(context):
-    addUtility(context, IIntIds, IntIds, ofs_name='intids', findroot=False)
+    addUtility(context, IIntIds, IntIds, ofs_name="intids", findroot=False)
 
 
 def installRelations(context):
-    if context.readDataFile('install_relations.txt') is None:
+    if context.readDataFile("install_relations.txt") is None:
         return
     portal = context.getSite()
     add_relations(portal)
-    return 'Added relations utility.'
+    return "Added relations utility."

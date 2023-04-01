@@ -8,16 +8,16 @@ from z3c.relationfield.schema import RelationList
 
 class ITestForm(IFormLayer):
     multiple = RelationList(
-        title='Multiple (Relations field)',
+        title="Multiple (Relations field)",
         required=False,
         value_type=RelationChoice(
-            title='Multiple', vocabulary='plone.app.vocabularies.Catalog'
+            title="Multiple", vocabulary="plone.app.vocabularies.Catalog"
         ),
     )
     single = RelationChoice(
-        title='Single',
+        title="Single",
         required=False,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
     )
 
 

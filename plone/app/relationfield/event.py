@@ -30,7 +30,6 @@ def extract_relations(obj):
 
 
 def update_behavior_relations(obj, event):
-    """Re-register relations in behaviors
-    """
+    """Re-register relations in behaviors"""
     for behavior_interface, name, relation in extract_relations(obj):
         _setRelation(obj, name, relation)

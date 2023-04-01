@@ -6,12 +6,11 @@ from zope.interface import implementer
 
 @implementer(IObjectPath)
 class Zope2ObjectPath:
-    """Path representation for Zope 2 objects.
-    """
+    """Path representation for Zope 2 objects."""
 
     def path(self, obj):
         try:
-            return '/'.join(obj.getPhysicalPath())
+            return "/".join(obj.getPhysicalPath())
         except AttributeError:
             raise ValueError(obj)
 

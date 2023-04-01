@@ -30,10 +30,8 @@ class CMFContentSearchSource:
         return self.getTerm(self.intid_utility.getObject(int(value)))
 
     def search(self, query_string):
-        catalog = getToolByName(self.context, 'portal_catalog')
-        result = catalog(
-            SearchableText=f'{query_string:s}*', sort_limit=20
-        )
+        catalog = getToolByName(self.context, "portal_catalog")
+        result = catalog(SearchableText=f"{query_string:s}*", sort_limit=20)
         terms = []
         for brain in result:
             try:

@@ -1,15 +1,18 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="plone.app.relationfield">
+    i18n_domain="plone.app.relationfield"
+    >
 
-    <adapter
-        for="* z3c.relationfield.interfaces.IRelation"
-        factory=".marshaler.RelationFieldMarshaler"
-        />
+  <adapter
+      factory=".marshaler.RelationFieldMarshaler"
+      for="*
+           z3c.relationfield.interfaces.IRelation"
+      />
 
-    <adapter
-        for="* z3c.relationfield.interfaces.IRelationChoice"
-        factory=".marshaler.RelationFieldMarshaler"
-        />
+  <adapter
+      factory=".marshaler.RelationFieldMarshaler"
+      for="*
+           z3c.relationfield.interfaces.IRelationChoice"
+      />
 
 </configure>

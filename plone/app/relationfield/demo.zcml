@@ -1,7 +1,8 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="plone.app.relationfield">
+    i18n_domain="plone.app.relationfield"
+    >
 
   <!-- Demo Page -->
 
@@ -9,9 +10,10 @@
     <implements interface=".demo.ITestForm" />
   </class>
 
-  <browser:page for="*"
-                name="test-relation-widget"
-                class=".demo.TestView"
-                permission="cmf.ModifyPortalContent"
-                />
+  <browser:page
+      name="test-relation-widget"
+      for="*"
+      class=".demo.TestView"
+      permission="cmf.ModifyPortalContent"
+      />
 </configure>

@@ -1,19 +1,20 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    i18n_domain="plone.app.relationfield">
+    i18n_domain="plone.app.relationfield"
+    >
 
   <include package="plone.schemaeditor" />
 
   <adapter
+      factory=".schemaeditor.getRelationChoiceEditFormSchema"
       provides="plone.schemaeditor.interfaces.IFieldEditFormSchema"
       for="z3c.relationfield.interfaces.IRelationChoice"
-      factory=".schemaeditor.getRelationChoiceEditFormSchema"
       />
 
   <adapter
+      factory=".schemaeditor.RelationChoiceEditFormAdapter"
       provides=".schemaeditor.IRelationFieldSettings"
       for="z3c.relationfield.interfaces.IRelationChoice"
-      factory=".schemaeditor.RelationChoiceEditFormAdapter"
       />
 
   <utility
@@ -22,15 +23,15 @@
       />
 
   <adapter
+      factory=".schemaeditor.getRelationListEditFormSchema"
       provides="plone.schemaeditor.interfaces.IFieldEditFormSchema"
       for="z3c.relationfield.interfaces.IRelationList"
-      factory=".schemaeditor.getRelationListEditFormSchema"
       />
 
   <adapter
+      factory=".schemaeditor.RelationListEditFormAdapter"
       provides=".schemaeditor.IRelationFieldSettings"
       for="z3c.relationfield.interfaces.IRelationList"
-      factory=".schemaeditor.RelationListEditFormAdapter"
       />
 
   <utility

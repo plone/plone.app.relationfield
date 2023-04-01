@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from z3c.relationfield.relation import _object
 from z3c.relationfield.relation import RelationValue
 from zope.component import getUtility

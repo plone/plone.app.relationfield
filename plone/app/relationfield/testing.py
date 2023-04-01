@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from persistent import Persistent
 from plone.app.relationfield import HAS_CONTENTTYPES
 from plone.app.testing import FunctionalTesting
@@ -17,31 +16,31 @@ if HAS_CONTENTTYPES:
 
 
 class IAddress(Interface):
-    streetname = zope.schema.TextLine(title=u'Street name')
-    city = zope.schema.TextLine(title=u'City')
+    streetname = zope.schema.TextLine(title='Street name')
+    city = zope.schema.TextLine(title='City')
 
 
 @implementer(IAddress, IHasRelations)
 class Address(Persistent):
-    __name__ = u''
-    streetname = u''
-    city = u''
+    __name__ = ''
+    streetname = ''
+    city = ''
 
     def __init__(self, streetname, city):
         self.streetname = streetname
         self.city = city
-        __name__ = '{streetname} - {city}'.format(**locals())
+        __name__ = f'{streetname} - {city}'
 
 
 class IPerson(zope.interface.Interface):
-    name = zope.schema.TextLine(title=u'Name', default=u'<no name>')
-    phone = zope.schema.TextLine(title=u'Phone')
-    addresses = RelationList(title=u'Addresses')
+    name = zope.schema.TextLine(title='Name', default='<no name>')
+    phone = zope.schema.TextLine(title='Phone')
+    addresses = RelationList(title='Addresses')
 
 
 @implementer(IPerson, IHasRelations)
 class Person(Persistent):
-    name = u''
+    name = ''
 
     def __init__(self, name):
         self.name = name

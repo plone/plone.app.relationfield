@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.rfc822.defaultfields import BaseFieldMarshaler
 from z3c.relationfield import RelationValue
 
@@ -25,7 +24,7 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
         contentType=None,
         primary=False,
     ):
-        if isinstance(value, six.binary_type):
+        if isinstance(value, bytes):
             value = value.decode(charset)
         try:
             toId = int(value)

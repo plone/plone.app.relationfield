@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.relationfield.monkey import PATCHES
 
 import pkg_resources

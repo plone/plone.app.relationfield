@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.dexterity import _
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
@@ -16,10 +15,10 @@ class IRelatedItems(model.Schema):
     """
 
     relatedItems = RelationList(
-        title=_(u'label_related_items', default=u'Related Items'),
+        title=_('label_related_items', default='Related Items'),
         default=[],
         value_type=RelationChoice(
-            title=u'Related', vocabulary='plone.app.vocabularies.Catalog'
+            title='Related', vocabulary='plone.app.vocabularies.Catalog'
         ),
         required=False,
     )
@@ -33,5 +32,5 @@ class IRelatedItems(model.Schema):
     )
 
     fieldset(
-        'categorization', label=_(u'Categorization'), fields=['relatedItems']
+        'categorization', label=_('Categorization'), fields=['relatedItems']
     )

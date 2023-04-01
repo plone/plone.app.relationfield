@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.vocabularies.catalog import CatalogSource
 from plone.supermodel.exportimport import BaseHandler
 from plone.supermodel.utils import valueToElement
@@ -20,12 +19,12 @@ class RelationChoiceBaseHandler(BaseHandler):
     )
 
     def __init__(self, klass):
-        super(RelationChoiceBaseHandler, self).__init__(klass)
+        super().__init__(klass)
 
         self.fieldAttributes['portal_type'] = schema.List(
             __name__='portal_type',
-            title=u'Allowed target types',
-            value_type=schema.Text(title=u'Type'),
+            title='Allowed target types',
+            value_type=schema.Text(title='Type'),
         )
 
     def _constructField(self, attributes):
@@ -42,12 +41,12 @@ class RelationChoiceBaseHandler(BaseHandler):
         else:
             attributes['source'] = CatalogSource(portal_type=portal_type)
 
-        return super(RelationChoiceBaseHandler, self)._constructField(
+        return super()._constructField(
             attributes
         )
 
     def write(self, field, name, type, elementName='field'):
-        element = super(RelationChoiceBaseHandler, self).write(
+        element = super().write(
             field, name, type, elementName
         )
         portal_type = []

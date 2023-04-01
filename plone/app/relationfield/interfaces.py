@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from z3c.relationfield.interfaces import IHasRelations
 
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Products.CMFCore.utils import getToolByName
 from z3c.formwidget.query.interfaces import IQuerySource
 from zope.component import getUtility
@@ -8,7 +7,7 @@ from zope.schema.vocabulary import SimpleVocabulary
 
 
 @implementer(IQuerySource)
-class CMFContentSearchSource(object):
+class CMFContentSearchSource:
     def __init__(self, context):
         self.context = context
         self.intid_utility = getUtility(IIntIds)
@@ -33,7 +32,7 @@ class CMFContentSearchSource(object):
     def search(self, query_string):
         catalog = getToolByName(self.context, 'portal_catalog')
         result = catalog(
-            SearchableText='{0:s}*'.format(query_string), sort_limit=20
+            SearchableText=f'{query_string:s}*', sort_limit=20
         )
         terms = []
         for brain in result:

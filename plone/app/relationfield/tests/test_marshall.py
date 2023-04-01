@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.testing import layered
 from plone.testing.zca import ZCMLSandbox
 from unittest import TestSuite

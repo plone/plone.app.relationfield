@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.relationfield.testing import Address
 from plone.app.relationfield.testing import FUNCTIONAL_TESTING
 from plone.app.relationfield.testing import IPerson

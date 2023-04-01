@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from z3c.form.datamanager import AttributeField
 from z3c.form.datamanager import DictionaryField
 from z3c.form.interfaces import NO_VALUE
@@ -22,7 +21,7 @@ class RelationDataManager(AttributeField):
         """Gets the target"""
         rel = None
         try:
-            rel = super(RelationDataManager, self).get()
+            rel = super().get()
         except AttributeError:
             # Not set yet
             pass
@@ -35,11 +34,11 @@ class RelationDataManager(AttributeField):
     def set(self, value):
         """Sets the relationship target"""
         if value is None:
-            return super(RelationDataManager, self).set(None)
+            return super().set(None)
 
         current = None
         try:
-            current = super(RelationDataManager, self).get()
+            current = super().get()
         except AttributeError:
             pass
         intids = getUtility(IIntIds)
@@ -50,7 +49,7 @@ class RelationDataManager(AttributeField):
         else:
             # otherwise create a relationship
             rel = RelationValue(to_id)
-            super(RelationDataManager, self).set(rel)
+            super().set(rel)
 
 
 @adapter(dict, IRelation)
@@ -62,7 +61,7 @@ class RelationDictDataManager(DictionaryField):
         """Gets the target"""
         rel = None
         try:
-            rel = super(RelationDictDataManager, self).get()
+            rel = super().get()
         except AttributeError:
             # Not set yet
             pass
@@ -80,18 +79,18 @@ class RelationDictDataManager(DictionaryField):
             raise e
         except AttributeError:
             if default == NO_VALUE:
-                return super(RelationDictDataManager, self).query()
+                return super().query()
             else:
                 return default
 
     def set(self, value):
         """Sets the relationship target"""
         if value is None:
-            return super(RelationDictDataManager, self).set(None)
+            return super().set(None)
 
         current = None
         try:
-            current = super(RelationDictDataManager, self).get()
+            current = super().get()
         except AttributeError:
             pass
         intids = getUtility(IIntIds)
@@ -102,7 +101,7 @@ class RelationDictDataManager(DictionaryField):
         else:
             # otherwise create a relationship
             rel = RelationValue(to_id)
-            super(RelationDictDataManager, self).set(rel)
+            super().set(rel)
 
 
 @adapter(Interface, IRelationList)
@@ -115,7 +114,7 @@ class RelationListDataManager(AttributeField):
 
         # Calling query() here will lead to infinite recursion!
         try:
-            rel_list = super(RelationListDataManager, self).get()
+            rel_list = super().get()
 
         except AttributeError:
             rel_list = None
@@ -140,7 +139,7 @@ class RelationListDataManager(AttributeField):
             # otherwise create one
             to_id = intids.getId(item)
             new_relationships.append(RelationValue(to_id))
-        super(RelationListDataManager, self).set(new_relationships)
+        super().set(new_relationships)
 
 
 @adapter(dict, IRelationList)
@@ -153,7 +152,7 @@ class RelationListDictDataManager(DictionaryField):
 
         # Calling query() here will lead to infinite recursion!
         try:
-            rel_list = super(RelationListDictDataManager, self).get()
+            rel_list = super().get()
         except AttributeError:
             rel_list = None
 
@@ -186,4 +185,4 @@ class RelationListDictDataManager(DictionaryField):
             # otherwise create one
             to_id = intids.getId(item)
             new_relationships.append(RelationValue(to_id))
-        super(RelationListDictDataManager, self).set(new_relationships)
+        super().set(new_relationships)

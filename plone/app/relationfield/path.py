@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from z3c.objpath.interfaces import IObjectPath
 from zExceptions import NotFound
 from zope.component.hooks import getSite
@@ -6,7 +5,7 @@ from zope.interface import implementer
 
 
 @implementer(IObjectPath)
-class Zope2ObjectPath(object):
+class Zope2ObjectPath:
     """Path representation for Zope 2 objects.
     """
 

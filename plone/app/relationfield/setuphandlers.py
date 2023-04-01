@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from five.intid.intid import IntIds
 from five.intid.site import addUtility
 from z3c.relationfield.index import RelationCatalog

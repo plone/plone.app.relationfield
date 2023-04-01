@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.vocabularies.catalog import CatalogSource
 from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.interfaces import IFieldEditFormSchema
@@ -26,10 +25,10 @@ class RelationFieldFactory(FieldFactory):
 class IRelationFieldSettings(schema.interfaces.IField):
 
     portal_type = schema.Set(
-        title=_(u'Types'),
-        description=_(u'Allowed target types'),
+        title=_('Types'),
+        description=_('Allowed target types'),
         value_type=schema.Choice(
-            title=_(u'Type'),
+            title=_('Type'),
             vocabulary='plone.app.vocabularies.ReallyUserFriendlyTypes',
         ),
         required=False,
@@ -42,7 +41,7 @@ def getRelationChoiceEditFormSchema(field):
     return IRelationFieldSettings
 
 
-class RelationChoiceEditFormAdapter(object):
+class RelationChoiceEditFormAdapter:
     def __init__(self, field):
         self.field = field
 
@@ -73,7 +72,7 @@ def getRelationListEditFormSchema(field):
     return IRelationFieldSettings
 
 
-class RelationListEditFormAdapter(object):
+class RelationListEditFormAdapter:
     def __init__(self, field):
         self.field = field
 
@@ -97,6 +96,6 @@ RelationListFactory = RelationFieldFactory(
     RelationList,
     _('Relation List'),
     value_type=RelationChoice(
-        title=_(u'Relation Choice'), source=CatalogSource()
+        title=_('Relation Choice'), source=CatalogSource()
     ),
 )

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.behavior.interfaces import IBehaviorAssignable
 from z3c.relationfield.event import _setRelation
 from z3c.relationfield.interfaces import IRelation

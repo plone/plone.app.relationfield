@@ -29,7 +29,7 @@ class Address(Persistent):
     def __init__(self, streetname, city):
         self.streetname = streetname
         self.city = city
-        __name__ = f"{streetname} - {city}"
+        self.__name__ = f"{streetname} - {city}"
 
 
 class IPerson(zope.interface.Interface):

@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
 from plone.rfc822.defaultfields import BaseFieldMarshaler
 from z3c.relationfield import RelationValue
-
-import six
 
 
 class RelationFieldMarshaler(BaseFieldMarshaler):
@@ -12,7 +9,7 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
 
     ascii = True
 
-    def encode(self, value, charset='utf-8', primary=False):
+    def encode(self, value, charset="utf-8", primary=False):
         if value is None:
             return None
         return str(value.to_id)
@@ -21,11 +18,11 @@ class RelationFieldMarshaler(BaseFieldMarshaler):
         self,
         value,
         message=None,
-        charset='utf-8',
+        charset="utf-8",
         contentType=None,
         primary=False,
     ):
-        if isinstance(value, six.binary_type):
+        if isinstance(value, bytes):
             value = value.decode(charset)
         try:
             toId = int(value)

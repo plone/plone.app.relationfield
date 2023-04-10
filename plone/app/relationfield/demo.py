@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.z3cform import layout
 from z3c.form import field
 from z3c.form import form
@@ -9,16 +8,16 @@ from z3c.relationfield.schema import RelationList
 
 class ITestForm(IFormLayer):
     multiple = RelationList(
-        title=u'Multiple (Relations field)',
+        title="Multiple (Relations field)",
         required=False,
         value_type=RelationChoice(
-            title=u'Multiple', vocabulary='plone.app.vocabularies.Catalog'
+            title="Multiple", vocabulary="plone.app.vocabularies.Catalog"
         ),
     )
     single = RelationChoice(
-        title=u'Single',
+        title="Single",
         required=False,
-        vocabulary='plone.app.vocabularies.Catalog',
+        vocabulary="plone.app.vocabularies.Catalog",
     )
 
 

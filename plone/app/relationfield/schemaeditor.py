@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.app.vocabularies.catalog import CatalogSource
 from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.interfaces import IFieldEditFormSchema
@@ -14,7 +13,7 @@ from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
 
 
-_ = MessageFactory('plone')
+_ = MessageFactory("plone")
 
 
 @implementer(IFieldFactory)
@@ -24,13 +23,12 @@ class RelationFieldFactory(FieldFactory):
 
 
 class IRelationFieldSettings(schema.interfaces.IField):
-
     portal_type = schema.Set(
-        title=_(u'Types'),
-        description=_(u'Allowed target types'),
+        title=_("Types"),
+        description=_("Allowed target types"),
         value_type=schema.Choice(
-            title=_(u'Type'),
-            vocabulary='plone.app.vocabularies.ReallyUserFriendlyTypes',
+            title=_("Type"),
+            vocabulary="plone.app.vocabularies.ReallyUserFriendlyTypes",
         ),
         required=False,
     )
@@ -42,7 +40,7 @@ def getRelationChoiceEditFormSchema(field):
     return IRelationFieldSettings
 
 
-class RelationChoiceEditFormAdapter(object):
+class RelationChoiceEditFormAdapter:
     def __init__(self, field):
         self.field = field
 
@@ -50,20 +48,20 @@ class RelationChoiceEditFormAdapter(object):
     def portal_type(self):
         field = self.field
         types = []
-        types.extend(field.source.query.get('portal_type') or [])
+        types.extend(field.source.query.get("portal_type") or [])
         return types
 
     @portal_type.setter
     def portal_type(self, value):
         field = self.field
         if value:
-            field.source.query['portal_type'] = list(value)
-        elif 'portal_type' in field.source.query:
-            del field.source.query['portal_type']
+            field.source.query["portal_type"] = list(value)
+        elif "portal_type" in field.source.query:
+            del field.source.query["portal_type"]
 
 
 RelationChoiceFactory = RelationFieldFactory(
-    RelationChoice, _('Relation Choice'), source=CatalogSource()
+    RelationChoice, _("Relation Choice"), source=CatalogSource()
 )
 
 
@@ -73,7 +71,7 @@ def getRelationListEditFormSchema(field):
     return IRelationFieldSettings
 
 
-class RelationListEditFormAdapter(object):
+class RelationListEditFormAdapter:
     def __init__(self, field):
         self.field = field
 
@@ -81,22 +79,20 @@ class RelationListEditFormAdapter(object):
     def portal_type(self):
         field = self.field.value_type
         types = []
-        types.extend(field.source.query.get('portal_type') or [])
+        types.extend(field.source.query.get("portal_type") or [])
         return set(types)
 
     @portal_type.setter
     def portal_type(self, value):
         field = self.field.value_type
         if value:
-            field.source.query['portal_type'] = list(value)
-        elif 'portal_type' in field.source.query:
-            del field.source.query['portal_type']
+            field.source.query["portal_type"] = list(value)
+        elif "portal_type" in field.source.query:
+            del field.source.query["portal_type"]
 
 
 RelationListFactory = RelationFieldFactory(
     RelationList,
-    _('Relation List'),
-    value_type=RelationChoice(
-        title=_(u'Relation Choice'), source=CatalogSource()
-    ),
+    _("Relation List"),
+    value_type=RelationChoice(title=_("Relation Choice"), source=CatalogSource()),
 )

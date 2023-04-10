@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from persistent import Persistent
 from plone.app.relationfield import HAS_CONTENTTYPES
 from plone.app.testing import FunctionalTesting
@@ -17,31 +16,31 @@ if HAS_CONTENTTYPES:
 
 
 class IAddress(Interface):
-    streetname = zope.schema.TextLine(title=u'Street name')
-    city = zope.schema.TextLine(title=u'City')
+    streetname = zope.schema.TextLine(title="Street name")
+    city = zope.schema.TextLine(title="City")
 
 
 @implementer(IAddress, IHasRelations)
 class Address(Persistent):
-    __name__ = u''
-    streetname = u''
-    city = u''
+    __name__ = ""
+    streetname = ""
+    city = ""
 
     def __init__(self, streetname, city):
         self.streetname = streetname
         self.city = city
-        __name__ = '{streetname} - {city}'.format(**locals())
+        self.__name__ = f"{streetname} - {city}"
 
 
 class IPerson(zope.interface.Interface):
-    name = zope.schema.TextLine(title=u'Name', default=u'<no name>')
-    phone = zope.schema.TextLine(title=u'Phone')
-    addresses = RelationList(title=u'Addresses')
+    name = zope.schema.TextLine(title="Name", default="<no name>")
+    phone = zope.schema.TextLine(title="Phone")
+    addresses = RelationList(title="Addresses")
 
 
 @implementer(IPerson, IHasRelations)
 class Person(Persistent):
-    name = u''
+    name = ""
 
     def __init__(self, name):
         self.name = name
@@ -59,17 +58,16 @@ class PloneAppRelationfieldFixture(PloneSandboxLayer):
         self.loadZCML(package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'plone.app.relationfield:default')
+        self.applyProfile(portal, "plone.app.relationfield:default")
 
 
 FIXTURE = PloneAppRelationfieldFixture()
 FUNCTIONAL_TESTING = FunctionalTesting(
-    bases=(FIXTURE,), name='plone.app.relationfield:Functional'
+    bases=(FIXTURE,), name="plone.app.relationfield:Functional"
 )
 
 
 class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
-
     if HAS_CONTENTTYPES:
         defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
     else:
@@ -89,21 +87,20 @@ class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
         self.loadZCML(package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'plone.app.dexterity:default')
-        self.applyProfile(portal, 'plone.formwidget.contenttree:default')
-        self.applyProfile(portal, 'plone.app.relationfield:default')
+        self.applyProfile(portal, "plone.app.dexterity:default")
+        self.applyProfile(portal, "plone.formwidget.contenttree:default")
+        self.applyProfile(portal, "plone.app.relationfield:default")
 
 
 CONTENTTREE_FIXTURE = PloneAppRelationfieldContentTreeFixture()
 
 FUNCTIONAL_CONTENTTREE_TESTING = FunctionalTesting(
     bases=(CONTENTTREE_FIXTURE,),
-    name='plone.app.relationfield.contenttree:Functional',
+    name="plone.app.relationfield.contenttree:Functional",
 )
 
 
 class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
-
     if HAS_CONTENTTYPES:
         defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
     else:
@@ -119,13 +116,13 @@ class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
         self.loadZCML(package=plone.app.relationfield)
 
     def setUpPloneSite(self, portal):
-        self.applyProfile(portal, 'plone.app.dexterity:default')
-        self.applyProfile(portal, 'plone.app.relationfield:default')
+        self.applyProfile(portal, "plone.app.dexterity:default")
+        self.applyProfile(portal, "plone.app.relationfield:default")
 
 
 WIDGETS_FIXTURE = PloneAppRelationfieldWidgetsFixture()
 
 FUNCTIONAL_WIDGETS_TESTING = FunctionalTesting(
     bases=(WIDGETS_FIXTURE,),
-    name='plone.app.relationfield.contenttree:Functional',
+    name="plone.app.relationfield.contenttree:Functional",
 )

@@ -1,8 +1,9 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:browser="http://namespaces.zope.org/browser"
-    i18n_domain="plone.app.relationfield">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="plone.app.relationfield"
+    >
 
   <!-- Widget setup -->
 
@@ -11,21 +12,24 @@
   <adapter factory=".widget.RelationListDataManager" />
   <adapter factory=".widget.RelationListDictDataManager" />
 
-  <utility component=".source.CMFContentSearchSource"
-           name="plone.formwidget.relations.cmfcontentsearch"
-           provides="zope.schema.interfaces.IVocabularyFactory"
-           />
+  <utility
+      provides="zope.schema.interfaces.IVocabularyFactory"
+      name="plone.formwidget.relations.cmfcontentsearch"
+      component=".source.CMFContentSearchSource"
+      />
 
   <configure zcml:condition="installed plone.formwidget.contenttree">
-    <adapter factory="plone.formwidget.contenttree.ContentTreeFieldWidget"
-             for="z3c.relationfield.interfaces.IRelationChoice
-                  z3c.form.interfaces.IFormLayer"
-             />
+    <adapter
+        factory="plone.formwidget.contenttree.ContentTreeFieldWidget"
+        for="z3c.relationfield.interfaces.IRelationChoice
+             z3c.form.interfaces.IFormLayer"
+        />
 
-    <adapter factory="plone.formwidget.contenttree.MultiContentTreeFieldWidget"
-             for="z3c.relationfield.interfaces.IRelationList
-                  z3c.form.interfaces.IFormLayer"
-             />
+    <adapter
+        factory="plone.formwidget.contenttree.MultiContentTreeFieldWidget"
+        for="z3c.relationfield.interfaces.IRelationList
+             z3c.form.interfaces.IFormLayer"
+        />
   </configure>
 
 </configure>

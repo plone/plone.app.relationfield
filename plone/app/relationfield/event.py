@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from plone.behavior.interfaces import IBehaviorAssignable
 from z3c.relationfield.event import _setRelation
 from z3c.relationfield.interfaces import IRelation
@@ -31,7 +30,6 @@ def extract_relations(obj):
 
 
 def update_behavior_relations(obj, event):
-    """Re-register relations in behaviors
-    """
+    """Re-register relations in behaviors"""
     for behavior_interface, name, relation in extract_relations(obj):
         _setRelation(obj, name, relation)

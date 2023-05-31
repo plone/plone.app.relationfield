@@ -1,4 +1,5 @@
 from plone.app.vocabularies.catalog import CatalogSource
+from plone.base import PloneMessageFactory as _
 from plone.schemaeditor.fields import FieldFactory
 from plone.schemaeditor.interfaces import IFieldEditFormSchema
 from plone.schemaeditor.interfaces import IFieldFactory
@@ -8,12 +9,8 @@ from z3c.relationfield.schema import RelationList
 from zope import schema
 from zope.component import adapter
 from zope.component import queryUtility
-from zope.i18n import MessageFactory
 from zope.interface import implementer
 from zope.intid.interfaces import IIntIds
-
-
-_ = MessageFactory("plone")
 
 
 @implementer(IFieldFactory)

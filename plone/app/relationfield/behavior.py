@@ -1,7 +1,7 @@
-from plone.app.dexterity import _
 from plone.app.z3cform.widget import RelatedItemsFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
+from plone.base import PloneMessageFactory as _
 from plone.supermodel import model
 from plone.supermodel.directives import fieldset
 from z3c.relationfield.schema import RelationChoice

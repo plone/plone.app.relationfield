@@ -54,7 +54,6 @@ setup(
         "plone.app.z3cform>=1.1.0",
         "BTrees",
         "Products.GenericSetup",
-        "plone.app.dexterity",
         "plone.behavior",
         "plone.dexterity",
         "plone.uuid",

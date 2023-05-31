@@ -47,7 +47,6 @@ setup(
         "plone.autoform",
         "plone.behavior",
         "plone.dexterity",
-        "plone.formwidget.contenttree",
         "plone.rfc822",
         "plone.schemaeditor",
         "plone.supermodel",
@@ -63,6 +62,7 @@ setup(
             "plone.app.contenttypes[test]",
             "plone.app.testing",
             "plone.app.dexterity",
+            "plone.formwidget.contenttree",
             "plone.testing",
         ]
     },

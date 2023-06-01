@@ -8,6 +8,24 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.3 (2023-06-01)
+------------------
+
+Bug fixes:
+
+
+- Removed unneeded dependency on plone.app.dexterity.
+  It remains a test dependency though.
+  [maurits] (#1)
+
+
+Internal:
+
+
+- Update configuration files.
+  [plone devs] (53dc5b4c)
+
+
 3.0.2 (2023-04-15)
 ------------------
 

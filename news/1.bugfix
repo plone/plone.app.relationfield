@@ -1,0 +1,3 @@
+Removed unneeded dependency on plone.app.dexterity.
+It remains a test dependency though.
+[maurits]

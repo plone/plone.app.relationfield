@@ -115,10 +115,6 @@ ignore = [
     "mx.ini",
 
 ]
-
-[tool.coverage.report]
-ignore_errors = true
-
 ##
 # Add extra configuration options in .meta.toml:
 #  [pyproject]

@@ -62,6 +62,8 @@ setup(
         "z3c.formwidget.query",
         "z3c.relationfield",
         "zc.relation",
+        "Zope",
+        "zope.intid",
     ],
     extras_require={
         "test": [

@@ -17,7 +17,7 @@
       title="Relation Field"
       description="Adds support for content relationships defined using z3c.relationfield"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      for="plone.base.interfaces.IPloneSiteRoot"
       directory="profiles/default"
       />
 

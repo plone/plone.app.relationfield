@@ -1,4 +1,4 @@
-from plone.app.z3cform.widget import RelatedItemsFieldWidget
+from plone.app.z3cform.widgets.contentbrowser import ContentBrowserFieldWidget
 from plone.autoform import directives as form
 from plone.autoform.interfaces import IFormFieldProvider
 from plone.base import PloneMessageFactory as _
@@ -23,7 +23,7 @@ class IRelatedItems(model.Schema):
     )
     form.widget(
         "relatedItems",
-        RelatedItemsFieldWidget,
+        ContentBrowserFieldWidget,
         vocabulary="plone.app.vocabularies.Catalog",
         pattern_options={
             "recentlyUsed": True  # Just turn on. Config in plone.app.widgets.

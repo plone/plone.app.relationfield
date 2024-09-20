@@ -3,7 +3,13 @@
 # See the inline comments on how to expand/tweak this configuration file
 [meta]
 template = "default"
-commit-id = "6e36bcc4"
+commit-id = "5d22fbf8"
 
 [pyproject]
 dependencies_ignores = "['plone.formwidget.contenttree']"
+
+[tox]
+constraints_file = "https://dist.plone.org/release/6.1-dev/constraints.txt"
+
+[github]
+py_versions = "[\"3.10\", \"3.12\"]"

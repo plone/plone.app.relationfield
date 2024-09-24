@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+4.0.0 (2024-09-24)
+------------------
+
+Breaking changes:
+
+
+- Implement new `ContentBrowserWidget` with `pat-contentbrowser` support.
+  [petschki] (#51)
+
+
 3.0.5 (2024-04-22)
 ------------------
 

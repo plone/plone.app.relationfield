@@ -5,7 +5,7 @@ plone.app.relationfield schemaeditor support
 Test setup::
 
     >>> app = layer['app']
-    >>> from plone.testing.z2 import Browser
+    >>> from plone.testing.zope import Browser
     >>> from plone.app.testing import TEST_USER_PASSWORD
     >>> browser = Browser(app)
     >>> browser.handleErrors = False

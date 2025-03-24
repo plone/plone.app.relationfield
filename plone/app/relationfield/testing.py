@@ -1,7 +1,6 @@
 from persistent import Persistent
-from plone.app.relationfield import HAS_CONTENTTYPES
+from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 from plone.app.testing import FunctionalTesting
-from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from z3c.relationfield import RelationList
 from z3c.relationfield.interfaces import IHasRelations
@@ -9,10 +8,6 @@ from zope.interface import implementer
 from zope.interface import Interface
 
 import zope.schema
-
-
-if HAS_CONTENTTYPES:
-    from plone.app.contenttypes.testing import PLONE_APP_CONTENTTYPES_FIXTURE
 
 
 class IAddress(Interface):
@@ -47,10 +42,7 @@ class Person(Persistent):
 
 
 class PloneAppRelationfieldFixture(PloneSandboxLayer):
-    if HAS_CONTENTTYPES:
-        defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
-    else:
-        defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import plone.app.relationfield
@@ -68,10 +60,7 @@ FUNCTIONAL_TESTING = FunctionalTesting(
 
 
 class PloneAppRelationfieldContentTreeFixture(PloneSandboxLayer):
-    if HAS_CONTENTTYPES:
-        defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
-    else:
-        defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import plone.app.dexterity
@@ -101,10 +90,7 @@ FUNCTIONAL_CONTENTTREE_TESTING = FunctionalTesting(
 
 
 class PloneAppRelationfieldWidgetsFixture(PloneSandboxLayer):
-    if HAS_CONTENTTYPES:
-        defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
-    else:
-        defaultBases = (PLONE_FIXTURE,)
+    defaultBases = (PLONE_APP_CONTENTTYPES_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
         import plone.app.dexterity

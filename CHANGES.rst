@@ -8,6 +8,15 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.6 (2025-03-26)
+------------------
+
+Bug fixes:
+
+
+- Get rid of no longer needed ``pkg_resources`` usage.  [gforcada] (#4126)
+
+
 3.0.5 (2024-04-22)
 ------------------
 

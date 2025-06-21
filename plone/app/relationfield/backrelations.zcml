@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="plone.app.relationfield">
+
+  <include package="z3c.form" file="meta.zcml" />
+  <include package="z3c.form" />
+
+  <adapter factory=".backrelations.BackRelatedItemsFieldWidget" />
+
+  <adapter factory=".backrelations.BackRelationChoiceRelatedItemsWidgetConverter" />
+
+  <adapter factory=".backrelations.BackRelationDataManager" />
+  <adapter factory=".backrelations.BackRelationListDataManager" />
+<!--
+  <adapter factory=".backrelations.BackRelationDictDataManager" />
+  <adapter factory=".backrelations.BackRelationListDictDataManager" />
+ -->
+
+  <include package="collective.monkeypatcher" />
+
+  <monkey:patch
+      description="Enable backrelations"
+      module="z3c.relationfield.event"
+      original="_setRelation"
+      replacement=".backrelations._setRelation_patched"
+      preserveOriginal="True"
+      />
+
+</configure>

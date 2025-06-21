@@ -84,4 +84,6 @@
       zcml:condition="installed plone.schemaeditor"
       />
 
+  <include file="backrelations.zcml" />
+
 </configure>

@@ -37,7 +37,6 @@ setup(
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
-        "setuptools",
         "plone.base",
         # Keep Products.CMFCore because z3c.dependencychecker does not yet
         # check transitive dependencies in our config.

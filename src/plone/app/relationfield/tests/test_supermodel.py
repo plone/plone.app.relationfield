@@ -5,7 +5,6 @@ import doctest
 import os
 import unittest
 
-
 optionflags = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
 
 

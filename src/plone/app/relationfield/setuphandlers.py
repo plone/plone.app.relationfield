@@ -7,7 +7,6 @@ from zope.intid.interfaces import IIntIds
 
 import BTrees
 
-
 PLONE_RELATION_INDEXES = [
     {"element": IRelationValue["from_id"]},
     {"element": IRelationValue["to_id"]},

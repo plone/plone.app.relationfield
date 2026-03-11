@@ -5,7 +5,6 @@ from unittest import TestSuite
 import doctest
 import plone.app.relationfield.tests
 
-
 ZCML_SANDBOX = ZCMLSandbox(
     filename="test_marshall.zcml", package=plone.app.relationfield.tests
 )

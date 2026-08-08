@@ -4,7 +4,77 @@
 [build-system]
 requires = ["setuptools>=68.2,<83", "wheel"]
 
+# START-MARKER-MANUAL-CONFIG
+# Anything from here until END-MARKER-MANUAL-CONFIG
+# will be kept by plone.meta
 
+[project]
+name = "plone.app.relationfield"
+version = "5.0.1.dev0"
+description = "Plone support for z3c.relationfield"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Plone",
+    "Framework :: Plone :: 6.2",
+    "Framework :: Plone :: Core",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+license = "GPL-2.0-only"
+dynamic = ["readme"]
+requires-python = ">=3.10"
+authors = [
+    {name = "Alec Mitchell",email = "apm13@columbia.edu"},
+]
+maintainers = [
+    {name = "Plone Foundation and contributors",email = "plone-developers@lists.sourceforge.net"},
+]
+dependencies = [
+    "Products.CMFCore",
+    "Zope",
+    "five.intid",
+    "plone.app.intid",
+    "plone.app.vocabularies",
+    "plone.app.z3cform",
+    "plone.autoform",
+    "plone.base",
+    "plone.behavior",
+    "plone.dexterity",
+    "plone.rfc822",
+    "plone.schemaeditor",
+    "plone.supermodel",
+    "plone.uuid",
+    "z3c.form",
+    "z3c.formwidget.query",
+    "z3c.objpath",
+    "z3c.relationfield",
+    "zc.relation",
+    "zope.intid",
+]
+keywords = ["dexterity", "relations", "plone", "zc.relation"]
+
+[project.optional-dependencies]
+test = [
+    "plone.app.contenttypes[test]",
+    "plone.app.dexterity",
+    "plone.app.testing",
+    "plone.formwidget.contenttree",
+    "plone.testing",
+]
+
+[project.urls]
+Source = "https://github.com/plone/plone.app.relationfield"
+Issues = "https://github.com/plone/Products.CMFPlone/issues"
+Changelog = "https://github.com/plone/plone.app.relationfield/blob/master/CHANGES.rst"
+
+[tool.setuptools.dynamic]
+readme = {file = ["README.rst", "CHANGES.rst"]}
+# END-MARKER-MANUAL-CONFIG
 
 [tool.towncrier]
 directory = "news/"
